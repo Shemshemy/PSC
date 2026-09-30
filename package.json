@@ -1,0 +1,26 @@
+{
+  "name": "psc-recruitment-portal",
+  "version": "2.4.0",
+  "description": "Public Service Commission (PSC) Kenya - Candidate Recruitment Portal & Production Backend",
+  "type": "module",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js",
+    "test": "node server/benchmark.js",
+    "benchmark": "node server/benchmark.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "kenya",
+    "public-service-commission",
+    "recruitment-portal",
+    "zero-trust",
+    "kafka-buffer",
+    "alfe-encryption"
+  ],
+  "author": "Public Service Commission Kenya",
+  "license": "UNLICENSED"
+}

@@ -5,9 +5,10 @@
  */
 
 const isBrowser = typeof window !== 'undefined';
-const API_BASE = (isBrowser && window.location && window.location.port === '5000') 
-  ? '/api/v2' 
-  : 'http://localhost:5000/api/v2';
+const isDevSplitServer = isBrowser && window.location && (window.location.port === '8080' || window.location.port === '3000' || window.location.port === '5173');
+const API_BASE = isDevSplitServer
+  ? `http://${window.location.hostname || 'localhost'}:5000/api/v2`
+  : '/api/v2';
 
 export class PSCAPIClient {
   constructor() {

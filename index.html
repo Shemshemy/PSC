@@ -164,15 +164,15 @@
 
         <!-- Official Civic Emblems (Transparent PNGs directly on Forest Green Header) -->
         <div class="flex items-center space-x-3">
-          <div class="flex items-center space-x-2.5 shrink-0">
-            <img src="assets/images/kenya_coat_of_arms_rgba.png" alt="Republic of Kenya Coat of Arms" class="h-11 sm:h-12 w-auto object-contain drop-shadow-md">
-            <div class="w-px h-9 bg-white/25"></div>
-            <img src="assets/images/PSC_Logo.png" alt="Public Service Commission Seal" class="h-11 sm:h-12 w-auto object-contain drop-shadow-md">
+          <div class="flex items-center space-x-2 shrink-0">
+            <img src="assets/images/kenya_coat_of_arms_rgba.png" alt="Republic of Kenya Coat of Arms" class="h-9 sm:h-12 w-auto object-contain drop-shadow-md">
+            <div class="w-px h-7 sm:h-9 bg-white/25"></div>
+            <img src="assets/images/PSC_Logo.png" alt="Public Service Commission Seal" class="h-9 sm:h-12 w-auto object-contain drop-shadow-md">
           </div>
 
           <div>
             <div class="flex items-center space-x-2">
-              <h1 class="text-base sm:text-lg font-bold tracking-tight text-white leading-tight" id="i18n-commissionName">
+              <h1 class="text-xs sm:text-base lg:text-lg font-bold tracking-tight text-white leading-tight" id="i18n-commissionName">
                 PUBLIC SERVICE COMMISSION
               </h1>
               <span class="hidden md:inline-flex bg-civic-gold/25 text-amber-200 text-[10px] font-bold px-2 py-0.5 rounded border border-civic-gold/50">
@@ -1744,7 +1744,7 @@
               <i data-lucide="terminal" class="w-3.5 h-3.5 text-amber-400"></i>
               Interactive Resilience &amp; Concurrency Sandbox
             </span>
-            <span class="text-[10px] text-slate-500 font-mono">Target: http://localhost:5000</span>
+            <span class="text-[10px] text-slate-500 font-mono">Live Gateway Active</span>
           </div>
 
           <!-- Buttons Row -->
@@ -1808,8 +1808,12 @@
     };
 
     function getBackendBase() {
-      const host = (window.location && window.location.hostname) ? window.location.hostname : 'localhost';
-      return `http://${host}:5000`;
+      const isDevSeparatePort = (window.location && (window.location.port === '8080' || window.location.port === '3000' || window.location.port === '5173'));
+      if (isDevSeparatePort) {
+        const host = (window.location && window.location.hostname) ? window.location.hostname : 'localhost';
+        return `http://${host}:5000`;
+      }
+      return '';
     }
 
     window.refreshArchitectureTelemetry = async function() {

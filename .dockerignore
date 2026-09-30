@@ -1,0 +1,10 @@
+.git
+.gitignore
+.dockerignore
+Template
+screenshots
+*.log
+.DS_Store
+*.md
+!README.md
+!DEPLOYMENT_GUIDE.md

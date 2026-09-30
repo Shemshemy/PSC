@@ -1,0 +1,26 @@
+[Unit]
+Description=Public Service Commission (PSC) Kenya - Enterprise Recruitment Portal
+After=network.target
+
+[Service]
+Type=simple
+User=psc
+WorkingDirectory=/var/www/psc-portal
+ExecStart=/usr/bin/node server/server.js
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+Environment=PORT=5000
+Environment=KMS_KEY_ID=arn:aws:kms:af-south-1:psc-hsm-01
+
+# Security Sandbox Hardening
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+
+# Resource limits
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target

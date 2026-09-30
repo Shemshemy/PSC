@@ -1,0 +1,23 @@
+# Public Service Commission (PSC) Kenya - Caddyfile (Automatic HTTPS)
+# Place in /etc/caddy/Caddyfile
+
+pscims.publicservice.go.ke, psc.go.ke {
+    # Encode with zstd and gzip
+    encode zstd gzip
+
+    # Production Security Headers
+    header {
+        X-Frame-Options "SAMEORIGIN"
+        X-Content-Type-Options "nosniff"
+        X-XSS-Protection "1; mode=block"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "geolocation=(), microphone=(), camera=()"
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    }
+
+    # Reverse proxy to Node.js backend
+    reverse_proxy 127.0.0.1:5000 {
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+    }
+}
