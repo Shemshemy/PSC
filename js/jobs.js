@@ -365,8 +365,8 @@ export class JobsManager {
             <h3 class="section-title" style="margin-top: 0.35rem; margin-bottom: 0;">${job.position}</h3>
             <div style="font-size: 0.88rem; color: var(--slate-600);">${job.organization}</div>
           </div>
-          <button type="button" class="btn-icon-action close-job-modal-btn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          <button type="button" class="close-job-modal-btn" aria-label="Close" title="Close">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
         </div>
         <div class="modal-body" style="display: flex; flex-direction: column; gap: 1.25rem;">
@@ -404,7 +404,7 @@ export class JobsManager {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary close-job-modal-btn">Close</button>
-          <button type="button" class="btn btn-primary modal-apply-btn bg-[#0B3B24] text-white">Proceed to Apply with Profile</button>
+          <button type="button" class="btn btn-primary modal-apply-btn bg-[#0B3B24] text-white font-bold flex items-center justify-center gap-1"><span>Apply with Profile</span><span>→</span></button>
         </div>
       </div>
     `;
@@ -438,8 +438,8 @@ export class JobsManager {
             <h3 class="section-title" style="margin-top: 0.35rem; margin-bottom: 0;">Formal Application for Appointment</h3>
             <div style="font-size: 0.88rem; color: var(--slate-600);">${job.position} • ${job.organization}</div>
           </div>
-          <button type="button" class="btn-icon-action close-apply-modal-btn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          <button type="button" class="close-apply-modal-btn" aria-label="Close" title="Close">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
         </div>
 
@@ -521,9 +521,9 @@ export class JobsManager {
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary close-apply-modal-btn">Cancel</button>
-          <button type="submit" form="formal-job-application-form" class="btn btn-primary submit-job-btn bg-[#0B3B24] text-white" disabled>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Confirm & Submit Official Application
+          <button type="submit" form="formal-job-application-form" class="btn btn-primary submit-job-btn bg-[#0B3B24] text-white flex items-center justify-center gap-1.5 font-bold" disabled>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Confirm & Submit</span>
           </button>
         </div>
       </div>
@@ -618,8 +618,8 @@ export class JobsManager {
             <h3 class="section-title" style="color: white; margin: 0.25rem 0 0 0;">Application Submitted Successfully</h3>
             <div style="font-size: 0.84rem; color: #D1FAE5;">Candidate: Faith Mwangi (ID: 24681012) • Advert: ${job.advertNumber}</div>
           </div>
-          <button type="button" class="btn-icon-action close-apply-modal-btn" style="color: white;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          <button type="button" class="close-apply-modal-btn" aria-label="Close" title="Close">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
         </div>
 

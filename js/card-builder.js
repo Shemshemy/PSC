@@ -239,8 +239,8 @@ export class CardBuilder {
       <div class="modal-card">
         <div class="modal-header">
           <h3 class="section-title" style="margin-bottom:0;">${modalTitle}</h3>
-          <button type="button" class="btn-icon-action close-modal-btn" aria-label="Close modal">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <button type="button" class="close-modal-btn" aria-label="Close" title="Close">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
