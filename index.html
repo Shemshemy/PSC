@@ -123,17 +123,7 @@
             <span class="font-mono tracking-tight text-[11px] font-semibold">IPRS &amp; eCitizen Verified</span>
           </button>
 
-          <!-- Interactive TLS Badge (Large screens only) -->
-          <button type="button" onclick="openCivicModal('tlsModal')" class="hidden lg:flex items-center space-x-1.5 text-stone-900 hover:text-stone-950 font-medium hover:underline transition cursor-pointer" title="Click to view Government GCCN TLS 1.3 encryption status">
-            <i data-lucide="lock" class="w-3.5 h-3.5 text-stone-800"></i>
-            <span>TLS 1.3 End-to-End Encrypted</span>
-          </button>
 
-          <!-- Interactive Architecture & Observability Console Badge (Large screens only) -->
-          <button type="button" onclick="openArchitectureModal()" class="hidden xl:flex items-center space-x-1.5 text-stone-950 bg-amber-200/90 hover:bg-white transition active:scale-95 px-2.5 py-0.5 rounded shadow-sm border border-amber-900/40 cursor-pointer font-bold" title="Open Enterprise Architecture & Live Observability Console">
-            <i data-lucide="cpu" class="w-3.5 h-3.5 text-stone-900"></i>
-            <span class="tracking-tight text-[11px]">Architecture</span>
-          </button>
 
           <!-- Accessibility Center Trigger -->
           <button id="accessibilityModalBtn" onclick="openCivicModal('accessibilityModal')" class="hover:text-black transition flex items-center space-x-1 text-stone-900 font-semibold cursor-pointer text-[11px] sm:text-xs" title="Open Accessibility and Display Options">
@@ -184,11 +174,11 @@
         </button>
 
         <!-- Official Civic Emblems (Transparent PNGs directly on Forest Green Header) -->
-        <div class="flex items-center space-x-2 sm:space-x-3 min-w-0">
+        <button type="button" onclick="if(window.pscApp) window.pscApp.switchView('dashboard')" class="flex items-center space-x-2 sm:space-x-3 min-w-0 cursor-pointer group" aria-label="Go to dashboard home" title="Home">
           <div class="flex items-center space-x-2 shrink-0">
-            <img src="assets/images/kenya_coat_of_arms_rgba.png" alt="Republic of Kenya Coat of Arms" class="hidden sm:block h-9 sm:h-12 w-auto object-contain drop-shadow-md">
+            <img src="assets/images/kenya_coat_of_arms_rgba.png" alt="Republic of Kenya Coat of Arms" class="hidden sm:block h-9 sm:h-12 w-auto object-contain drop-shadow-md group-hover:opacity-90 transition">
             <div class="hidden sm:block w-px h-7 sm:h-9 bg-white/25"></div>
-            <img src="assets/images/PSC_Logo.png" alt="Public Service Commission Seal" class="h-8 sm:h-12 w-auto object-contain drop-shadow-md">
+            <img src="assets/images/PSC_Logo.png" alt="Public Service Commission Seal" class="h-8 sm:h-12 w-auto object-contain drop-shadow-md group-hover:opacity-90 transition">
           </div>
 
           <div class="min-w-0">
@@ -205,7 +195,7 @@
               A Values-Driven Citizen-Centric Public Service
             </p>
           </div>
-        </div>
+        </button>
       </div>
 
       <!-- Right Header Section: Real-time Auto-save & User Authentication Meta -->
@@ -429,15 +419,6 @@
                 <span class="tree-badge forest">4 Active</span>
               </button>
 
-              <!-- 7. Live Access & Geolocation Monitor (NOC Telemetry) -->
-              <button type="button" class="sidebar-tree-node" data-view="admin-monitor" id="sidebar-node-admin">
-                <span class="tree-bullet bg-emerald-500"></span>
-                <span class="tree-node-label flex items-center gap-1.5">
-                  <i data-lucide="radar" class="w-3.5 h-3.5 text-emerald-600"></i>
-                  <span>Live Access &amp; Geo</span>
-                </span>
-                <span class="tree-badge" style="background: rgba(16, 185, 129, 0.15); color: #047857; font-weight: 800; border: 1px solid rgba(16, 185, 129, 0.4);">LIVE</span>
-              </button>
             </nav>
           </div>
         </div>
@@ -675,42 +656,30 @@
         <div id="panel-step-personal" class="profile-step-panel">
           <div class="bg-white rounded-xl border border-slate-200 shadow-elevation-1 max-w-4xl overflow-hidden mb-6">
             
-            <!-- 4 Segment Navigation Tabs -->
-            <ul class="segment-tabs-nav grid grid-cols-2 md:grid-cols-4 bg-slate-50 border-b border-slate-200 p-0 m-0 list-none" role="tablist" aria-label="Personal details sections">
+            <!-- 4 Segment Navigation Tabs: compact single-row stepper -->
+            <ul class="segment-tabs-nav grid grid-cols-4 bg-slate-50 border-b border-slate-200 p-0 m-0 list-none" role="tablist" aria-label="Personal details sections">
               <li>
-                <button type="button" class="segment-tab-btn active w-full p-3.5 text-left border-r border-b-2 border-slate-200 flex items-center space-x-3 transition" role="tab" id="tab-seg-1" data-segment="1" aria-selected="true" aria-controls="segment-panel-1">
-                  <span class="segment-tab-badge w-6 h-6 rounded-full bg-civic-forest text-white text-xs font-bold flex items-center justify-center shrink-0">1</span>
-                  <div class="segment-tab-texts leading-tight">
-                    <span class="text-[10px] uppercase font-bold text-slate-500 block">Part 1</span>
-                    <span class="text-xs font-bold text-slate-900 block">Identity & Name</span>
-                  </div>
+                <button type="button" class="segment-tab-btn active w-full py-3 px-1 text-center border-r border-b-2 border-slate-200 flex flex-col items-center gap-1 transition" role="tab" id="tab-seg-1" data-segment="1" aria-selected="true" aria-controls="segment-panel-1">
+                  <span class="segment-tab-badge w-5 h-5 rounded-full bg-civic-forest text-white text-[10px] font-bold flex items-center justify-center shrink-0">1</span>
+                  <span class="text-[10px] font-semibold text-slate-700 leading-none">Identity</span>
                 </button>
               </li>
               <li>
-                <button type="button" class="segment-tab-btn w-full p-3.5 text-left border-r border-b-2 border-slate-200 flex items-center space-x-3 transition hover:bg-slate-100" role="tab" id="tab-seg-2" data-segment="2" aria-selected="false" aria-controls="segment-panel-2">
-                  <span class="segment-tab-badge w-6 h-6 rounded-full bg-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center shrink-0">2</span>
-                  <div class="segment-tab-texts leading-tight">
-                    <span class="text-[10px] uppercase font-bold text-slate-500 block">Part 2</span>
-                    <span class="text-xs font-bold text-slate-900 block">Demographics</span>
-                  </div>
+                <button type="button" class="segment-tab-btn w-full py-3 px-1 text-center border-r border-b-2 border-slate-200 flex flex-col items-center gap-1 transition hover:bg-slate-100" role="tab" id="tab-seg-2" data-segment="2" aria-selected="false" aria-controls="segment-panel-2">
+                  <span class="segment-tab-badge w-5 h-5 rounded-full bg-slate-200 text-slate-600 text-[10px] font-bold flex items-center justify-center shrink-0">2</span>
+                  <span class="text-[10px] font-semibold text-slate-500 leading-none">Demographics</span>
                 </button>
               </li>
               <li>
-                <button type="button" class="segment-tab-btn w-full p-3.5 text-left border-r border-b-2 border-slate-200 flex items-center space-x-3 transition hover:bg-slate-100" role="tab" id="tab-seg-3" data-segment="3" aria-selected="false" aria-controls="segment-panel-3">
-                  <span class="segment-tab-badge w-6 h-6 rounded-full bg-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center shrink-0">3</span>
-                  <div class="segment-tab-texts leading-tight">
-                    <span class="text-[10px] uppercase font-bold text-slate-500 block">Part 3</span>
-                    <span class="text-xs font-bold text-slate-900 block">Contacts</span>
-                  </div>
+                <button type="button" class="segment-tab-btn w-full py-3 px-1 text-center border-r border-b-2 border-slate-200 flex flex-col items-center gap-1 transition hover:bg-slate-100" role="tab" id="tab-seg-3" data-segment="3" aria-selected="false" aria-controls="segment-panel-3">
+                  <span class="segment-tab-badge w-5 h-5 rounded-full bg-slate-200 text-slate-600 text-[10px] font-bold flex items-center justify-center shrink-0">3</span>
+                  <span class="text-[10px] font-semibold text-slate-500 leading-none">Contacts</span>
                 </button>
               </li>
               <li>
-                <button type="button" class="segment-tab-btn w-full p-3.5 text-left border-b-2 border-slate-200 flex items-center space-x-3 transition hover:bg-slate-100" role="tab" id="tab-seg-4" data-segment="4" aria-selected="false" aria-controls="segment-panel-4">
-                  <span class="segment-tab-badge w-6 h-6 rounded-full bg-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center shrink-0">4</span>
-                  <div class="segment-tab-texts leading-tight">
-                    <span class="text-[10px] uppercase font-bold text-slate-500 block">Part 4</span>
-                    <span class="text-xs font-bold text-slate-900 block">Ethics &amp; Civil</span>
-                  </div>
+                <button type="button" class="segment-tab-btn w-full py-3 px-1 text-center border-b-2 border-slate-200 flex flex-col items-center gap-1 transition hover:bg-slate-100" role="tab" id="tab-seg-4" data-segment="4" aria-selected="false" aria-controls="segment-panel-4">
+                  <span class="segment-tab-badge w-5 h-5 rounded-full bg-slate-200 text-slate-600 text-[10px] font-bold flex items-center justify-center shrink-0">4</span>
+                  <span class="text-[10px] font-semibold text-slate-500 leading-none">Ethics</span>
                 </button>
               </li>
             </ul>
@@ -967,37 +936,35 @@
                   <p class="text-xs text-slate-500 mt-0.5">All official interview invitations, shortlist announcements, and statutory notices will be transmitted to these verified coordinates.</p>
                 </div>
 
-                <div class="space-y-6 max-w-3xl">
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="space-y-5 max-w-3xl">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label class="block text-sm font-semibold text-slate-900 mb-1.5" for="field-mobileNumber">
-                        Primary Mobile Number <span class="text-red-600">*</span>
+                        Primary Mobile <span class="text-red-600">*</span>
                       </label>
-                      <p class="text-xs text-slate-400 mb-1.5">Used for official interview invitation SMS alerts.</p>
-                      <input type="tel" id="field-mobileNumber" name="mobileNumber" class="w-full max-w-sm px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 font-mono tracking-wider focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm font-medium" value="0700000000" required>
+                      <input type="tel" id="field-mobileNumber" name="mobileNumber" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 font-mono tracking-wider focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm" value="0700000000" required placeholder="07XXXXXXXX">
                     </div>
 
                     <div>
                       <label class="block text-sm font-semibold text-slate-900 mb-1.5" for="field-emailAddress">
                         Email Address <span class="text-red-600">*</span>
                       </label>
-                      <p class="text-xs text-slate-400 mb-1.5">Official email for formal recruitment correspondence.</p>
-                      <input type="email" id="field-emailAddress" name="emailAddress" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm font-medium" value="candidate@publicservice.go.ke" required>
+                      <input type="email" id="field-emailAddress" name="emailAddress" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm" value="candidate@publicservice.go.ke" required>
                     </div>
                   </div>
 
-                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <div class="col-span-2 sm:col-span-1">
                       <label class="block text-sm font-semibold text-slate-900 mb-1.5" for="field-postalAddress">
                         Postal Address <span class="text-red-600">*</span>
                       </label>
-                      <input type="text" id="field-postalAddress" name="postalAddress" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 transition shadow-sm" value="P.O. Box 30095" required>
+                      <input type="text" id="field-postalAddress" name="postalAddress" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 transition shadow-sm" value="P.O. Box 30095" required placeholder="P.O. Box XXXXX">
                     </div>
                     <div>
                       <label class="block text-sm font-semibold text-slate-900 mb-1.5" for="field-postalCode">
                         Postal Code <span class="text-red-600">*</span>
                       </label>
-                      <input type="text" id="field-postalCode" name="postalCode" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 font-mono focus:border-blue-600 transition shadow-sm" value="00100" required>
+                      <input type="text" id="field-postalCode" name="postalCode" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 font-mono focus:border-blue-600 transition shadow-sm" value="00100" required placeholder="00100">
                     </div>
                     <div>
                       <label class="block text-sm font-semibold text-slate-900 mb-1.5" for="field-town">
@@ -1499,9 +1466,11 @@
               type="button" 
               aria-label="Scroll back to top of page" 
               title="Back to Top"
-              class="fixed bottom-6 right-8 z-30 flex items-center space-x-2 bg-[#0B3B24] hover:bg-[#072517] text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-elevation-3 border border-emerald-500/40 transition-all duration-300 transform translate-y-16 opacity-0 pointer-events-none cursor-pointer hover:shadow-lg hover:scale-105 active:scale-95 group">
+              class="fixed z-30 flex items-center space-x-2 bg-[#0B3B24] hover:bg-[#072517] text-white text-xs font-semibold rounded-full shadow-elevation-3 border border-emerald-500/40 transition-all duration-300 transform translate-y-16 opacity-0 pointer-events-none cursor-pointer hover:shadow-lg hover:scale-105 active:scale-95 group
+                     bottom-[84px] right-4 px-3 py-2
+                     sm:bottom-6 sm:right-8 sm:px-4 sm:py-2.5">
         <i data-lucide="arrow-up" class="w-4 h-4 text-emerald-300 group-hover:-translate-y-0.5 transition-transform"></i>
-        <span class="tracking-wide font-medium">Back to Top</span>
+        <span class="tracking-wide font-medium hidden sm:inline">Back to Top</span>
       </button>
 
     </main>
@@ -2443,23 +2412,11 @@
           </div>
           <span>Courses</span>
         </button>
-        <button type="button" class="mobile-more-item" onclick="if(window.pscApp) window.pscApp.switchView('admin-monitor'); closeMobileMoreMenu(); setMobileNavActive(null);">
-          <div class="mobile-more-icon-wrap bg-emerald-50 text-emerald-700">
-            <i data-lucide="radar" class="w-5 h-5"></i>
-          </div>
-          <span>Live Access</span>
-        </button>
         <button type="button" class="mobile-more-item" onclick="openCivicModal('iprsModal'); closeMobileMoreMenu();">
           <div class="mobile-more-icon-wrap bg-purple-50 text-purple-700">
             <i data-lucide="shield-check" class="w-5 h-5"></i>
           </div>
           <span>IPRS ID</span>
-        </button>
-        <button type="button" class="mobile-more-item" onclick="openArchitectureModal(); closeMobileMoreMenu();">
-          <div class="mobile-more-icon-wrap bg-slate-100 text-slate-700">
-            <i data-lucide="cpu" class="w-5 h-5"></i>
-          </div>
-          <span>Architecture</span>
         </button>
         <button type="button" class="mobile-more-item" onclick="openCivicModal('accessibilityModal'); closeMobileMoreMenu();">
           <div class="mobile-more-icon-wrap bg-amber-50 text-amber-700">

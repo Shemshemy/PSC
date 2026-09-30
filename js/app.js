@@ -519,10 +519,20 @@ class PSCApplication {
       targetPanel.classList.add('active');
     }
 
-    // Scroll smoothly to top of the wizard card
-    const wizardCard = document.querySelector('.segment-wizard-card');
-    if (wizardCard) {
-      wizardCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Scroll to top of the main canvas so the new segment starts at the top
+    const mainCanvas = document.getElementById('main-content');
+    const profileCard = document.getElementById('panel-step-personal');
+    const scrollTarget = profileCard || mainCanvas;
+
+    if (mainCanvas) {
+      // Use scrollTo on the scrollable container (the main canvas)
+      const cardTop = scrollTarget
+        ? scrollTarget.getBoundingClientRect().top + mainCanvas.scrollTop - 16
+        : 0;
+      mainCanvas.scrollTo({ top: Math.max(0, cardTop), behavior: 'smooth' });
+    } else {
+      // Fallback for non-overflow-scroll layouts
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 
