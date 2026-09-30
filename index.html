@@ -178,8 +178,8 @@
       
       <!-- Left Header: Sidebar Hamburger Toggle & Institutional Seal -->
       <div class="flex items-center space-x-2 sm:space-x-4 min-w-0">
-        <!-- Sidebar Toggle Hamburger Button -->
-        <button type="button" id="sidebar-toggle-btn" class="p-1.5 sm:p-2 rounded-lg bg-black/20 hover:bg-black/35 text-white border border-white/20 transition flex items-center justify-center shrink-0" aria-label="Toggle navigation menu" title="Toggle Sidebar">
+        <!-- Sidebar Toggle Hamburger Button (Desktop/Tablet only - hidden on mobile which uses bottom nav) -->
+        <button type="button" id="sidebar-toggle-btn" class="hidden sm:flex p-1.5 sm:p-2 rounded-lg bg-black/20 hover:bg-black/35 text-white border border-white/20 transition items-center justify-center shrink-0" aria-label="Toggle navigation menu" title="Toggle Sidebar">
           <i data-lucide="menu" class="w-5 h-5"></i>
         </button>
 
@@ -475,7 +475,7 @@
     <main id="main-content" class="app-main flex-1 overflow-y-auto bg-civic-slateBg p-5 sm:p-7 lg:p-9 min-w-0" role="main">
 
       <!-- Dedicated Modern Blue Informational Notice Banner -->
-      <aside class="bg-civic-navyNoticeBg border-l-4 border-civic-navyBorder rounded-r-xl p-4 sm:p-5 shadow-elevation-1 flex flex-col md:flex-row md:items-center justify-between gap-4 mb-7" role="region" aria-label="State Department Vacancy Notice">
+      <aside id="state-dept-notice" class="bg-civic-navyNoticeBg border-l-4 border-civic-navyBorder rounded-r-xl p-4 sm:p-5 shadow-elevation-1 flex flex-col md:flex-row md:items-center justify-between gap-4 mb-7" role="region" aria-label="State Department Vacancy Notice">
         <div class="flex items-start space-x-3.5">
           <div class="w-9 h-9 rounded-full bg-blue-100 text-civic-navyNotice flex items-center justify-center shrink-0 mt-0.5">
             <i data-lucide="info" class="w-5 h-5 text-blue-700"></i>
@@ -494,6 +494,9 @@
             psckjobs.go.ke
             <i data-lucide="external-link" class="w-3.5 h-3.5 ml-1.5"></i>
           </a>
+          <button type="button" onclick="document.getElementById('state-dept-notice').classList.add('hidden')" class="p-1.5 rounded-lg text-blue-400 hover:text-blue-700 hover:bg-blue-100 transition" aria-label="Dismiss notice" title="Dismiss">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
         </div>
       </aside>
 
@@ -1581,16 +1584,7 @@
     </div>
   </div>
 
-  <!-- Tiny Civic Status Indicator (Transparent Background at Corner) -->
-  <div class="fixed bottom-2 left-4 z-20 pointer-events-auto">
-    <button type="button" 
-            onclick="openArchitectureModal()" 
-            class="inline-flex items-center space-x-1.5 text-[11px] text-slate-400 hover:text-emerald-700 bg-transparent py-0.5 px-1 rounded transition-colors cursor-pointer group select-none" 
-            title="All systems operational • Click to view System Architecture">
-      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 group-hover:scale-125 transition-transform animate-pulse"></span>
-      <span class="font-normal tracking-tight">All systems operational</span>
-    </button>
-  </div>
+
 
   <!-- ============================================================== -->
   <!-- MODAL: IPRS & ECITIZEN IDENTITY VERIFICATION TELEMETRY           -->
@@ -2365,5 +2359,168 @@
   <script type="module" src="js/api-client.js"></script>
   <script type="module" src="js/i18n.js"></script>
   <script type="module" src="js/app.js"></script>
+
+  <!-- ============================================================== -->
+  <!-- MOBILE BOTTOM NAVIGATION BAR (visible only on mobile <640px)   -->
+  <!-- ============================================================== -->
+  <nav id="mobile-bottom-nav" class="fixed bottom-0 left-0 right-0 z-50 sm:hidden" aria-label="Mobile navigation" role="navigation">
+    <div class="bg-white border-t border-slate-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] flex items-stretch">
+
+      <!-- Dashboard -->
+      <button type="button" class="mobile-nav-btn active" id="mob-nav-dashboard"
+              onclick="if(window.pscApp) window.pscApp.switchView('dashboard'); setMobileNavActive('mob-nav-dashboard');"
+              aria-label="Dashboard">
+        <i data-lucide="layout-dashboard" class="mobile-nav-icon"></i>
+        <span class="mobile-nav-label">Home</span>
+      </button>
+
+      <!-- Jobs -->
+      <button type="button" class="mobile-nav-btn" id="mob-nav-jobs"
+              onclick="if(window.pscApp) window.pscApp.switchView('jobs'); setMobileNavActive('mob-nav-jobs');"
+              aria-label="Jobs">
+        <i data-lucide="briefcase" class="mobile-nav-icon"></i>
+        <span class="mobile-nav-label">Jobs</span>
+        <span class="mobile-nav-badge">7</span>
+      </button>
+
+      <!-- My Profile -->
+      <button type="button" class="mobile-nav-btn" id="mob-nav-profile"
+              onclick="if(window.pscApp) window.pscApp.switchView('profile'); setMobileNavActive('mob-nav-profile');"
+              aria-label="My Profile">
+        <div class="relative">
+          <i data-lucide="user-circle" class="mobile-nav-icon"></i>
+        </div>
+        <span class="mobile-nav-label">Profile</span>
+      </button>
+
+      <!-- Applications -->
+      <button type="button" class="mobile-nav-btn" id="mob-nav-apps"
+              onclick="if(window.pscApp) window.pscApp.switchView('applications'); setMobileNavActive('mob-nav-apps');"
+              aria-label="Applications">
+        <i data-lucide="file-text" class="mobile-nav-icon"></i>
+        <span class="mobile-nav-label">Applied</span>
+        <span class="mobile-nav-badge">4</span>
+      </button>
+
+      <!-- More (triggers sidebar slide-in for full menu) -->
+      <button type="button" class="mobile-nav-btn" id="mob-nav-more"
+              onclick="toggleMobileMoreMenu();"
+              aria-label="More options">
+        <i data-lucide="grid-3x3" class="mobile-nav-icon"></i>
+        <span class="mobile-nav-label">More</span>
+      </button>
+
+    </div>
+
+    <!-- Safe area spacer for iOS home indicator -->
+    <div class="bg-white" style="height: env(safe-area-inset-bottom, 0px);"></div>
+  </nav>
+
+  <!-- Mobile More Menu Drawer (slides up from bottom nav) -->
+  <div id="mobile-more-drawer" class="fixed inset-0 z-[60] sm:hidden hidden" aria-hidden="true">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeMobileMoreMenu();"></div>
+    <!-- Drawer Panel -->
+    <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl border-t border-slate-200 pb-[env(safe-area-inset-bottom,0px)]" style="transform: translateY(100%); transition: transform 0.32s cubic-bezier(0.32,0,0.07,1);" id="mobile-more-panel">
+      <!-- Handle -->
+      <div class="flex justify-center pt-3 pb-1">
+        <div class="w-10 h-1 rounded-full bg-slate-300"></div>
+      </div>
+
+      <!-- Header -->
+      <div class="px-5 py-3 border-b border-slate-100 flex items-center justify-between">
+        <h2 class="text-sm font-bold text-slate-900">PSC Portal Menu</h2>
+        <button onclick="closeMobileMoreMenu()" class="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 transition">
+          <i data-lucide="x" class="w-4 h-4 text-slate-600"></i>
+        </button>
+      </div>
+
+      <!-- Menu Items Grid -->
+      <div class="p-4 grid grid-cols-3 gap-3">
+        <button type="button" class="mobile-more-item" onclick="if(window.pscApp) window.pscApp.switchView('courses'); closeMobileMoreMenu(); setMobileNavActive(null);">
+          <div class="mobile-more-icon-wrap bg-blue-50 text-blue-700">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+          </div>
+          <span>Courses</span>
+        </button>
+        <button type="button" class="mobile-more-item" onclick="if(window.pscApp) window.pscApp.switchView('admin-monitor'); closeMobileMoreMenu(); setMobileNavActive(null);">
+          <div class="mobile-more-icon-wrap bg-emerald-50 text-emerald-700">
+            <i data-lucide="radar" class="w-5 h-5"></i>
+          </div>
+          <span>Live Access</span>
+        </button>
+        <button type="button" class="mobile-more-item" onclick="openCivicModal('iprsModal'); closeMobileMoreMenu();">
+          <div class="mobile-more-icon-wrap bg-purple-50 text-purple-700">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <span>IPRS ID</span>
+        </button>
+        <button type="button" class="mobile-more-item" onclick="openArchitectureModal(); closeMobileMoreMenu();">
+          <div class="mobile-more-icon-wrap bg-slate-100 text-slate-700">
+            <i data-lucide="cpu" class="w-5 h-5"></i>
+          </div>
+          <span>Architecture</span>
+        </button>
+        <button type="button" class="mobile-more-item" onclick="openCivicModal('accessibilityModal'); closeMobileMoreMenu();">
+          <div class="mobile-more-icon-wrap bg-amber-50 text-amber-700">
+            <i data-lucide="eye" class="w-5 h-5"></i>
+          </div>
+          <span>Accessibility</span>
+        </button>
+        <button type="button" class="mobile-more-item" onclick="document.getElementById('btn-logout').click(); closeMobileMoreMenu();">
+          <div class="mobile-more-icon-wrap bg-red-50 text-red-600">
+            <i data-lucide="log-out" class="w-5 h-5"></i>
+          </div>
+          <span class="text-red-600">Sign Out</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mobile bottom nav active state
+    window.setMobileNavActive = function(activeId) {
+      document.querySelectorAll('.mobile-nav-btn').forEach(btn => btn.classList.remove('active'));
+      if (activeId) {
+        const el = document.getElementById(activeId);
+        if (el) el.classList.add('active');
+      }
+    };
+
+    // More drawer open/close
+    window.toggleMobileMoreMenu = function() {
+      const drawer = document.getElementById('mobile-more-drawer');
+      const panel = document.getElementById('mobile-more-panel');
+      const isHidden = drawer.classList.contains('hidden');
+      if (isHidden) {
+        drawer.classList.remove('hidden');
+        drawer.removeAttribute('aria-hidden');
+        requestAnimationFrame(() => {
+          panel.style.transform = 'translateY(0)';
+        });
+      } else {
+        closeMobileMoreMenu();
+      }
+    };
+
+    window.closeMobileMoreMenu = function() {
+      const drawer = document.getElementById('mobile-more-drawer');
+      const panel = document.getElementById('mobile-more-panel');
+      panel.style.transform = 'translateY(100%)';
+      setTimeout(() => {
+        drawer.classList.add('hidden');
+        drawer.setAttribute('aria-hidden', 'true');
+      }, 320);
+    };
+
+    // Re-init lucide icons after drawer opens
+    window.toggleMobileMoreMenu = (function(original) {
+      return function() {
+        original();
+        setTimeout(() => { if (window.lucide) window.lucide.createIcons(); }, 50);
+      };
+    })(window.toggleMobileMoreMenu);
+  </script>
+
 </body>
 </html>

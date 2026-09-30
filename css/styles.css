@@ -952,7 +952,7 @@ body.mobile-drawer-open {
     transform: translateX(0);
   }
   .app-main {
-    padding: 1.5rem 1.25rem 4rem 1.25rem;
+    padding: 1.25rem 1rem 1.5rem 1rem;
   }
   .psc-header-inner {
     padding: 0.75rem 1rem;
@@ -964,6 +964,127 @@ body.mobile-drawer-open {
     display: none;
   }
 }
+
+/* On small screens, the sidebar is fully hidden; show bottom nav instead */
+@media (max-width: 639px) {
+  /* Hide the sidebar entirely on mobile — bottom nav takes over */
+  #portal-sidebar {
+    display: none !important;
+  }
+
+  /* Add safe bottom padding so content clears the bottom nav bar */
+  .app-main {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* ================================================================
+   MOBILE BOTTOM NAVIGATION BAR
+   ================================================================ */
+.mobile-nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 10px 4px 10px 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #94A3B8;
+  transition: color 0.15s ease, background 0.15s ease;
+  position: relative;
+  min-width: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-nav-btn:active {
+  background: rgba(11, 59, 36, 0.04);
+  transform: scale(0.96);
+}
+
+.mobile-nav-btn.active {
+  color: #0B3B24;
+}
+
+.mobile-nav-btn.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 3px;
+  background: #0B3B24;
+  border-radius: 0 0 4px 4px;
+}
+
+.mobile-nav-icon {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.75;
+  flex-shrink: 0;
+}
+
+.mobile-nav-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.mobile-nav-badge {
+  position: absolute;
+  top: 7px;
+  right: calc(50% - 18px);
+  background: #DC2626;
+  color: white;
+  font-size: 9px;
+  font-weight: 800;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  line-height: 1;
+}
+
+/* Mobile More Menu Grid Items */
+.mobile-more-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 8px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 11px;
+  font-weight: 600;
+  color: #334155;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-more-item:active {
+  background: #F1F5F9;
+  transform: scale(0.97);
+}
+
+.mobile-more-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 /* ==============================================================
    Accessibility Scaling & Cognitive Support (WCAG 2.2 AAA)

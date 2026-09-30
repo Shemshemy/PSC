@@ -269,6 +269,17 @@ class PSCApplication {
       document.body.classList.remove('mobile-drawer-open');
     }
 
+    // Sync mobile bottom nav active state
+    const mobileNavMap = {
+      'dashboard': 'mob-nav-dashboard',
+      'jobs': 'mob-nav-jobs',
+      'profile': 'mob-nav-profile',
+      'applications': 'mob-nav-apps',
+    };
+    if (window.setMobileNavActive) {
+      window.setMobileNavActive(mobileNavMap[viewName] || null);
+    }
+
     // Re-apply language translation if current language is Swahili
     if (window.pscI18n && window.pscI18n.currentLanguage === 'sw') {
       window.pscI18n.applyLanguage('sw');
