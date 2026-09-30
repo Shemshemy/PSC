@@ -17,6 +17,7 @@ import { eventBuffer } from './event-buffer.js';
 import { obs } from './observability.js';
 import { security } from './security.js';
 import { circuitBreakers, idempotency, rateLimiter, dbPool } from './resilience.js';
+import { accessTracker } from './access-tracker.js';
 
 export async function handleRequest(req, res, url) {
   const reqStart = Date.now();
@@ -71,6 +72,9 @@ export async function handleRequest(req, res, url) {
   const send = (statusCode, data, extraHeaders = {}) => {
     const durationMs = Date.now() - reqStart;
     obs.recordHttpMetric(method, pathname, statusCode, durationMs);
+    if (!pathname.startsWith('/healthz') && pathname !== '/api/v2/admin/access-logs' && pathname !== '/api/v2/admin/ping') {
+      accessTracker.recordAccess(req, res, durationMs);
+    }
     obs.info(`${method} ${pathname} -> HTTP ${statusCode}`, {
       traceId: trace.traceId,
       spanId: trace.spanId,
@@ -212,6 +216,34 @@ export async function handleRequest(req, res, url) {
   // OpenAPI 3.1 Specification Contract
   if (pathname === '/api/v2/openapi.json' && method === 'GET') {
     return send(200, getOpenApiSpecification());
+  }
+
+  // ==========================================
+  // REAL-TIME CITIZEN ACCESS & GEOLOCATION MONITOR
+  // ==========================================
+
+  // Live Access Telemetry Feed (Kenyan Counties, Diaspora, Devices, Active Sessions)
+  if (pathname === '/api/v2/admin/access-logs' && method === 'GET') {
+    return send(200, accessTracker.getTelemetry());
+  }
+
+  // Frontend Live Heartbeat / Pageview Beacon
+  if (pathname === '/api/v2/admin/ping' && method === 'POST') {
+    try {
+      const body = await readBody();
+      accessTracker.recordAccess(req, res, Date.now() - reqStart, {
+        candidateId: body.candidateId,
+        candidateName: body.candidateName,
+        resource: body.page || req.url,
+        device: body.device,
+        browser: body.browser,
+        os: body.os
+      });
+      return send(200, { ok: true, activeSessions: accessTracker.activeSessions.size });
+    } catch {
+      accessTracker.recordAccess(req, res, Date.now() - reqStart);
+      return send(200, { ok: true });
+    }
   }
 
   // ==========================================

@@ -411,6 +411,16 @@
                 <span class="tree-node-label">Status of My Application(s)</span>
                 <span class="tree-badge forest">4 Active</span>
               </button>
+
+              <!-- 7. Live Access & Geolocation Monitor (NOC Telemetry) -->
+              <button type="button" class="sidebar-tree-node" data-view="admin-monitor" id="sidebar-node-admin">
+                <span class="tree-bullet bg-emerald-500"></span>
+                <span class="tree-node-label flex items-center gap-1.5">
+                  <i data-lucide="radar" class="w-3.5 h-3.5 text-emerald-600"></i>
+                  <span>Live Access &amp; Geo</span>
+                </span>
+                <span class="tree-badge" style="background: rgba(16, 185, 129, 0.15); color: #047857; font-weight: 800; border: 1px solid rgba(16, 185, 129, 0.4);">LIVE</span>
+              </button>
             </nav>
           </div>
         </div>
@@ -1269,6 +1279,198 @@
 
         <div id="application-status-table-container">
           <!-- Rendered by jobs.js -->
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- VIEW 6: LIVE CITIZEN ACCESS & GEOLOCATION MONITOR (ADMIN NOC)  -->
+      <!-- ============================================================== -->
+      <section id="view-admin-monitor" class="view-container space-y-6" aria-labelledby="admin-monitor-heading">
+        <div class="page-header flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center space-x-2">
+              <h2 id="admin-monitor-heading" class="text-2xl font-extrabold text-slate-900 tracking-tight">Live Citizen Access &amp; Geolocation Monitor</h2>
+              <span class="bg-red-500/15 text-red-600 border border-red-500/30 text-[10px] font-extrabold px-2 py-0.5 rounded-full animate-pulse">LIVE NOC TELEMETRY</span>
+            </div>
+            <p class="text-sm text-slate-600 mt-1">
+              National Operations Center (NOC) • Real-time visitor logs, Kenyan county distribution, client IP origins, and device intelligence.
+            </p>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <a href="admin.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-slate-900 hover:bg-black text-white text-xs font-semibold rounded-lg shadow-sm transition" title="Open full-screen NOC monitor in new tab">
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              <span>Dedicated NOC View</span>
+            </a>
+            <button type="button" id="admin-export-btn" class="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 text-xs font-semibold rounded-lg shadow-sm transition cursor-pointer">
+              <i data-lucide="download" class="w-3.5 h-3.5 text-slate-500"></i>
+              <span>Export Audit JSON</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Top Live KPI Stat Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Active Sessions -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm relative overflow-hidden">
+            <div class="flex items-center justify-between text-slate-500 text-xs font-semibold">
+              <span>ACTIVE CONCURRENT SESSIONS</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            </div>
+            <div class="mt-2 flex items-baseline space-x-2">
+              <div id="admin-metric-active" class="text-3xl font-extrabold text-slate-900 font-mono">18</div>
+              <span class="text-xs text-emerald-700 font-semibold">Live Citizens</span>
+            </div>
+            <p class="text-[11px] text-slate-500 mt-1">Across 47 Kenyan Counties &amp; Diaspora</p>
+          </div>
+
+          <!-- Total Requests Tracked -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm relative overflow-hidden">
+            <div class="flex items-center justify-between text-slate-500 text-xs font-semibold">
+              <span>TOTAL REQUESTS LOGGED</span>
+              <i data-lucide="activity" class="w-4 h-4 text-civic-gold"></i>
+            </div>
+            <div class="mt-2 flex items-baseline space-x-2">
+              <div id="admin-metric-total" class="text-3xl font-extrabold text-amber-700 font-mono">142</div>
+              <span class="text-xs text-slate-500 font-semibold">Buffered Hits</span>
+            </div>
+            <p class="text-[11px] text-slate-500 mt-1">Real-time non-blocking Kafka stream</p>
+          </div>
+
+          <!-- Unique IP Nodes -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm relative overflow-hidden">
+            <div class="flex items-center justify-between text-slate-500 text-xs font-semibold">
+              <span>UNIQUE CLIENT IP NODES</span>
+              <i data-lucide="globe" class="w-4 h-4 text-blue-600"></i>
+            </div>
+            <div class="mt-2 flex items-baseline space-x-2">
+              <div id="admin-metric-visitors" class="text-3xl font-extrabold text-blue-700 font-mono">31</div>
+              <span class="text-xs text-slate-500 font-semibold">Distinct Nodes</span>
+            </div>
+            <p class="text-[11px] text-slate-500 mt-1">Safaricom, Jamii, Airtel, GCCN</p>
+          </div>
+
+          <!-- Zero Trust & Security -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm relative overflow-hidden">
+            <div class="flex items-center justify-between text-slate-500 text-xs font-semibold">
+              <span>ZERO-TRUST SECURITY</span>
+              <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+            </div>
+            <div class="mt-2 flex items-baseline space-x-2">
+              <div class="text-xl font-bold text-emerald-800">NIST SP 800-207</div>
+            </div>
+            <p class="text-[11px] text-emerald-700 mt-1">✓ mTLS 1.3 Active • 0 Breaches</p>
+          </div>
+        </div>
+
+        <!-- Regional County Geolocation & Device Spectrum -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Counties Distribution -->
+          <div class="lg:col-span-2 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <i data-lucide="map-pin" class="w-4 h-4 text-emerald-700"></i>
+                <h3 class="font-bold text-sm text-slate-900 uppercase tracking-wider">Kenyan Counties &amp; Origin Distribution</h3>
+              </div>
+              <span class="text-xs text-slate-500 font-mono">National Coverage</span>
+            </div>
+            <div id="admin-counties-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-500">Loading live county distribution...</div>
+            </div>
+          </div>
+
+          <!-- Device Spectrum -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <i data-lucide="smartphone" class="w-4 h-4 text-civic-gold"></i>
+                <h3 class="font-bold text-sm text-slate-900 uppercase tracking-wider">Device Spectrum</h3>
+              </div>
+              <span class="text-xs text-slate-500 font-mono">Mobile / Desktop</span>
+            </div>
+            <div class="space-y-3 text-xs">
+              <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <i data-lucide="smartphone" class="w-4 h-4 text-emerald-600"></i>
+                  <div>
+                    <div class="font-bold text-slate-900">Mobile Phones</div>
+                    <div class="text-[11px] text-slate-500">Android &amp; iOS</div>
+                  </div>
+                </div>
+                <div id="admin-metric-device-mobile" class="font-mono font-extrabold text-base text-emerald-700">14</div>
+              </div>
+              <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <i data-lucide="laptop" class="w-4 h-4 text-blue-600"></i>
+                  <div>
+                    <div class="font-bold text-slate-900">Desktop Workstations</div>
+                    <div class="text-[11px] text-slate-500">Linux, Windows &amp; macOS</div>
+                  </div>
+                </div>
+                <div id="admin-metric-device-desktop" class="font-mono font-extrabold text-base text-blue-700">10</div>
+              </div>
+              <div class="p-2.5 bg-emerald-50/70 border border-emerald-200 rounded-xl text-[11px] text-emerald-800">
+                <div class="font-semibold">ODPC Data Protection 2019:</div>
+                <div>Access metadata is encrypted in transit and logged without exposing plain citizen credentials.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Traffic Feed Table Section -->
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+          <div class="p-4 sm:p-5 border-b border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center space-x-2">
+                <i data-lucide="radar" class="w-4 h-4 text-emerald-700"></i>
+                <h3 class="font-bold text-sm text-slate-900 uppercase tracking-wider">Live Citizen Traffic Feed</h3>
+              </div>
+              <p class="text-xs text-slate-500 mt-0.5">Captures every incoming request with IP, County, Identity, and ISP latency</p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+              <div class="relative flex-1 sm:w-64">
+                <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400"></i>
+                <input type="text" id="admin-search-input" placeholder="Search Citizen, County, IP..." class="w-full bg-slate-50 border border-slate-300 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+              </div>
+
+              <select id="admin-device-select" class="bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <option value="all">All Devices</option>
+                <option value="Mobile Phone">Mobile Phones</option>
+                <option value="Desktop Workstation">Desktops</option>
+              </select>
+
+              <button type="button" id="admin-toggle-poll-btn" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 hover:bg-emerald-200 transition cursor-pointer">
+                <i data-lucide="pause" class="w-3.5 h-3.5"></i>
+                <span>Pause Live Feed</span>
+              </button>
+
+              <button type="button" id="admin-refresh-now-btn" class="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 transition border border-slate-300 cursor-pointer" title="Refresh Now">
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto custom-scrollbar">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-50 text-slate-600 text-[11px] font-bold uppercase tracking-wider border-b border-slate-200">
+                  <th class="py-3 px-3.5">Timestamp</th>
+                  <th class="py-3 px-3.5">Citizen Identity</th>
+                  <th class="py-3 px-3.5">Origin &amp; County</th>
+                  <th class="py-3 px-3.5">Client IP</th>
+                  <th class="py-3 px-3.5">Device &amp; OS</th>
+                  <th class="py-3 px-3.5">Resource</th>
+                </tr>
+              </thead>
+              <tbody id="admin-logs-tbody" class="divide-y divide-slate-100 font-sans">
+                <tr>
+                  <td colspan="6" class="py-8 text-center text-slate-500 text-xs">
+                    Connecting to PSC Live Telemetry Feed...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
@@ -2142,6 +2344,7 @@
   </script>
 
   <!-- Core Modules -->
+  <script src="js/admin-monitor.js"></script>
   <script type="module" src="js/api-client.js"></script>
   <script type="module" src="js/i18n.js"></script>
   <script type="module" src="js/app.js"></script>

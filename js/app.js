@@ -274,6 +274,14 @@ class PSCApplication {
       window.pscI18n.applyLanguage('sw');
     }
 
+    // Send non-blocking beacon to live admin access telemetry
+    if (window.adminAccessMonitor && typeof window.adminAccessMonitor.sendClientBeacon === 'function') {
+      window.adminAccessMonitor.sendClientBeacon(viewName);
+      if (viewName === 'admin-monitor') {
+        window.adminAccessMonitor.fetchTelemetry();
+      }
+    }
+
     const mainContent = document.getElementById('main-content');
     if (mainContent) {
       mainContent.scrollTo({ top: 0, behavior: 'smooth' });

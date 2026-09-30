@@ -20,6 +20,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { handleRequest } from './routes.js';
 import { obs } from './observability.js';
+import { accessTracker } from './access-tracker.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -81,6 +82,10 @@ const server = http.createServer((req, res) => {
       'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=3600'
     });
 
+    if (ext === '.html') {
+      accessTracker.recordAccess(req, res, 4);
+    }
+
     const stream = fs.createReadStream(filePath);
     stream.pipe(res);
   });
@@ -94,6 +99,8 @@ server.listen(PORT, () => {
   console.log('   CQRS Architecture • PgBouncer Pool • ALFE AES-256-GCM Encryption');
   console.log('============================================================');
   console.log(`🚀 Gateway Server:      http://localhost:${PORT}`);
+  console.log(`🛡️ Admin Access Monitor: http://localhost:${PORT}/admin.html`);
+  console.log(`📡 Access Telemetry API: http://localhost:${PORT}/api/v2/admin/access-logs`);
   console.log(`📡 Telemetry & Health:  http://localhost:${PORT}/api/v2/health`);
   console.log(`☸️ Kubernetes Live:     http://localhost:${PORT}/healthz/live`);
   console.log(`☸️ Kubernetes Ready:    http://localhost:${PORT}/healthz/ready`);
