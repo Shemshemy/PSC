@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Public Service Commission | Citizen Recruitment & Selection Portal</title>
+  <meta name="description" content="Official Public Service Commission of Kenya Online Recruitment and Selection System. Modern, accessible, WCAG 2.2 AAA compliant citizen career portal.">
+
+  <!-- Google Fonts: Plus Jakarta Sans, Inter & Lora -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Top Header & Dignified Civic Identity (Rich Kenya Mustard Gold Banner) -->
+  <header class="psc-header" role="banner">
+    <div class="psc-header-top-accent"></div>
+    <div class="psc-header-inner">
+      <div class="psc-header-left">
+        <!-- Sidebar Toggle Hamburger Button -->
+        <button type="button" id="sidebar-toggle-btn" class="sidebar-toggle-btn" aria-label="Toggle navigation menu" title="Toggle Sidebar">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+
+        <!-- Official Civic Emblems & Flagship Titles -->
+        <div class="psc-brand-group">
+          <div class="psc-emblems">
+            <img src="assets/images/kenya-coat-of-arms-seeklogo.png" alt="Republic of Kenya Coat of Arms" class="psc-emblem-img">
+            <div class="psc-emblem-divider"></div>
+            <img src="assets/images/PSC_Logo.png" alt="Public Service Commission Seal" class="psc-emblem-img">
+          </div>
+          <div class="psc-brand-titles">
+            <h1 class="psc-brand-flagship">Public Service Commission</h1>
+            <p class="psc-brand-sub">A Values-Driven Citizen-Centric Public Service</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Header Section: Real-time Auto-save & User Authentication Meta -->
+      <div class="psc-header-utils">
+        <!-- Real-Time Auto-Save Indicator -->
+        <div id="auto-save-indicator" class="auto-save-pill" role="status" aria-live="polite">
+          <span class="auto-save-dot"></span>
+          <span>✓ Saved locally at 18:24</span>
+        </div>
+
+        <div class="psc-user-auth-meta">
+          <div class="signed-in-tag">
+            <span class="signed-label">Signed as:</span>
+            <strong class="signed-name">Dennis Limo</strong>
+          </div>
+          <div class="auth-action-links">
+            <button type="button" class="auth-link-btn" id="btn-change-password" title="Change Account Password">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span>Change Password</span>
+            </button>
+            <span class="auth-link-divider">|</span>
+            <button type="button" class="auth-link-btn danger" id="btn-logout" title="Sign Out of PSC Portal">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+              <span>Log Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Split-Screen Layout (Curved Organic Architecture) -->
+  <div class="app-wrapper">
+    <!-- Left Curved Side Rail (Authentic PSC Applicant Section Tree Navigation) -->
+    <aside id="portal-sidebar" class="curved-sidebar" role="navigation" aria-label="Portal Navigation">
+      <!-- Curved Wave SVG Transition -->
+      <svg class="sidebar-curve-svg" viewBox="0 0 40 1000" preserveAspectRatio="none">
+        <path d="M 0,0 Q 40,300 15,600 T 0,1000 L 40,1000 L 40,0 Z" fill="#F8FAFC" />
+      </svg>
+
+      <div class="curved-sidebar-content">
+        <!-- Top Title Banner: PSC INFORMATION MANAGEMENT SYSTEM -->
+        <div class="sidebar-system-banner">
+          <div class="sidebar-system-title">PSC INFORMATION MANAGEMENT SYSTEM</div>
+          <div class="sidebar-system-sub">Candidate Recruitment Portal</div>
+        </div>
+
+        <!-- Section Accordion Header: Applicant Section -->
+        <div class="sidebar-accordion-section">
+          <div class="sidebar-section-header" id="applicant-accordion-toggle" role="button" tabindex="0" aria-expanded="true">
+            <div class="sidebar-section-title-wrap">
+              <svg class="sidebar-section-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span class="sidebar-section-title">Applicant Section</span>
+            </div>
+            <svg class="sidebar-chevron-icon open" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+
+          <!-- Tree Navigation List with Connected Bullet Line -->
+          <nav class="sidebar-nav-tree" id="applicant-nav-tree" aria-label="Applicant Navigation Tree">
+            <!-- Vertical Line Connecting Tree Nodes -->
+            <div class="tree-line-connector"></div>
+
+            <!-- 1. Dashboard -->
+            <button type="button" class="sidebar-tree-node active" data-view="dashboard">
+              <span class="tree-bullet"></span>
+              <span class="tree-node-label">Dashboard</span>
+            </button>
+
+            <!-- 2. Advertised Jobs -->
+            <button type="button" class="sidebar-tree-node" data-view="jobs">
+              <span class="tree-bullet"></span>
+              <span class="tree-node-label">Advertised Jobs</span>
+              <span class="tree-badge mustard">7 Open</span>
+            </button>
+
+            <!-- 3. View Courses -->
+            <button type="button" class="sidebar-tree-node" data-view="courses">
+              <span class="tree-bullet"></span>
+              <span class="tree-node-label">View Courses</span>
+            </button>
+
+            <!-- 4. My Profile (Expandable sub-tree with the 9 steps) -->
+            <div class="sidebar-profile-node-group open" id="profile-node-group">
+              <button type="button" class="sidebar-tree-node profile-parent-node" id="profile-expand-toggle" data-view="profile" aria-expanded="true">
+                <span class="tree-bullet"></span>
+                <span class="tree-node-label">My Profile</span>
+                <span class="tree-badge gold">92%</span>
+                <svg class="node-arrow-icon open" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <!-- Profile Steps Sub-Tree (9 Steps) -->
+              <div class="sidebar-steps-sublist" id="sidebar-steps-list">
+                <!-- Populated dynamically and rendered by app.js -->
+              </div>
+            </div>
+
+            <!-- 5. Apply for Job -->
+            <button type="button" class="sidebar-tree-node" data-view="jobs" data-action="apply">
+              <span class="tree-bullet"></span>
+              <span class="tree-node-label">Apply for Job</span>
+            </button>
+
+            <!-- 6. Status of My Application(s) -->
+            <button type="button" class="sidebar-tree-node" data-view="applications">
+              <span class="tree-bullet"></span>
+              <span class="tree-node-label">Status of My Application(s)</span>
+              <span class="tree-badge forest">4 Active</span>
+            </button>
+          </nav>
+        </div>
+
+        <!-- Citizen Support helper card -->
+        <div class="sidebar-support">
+          <p class="sidebar-support-text">Have a question regarding PSC vacancies?</p>
+          <a class="sidebar-support-link" href="mailto:support@publicservice.go.ke">Chat with PSC Support</a>
+          <p class="sidebar-support-sub">Toll-Free Helpline: 0800 221 000</p>
+        </div>
+
+        <!-- Bottom Toolbar (as in genuine PSC original: Settings, Fullscreen, High Contrast, Logout) -->
+        <div class="sidebar-footer-toolbar" role="toolbar" aria-label="Portal Accessibility and Preferences">
+          <button type="button" class="toolbar-btn" id="btn-sidebar-settings" title="Settings &amp; Font Preferences" aria-label="Settings">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          </button>
+          <button type="button" class="toolbar-btn" id="btn-sidebar-fullscreen" title="Toggle Fullscreen View" aria-label="Toggle Fullscreen">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+          </button>
+          <button type="button" class="toolbar-btn" id="btn-sidebar-contrast" title="High Contrast Accessibility Mode" aria-label="High Contrast">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 0 0 20z" fill="currentColor"></path></svg>
+          </button>
+          <button type="button" class="toolbar-btn danger" id="btn-sidebar-power" title="Log Out" aria-label="Log Out">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Central Content Canvas -->
+    <main id="main-content" class="app-main" role="main">
+
+      <!-- VIEW 1: RECRUITMENT DASHBOARD -->
+      <section id="view-dashboard" class="view-container active" aria-labelledby="dashboard-heading">
+        <div class="page-header">
+          <h2 id="dashboard-heading" class="page-title">Candidate Recruitment Dashboard</h2>
+          <p class="page-description">
+            Welcome to the Public Service Commission Online Recruitment & Selection Portal for Public Universities and Independent Offices.
+          </p>
+        </div>
+
+        <!-- Dedicated Pale-Blue Advisory Banner (Replaces raw electric blue body text) -->
+        <aside class="advisory-banner" role="region" aria-label="State Department Vacancy Notice">
+          <svg class="advisory-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <div class="advisory-body">
+            <h3 class="advisory-title">Notice on Ministries & State Department Vacancies</h3>
+            <p class="advisory-text">
+              If you are applying for jobs advertised by Ministries and State Departments, kindly visit the dedicated Civil Service portal at 
+              <a href="https://www.psckjobs.go.ke/" target="_blank" rel="noopener noreferrer" class="advisory-link">www.psckjobs.go.ke</a> or 
+              <a href="https://pscims.publicservice.go.ke/jobs/" target="_blank" rel="noopener noreferrer" class="advisory-link">pscims.publicservice.go.ke/jobs/</a>.
+            </p>
+          </div>
+        </aside>
+
+        <!-- Redesigned Standardized, Accessible Payroll Input Card -->
+        <div class="form-card" style="padding: 1.75rem 2rem; margin-bottom: 2rem;">
+          <div style="display: flex; flex-direction: column; max-width: 520px;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="dash-payroll-input" class="form-label">
+                My Civil Service Payroll Number (IPPD)
+                <span class="verified-tag" style="margin-left: 0.5rem;">✓ Active Serving Officer</span>
+                <span class="alfe-badge" title="NIST SP 800-207 Zero Trust: Field encrypted via HSM KMS envelope key">🔒 ALFE Encrypted</span>
+              </label>
+              <p class="form-hint">
+                Applicable only to candidates currently serving in the Kenyan Public Service. Enter your 11-digit payroll identifier.
+              </p>
+              <div style="display: flex; gap: 0.75rem; align-items: center;">
+                <input
+                  type="text"
+                  id="dash-payroll-input"
+                  name="dashPayrollNumber"
+                  class="form-control input-payroll"
+                  value="20250031176"
+                  placeholder="e.g. 20250031176"
+                  aria-describedby="payroll-desc"
+                >
+                <button type="button" class="btn btn-secondary" style="min-height: 42px; font-size: 0.85rem;" onclick="alert('Payroll number verified with Government Human Resource Information System (GHRIS).')">
+                  Verify IPPD
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard High-Impact Statistics Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+          <!-- Card 1: Profile Completeness -->
+          <div class="form-card" style="margin-bottom: 0; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.78rem; text-transform: uppercase; font-weight: 700; color: var(--slate-500); letter-spacing: 0.5px;">Bio-Data Readiness</span>
+                <span class="status-pill shortlisted">92% Ready</span>
+              </div>
+              <div style="font-size: 1.6rem; font-weight: 800; color: var(--psc-forest-900); margin: 0.4rem 0;">Ready for Adverts</div>
+              <div style="font-size: 0.84rem; color: var(--slate-600);">8 of 9 sections completely validated with KNEC and NRB registry.</div>
+            </div>
+            <button type="button" class="btn btn-outline-gold dashboard-action-btn" data-view="profile" data-step="1" style="margin-top: 1.25rem; width: 100%;">
+              Review Master Profile &rarr;
+            </button>
+          </div>
+
+          <!-- Card 2: Tracked Applications -->
+          <div class="form-card" style="margin-bottom: 0; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.78rem; text-transform: uppercase; font-weight: 700; color: var(--slate-500); letter-spacing: 0.5px;">Active Submissions</span>
+                <span class="status-pill review">4 Jobs</span>
+              </div>
+              <div style="font-size: 1.6rem; font-weight: 800; color: var(--blue-700); margin: 0.4rem 0;">2 Shortlisted</div>
+              <div style="font-size: 0.84rem; color: var(--slate-600);">ICT Officer II and Weights & Measures Officer II shortlisted for interview.</div>
+            </div>
+            <button type="button" class="btn btn-secondary dashboard-action-btn" data-view="applications" style="margin-top: 1.25rem; width: 100%;">
+              Track Status & Interview Dates &rarr;
+            </button>
+          </div>
+
+          <!-- Card 3: Active Job Adverts -->
+          <div class="form-card" style="margin-bottom: 0; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.78rem; text-transform: uppercase; font-weight: 700; color: var(--slate-500); letter-spacing: 0.5px;">Commission Postings</span>
+                <span class="status-pill" style="background:#FEF3C7; color:#B45309;">Closing Oct 13</span>
+              </div>
+              <div style="font-size: 1.6rem; font-weight: 800; color: var(--slate-900); margin: 0.4rem 0;">7 Open Adverts</div>
+              <div style="font-size: 0.84rem; color: var(--slate-600);">Vice Chancellor, DVCs, Principals and technical cadres currently open.</div>
+            </div>
+            <button type="button" class="btn btn-primary dashboard-action-btn" data-view="jobs" style="margin-top: 1.25rem; width: 100%;">
+              Explore Active Adverts &rarr;
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: ADVERTISED JOBS -->
+      <section id="view-jobs" class="view-container" aria-labelledby="jobs-heading">
+        <div class="page-header">
+          <h2 id="jobs-heading" class="page-title">Active Public Service Adverts & Vacancies</h2>
+          <p class="page-description">
+            Explore official public service career opportunities across public universities and state corporations. Apply directly with your verified bio-data.
+          </p>
+        </div>
+
+        <div id="active-jobs-table-container">
+          <!-- Rendered by jobs.js -->
+        </div>
+      </section>
+
+      <!-- VIEW 3: VIEW COURSES REGISTRY -->
+      <section id="view-courses" class="view-container" aria-labelledby="courses-heading">
+        <div class="page-header">
+          <h2 id="courses-heading" class="page-title">Curriculum & Accredited Courses Directory</h2>
+          <p class="page-description">
+            Official Public Service Commission database of accredited academic degree, diploma, and technical courses recognized for government appointment.
+          </p>
+        </div>
+
+        <div id="courses-registry-container">
+          <!-- Rendered by courses.js -->
+        </div>
+      </section>
+
+      <!-- VIEW 4: MY PROFILE (MULTI-STEP FLOW) -->
+      <section id="view-profile" class="view-container" aria-labelledby="profile-heading">
+        <!-- Profile Master Stepper & Progress Header -->
+        <div class="profile-stepper-header" role="region" aria-label="Profile Completion Stepper">
+          <div class="profile-stepper-top">
+            <div class="profile-stepper-info">
+              <div class="profile-stepper-kicker">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                <span>Republic of Kenya • Public Service Commission Candidate Dossier</span>
+              </div>
+              <h2 id="profile-master-step-title" class="profile-stepper-title">Step 1 of 9: Personal & Identification Details</h2>
+              <p id="profile-master-step-desc" class="profile-stepper-desc">Sequential, segmented bio-data capture. All progress is cryptographically preserved in real time.</p>
+            </div>
+            <div class="profile-stepper-stat">
+              <div id="profile-overall-pct" class="profile-stepper-pct">92%</div>
+              <div class="profile-stepper-label">
+                <strong>Overall Profile</strong><br>
+                Completion Status
+              </div>
+            </div>
+          </div>
+
+          <!-- Master Progress Fill Rail -->
+          <div class="profile-progress-rail" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100">
+            <div id="profile-overall-progress-fill" class="profile-progress-fill" style="width: 92%;"></div>
+          </div>
+
+          <!-- 9 Sequential Step Pills -->
+          <div class="profile-step-pills" id="profile-step-pills-bar">
+            <!-- Populated dynamically by app.js -->
+          </div>
+        </div>
+
+        <!-- Step Panel 1: Personal Details (Segmented Wizard) -->
+        <div id="panel-step-personal" class="profile-step-panel">
+          <div class="segment-wizard-card">
+            <!-- 4 Segment Navigation Tabs -->
+            <ul class="segment-tabs-nav" role="tablist" aria-label="Personal details sections">
+              <li>
+                <button type="button" class="segment-tab-btn active" role="tab" id="tab-seg-1" data-segment="1" aria-selected="true" aria-controls="segment-panel-1">
+                  <span class="segment-tab-badge">1</span>
+                  <div class="segment-tab-texts">
+                    <span class="segment-tab-kicker">Part 1</span>
+                    <span class="segment-tab-title">Identity & Name</span>
+                  </div>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="segment-tab-btn" role="tab" id="tab-seg-2" data-segment="2" aria-selected="false" aria-controls="segment-panel-2">
+                  <span class="segment-tab-badge">2</span>
+                  <div class="segment-tab-texts">
+                    <span class="segment-tab-kicker">Part 2</span>
+                    <span class="segment-tab-title">Demographics & Origin</span>
+                  </div>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="segment-tab-btn" role="tab" id="tab-seg-3" data-segment="3" aria-selected="false" aria-controls="segment-panel-3">
+                  <span class="segment-tab-badge">3</span>
+                  <div class="segment-tab-texts">
+                    <span class="segment-tab-kicker">Part 3</span>
+                    <span class="segment-tab-title">Contacts & Address</span>
+                  </div>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="segment-tab-btn" role="tab" id="tab-seg-4" data-segment="4" aria-selected="false" aria-controls="segment-panel-4">
+                  <span class="segment-tab-badge">4</span>
+                  <div class="segment-tab-texts">
+                    <span class="segment-tab-kicker">Part 4</span>
+                    <span class="segment-tab-title">Public Service & Ethics</span>
+                  </div>
+                </button>
+              </li>
+            </ul>
+
+            <form id="personal-details-form" novalidate>
+              <!-- SEGMENT 1: IDENTITY & LEGAL NAMES -->
+              <div id="segment-panel-1" class="form-segment active" role="tabpanel" aria-labelledby="tab-seg-1">
+                <div class="segment-meta-header">
+                  <div class="segment-kicker">Part 1 of 4 • Primary Identity</div>
+                  <h3 class="segment-title">National Identification & Legal Names</h3>
+                  <p class="segment-description">Verified against the National Registration Bureau (NRB) and Kenya Revenue Authority (KRA) registries.</p>
+                </div>
+
+                <div class="form-flow">
+                  <!-- National ID & Huduma Number -->
+                  <div class="form-row-paired">
+                    <div class="form-group">
+                      <label class="form-label" for="field-nationalId">
+                        National ID Number <span class="required-star">*</span>
+                        <span class="verified-tag">✓ NRB Verified</span>
+                        <span class="alfe-badge" title="NIST SP 800-207 Zero Trust: Field encrypted with AES-256-GCM via HSM KMS before database storage">🔒 ALFE Encrypted</span>
+                      </label>
+                      <p class="form-hint">7 to 8 digits from your National Identity Card.</p>
+                      <input type="text" id="field-nationalId" name="nationalId" class="form-control input-national-id" value="35431943" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label" for="field-hudumaNo">
+                        Huduma Number (Optional)
+                        <span class="alfe-badge" title="Encrypted at application layer before DB persistence">🔒 ALFE Encrypted</span>
+                      </label>
+                      <p class="form-hint">National Integrated Identity Management (NIIMS) ID.</p>
+                      <input type="text" id="field-hudumaNo" name="hudumaNo" class="form-control input-national-id" placeholder="Optional">
+                    </div>
+                  </div>
+
+                  <!-- Salutation and Candidate Names -->
+                  <div class="form-row-triplet">
+                    <div class="form-group">
+                      <label class="form-label" for="field-salutation">Salutation</label>
+                      <select id="field-salutation" name="salutation" class="form-control">
+                        <option value="Mr" selected>Mr</option>
+                        <option value="Mrs">Mrs</option>
+                        <option value="Ms">Ms</option>
+                        <option value="Dr">Dr</option>
+                        <option value="Prof">Prof</option>
+                        <option value="Eng">Eng</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="field-surname">Surname <span class="required-star">*</span></label>
+                      <input type="text" id="field-surname" name="surname" class="form-control" value="Limo" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="field-firstName">First Name <span class="required-star">*</span></label>
+                      <input type="text" id="field-firstName" name="firstName" class="form-control" value="Dennis" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="field-otherNames">Other Names</label>
+                    <input type="text" id="field-otherNames" name="otherNames" class="form-control input-medium" value="Shem Ochieng">
+                  </div>
+
+                  <!-- 3-Part Numeric Date-of-Birth Physics (GOV.UK Standard) -->
+                  <div class="form-group">
+                    <label class="form-label">
+                      Date of Birth <span class="required-star">*</span>
+                      <span class="dob-age-feedback visible">✓ Age: 27 years (Eligible)</span>
+                    </label>
+                    <p class="form-hint">For example, 16 09 1998. Numeric day, month, and 4-digit year.</p>
+                    <div class="dob-wrapper">
+                      <div class="dob-subfield">
+                        <label for="dob-day">Day</label>
+                        <input type="text" id="dob-day" name="dobDay" class="form-control input-dob-day" inputmode="numeric" maxlength="2" value="16" placeholder="DD">
+                      </div>
+                      <span style="font-size: 1.25rem; color: var(--slate-400); margin-top: 18px;">/</span>
+                      <div class="dob-subfield">
+                        <label for="dob-month">Month</label>
+                        <input type="text" id="dob-month" name="dobMonth" class="form-control input-dob-month" inputmode="numeric" maxlength="2" value="09" placeholder="MM">
+                      </div>
+                      <span style="font-size: 1.25rem; color: var(--slate-400); margin-top: 18px;">/</span>
+                      <div class="dob-subfield">
+                        <label for="dob-year">Year</label>
+                        <input type="text" id="dob-year" name="dobYear" class="form-control input-dob-year" inputmode="numeric" maxlength="4" value="1998" placeholder="YYYY">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Gender and KRA PIN -->
+                  <div class="form-row-paired">
+                    <div class="form-group">
+                      <label class="form-label">Gender <span class="required-star">*</span></label>
+                      <div style="display: flex; gap: 1.5rem; margin-top: 0.5rem; align-items: center;">
+                        <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+                          <input type="radio" name="gender" value="Male" checked> Male
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+                          <input type="radio" name="gender" value="Female"> Female
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label" for="field-kraPin">
+                        KRA PIN Number <span class="required-star">*</span>
+                        <span class="alfe-badge" title="NIST SP 800-207: Envelope encrypted field with automated KRA breaker">🔒 ALFE Encrypted</span>
+                      </label>
+                      <p class="form-hint">e.g. A011114073C</p>
+                      <input type="text" id="field-kraPin" name="kraPin" class="form-control input-kra-pin" value="A011114073C" required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="segment-actions-bar">
+                  <div class="segment-progress-indicator">
+                    <span class="segment-dot-track">
+                      <span class="segment-dot active"></span>
+                      <span class="segment-dot"></span>
+                      <span class="segment-dot"></span>
+                      <span class="segment-dot"></span>
+                    </span>
+                    <span>Part 1 of 4 • Identity Details</span>
+                  </div>
+                  <button type="button" class="btn btn-mustard next-segment-btn" data-next="2">
+                    Save & Continue to Demographics &rarr;
+                  </button>
+                </div>
+              </div>
+
+              <!-- SEGMENT 2: DEMOGRAPHICS, ORIGIN & EQUAL INCLUSION -->
+              <div id="segment-panel-2" class="form-segment" role="tabpanel" aria-labelledby="tab-seg-2">
+                <div class="segment-meta-header">
+                  <div class="segment-kicker">Part 2 of 4 • Demographics & Inclusion</div>
+                  <h3 class="segment-title">Demographics, Regional Origin & Equal Inclusion</h3>
+                  <p class="segment-description">Pursuant to Article 54 of the Constitution and Kenya Public Service regional representation standards.</p>
+                </div>
+
+                <div class="form-flow">
+                  <!-- Disability Inclusion & Accommodations (Article 54) -->
+                  <div class="form-group" style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: var(--border-radius-md); padding: 1.5rem 1.75rem;">
+                    <label class="form-label" style="margin-bottom: 0.35rem;">
+                      Are you a Person Living with Disability (PWD)? <span class="required-star">*</span>
+                    </label>
+                    <p class="form-hint" style="margin-bottom: 0.85rem;">
+                      Under Article 54 of the Constitution of Kenya and Public Service affirmative inclusion standards.
+                    </p>
+                    <div style="display: flex; gap: 2.25rem; align-items: center;">
+                      <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 700;">
+                        <input type="radio" name="isDisability" value="No" checked id="pwd-no-radio"> No
+                      </label>
+                      <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 700;">
+                        <input type="radio" name="isDisability" value="Yes" id="pwd-yes-radio"> Yes
+                      </label>
+                    </div>
+
+                    <div id="pwd-conditional-fields" style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--slate-300);">
+                      <div class="form-row-paired">
+                        <div class="form-group">
+                          <label class="form-label" for="field-pwdRegNo">NCPWD Registration Number <span class="required-star">*</span></label>
+                          <input type="text" id="field-pwdRegNo" name="pwdRegNo" class="form-control" placeholder="e.g. NCPWD/P/2023/10492">
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label" for="field-pwdCategory">Category of Disability <span class="required-star">*</span></label>
+                          <select id="field-pwdCategory" name="pwdCategory" class="form-control">
+                            <option value="">Select Category...</option>
+                            <option value="Physical">Physical / Mobility</option>
+                            <option value="Visual">Visual Impairment</option>
+                            <option value="Hearing">Hearing Impairment</option>
+                            <option value="Speech">Speech Impairment</option>
+                            <option value="Psychosocial">Mental / Psychosocial</option>
+                            <option value="Multiple">Multiple Disabilities</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group" style="margin-top: 1.25rem;">
+                        <label class="form-label" for="field-pwdAccommodation">Special Interview Accommodation Requirements (Optional)</label>
+                        <input type="text" id="field-pwdAccommodation" name="pwdAccommodation" class="form-control" placeholder="e.g. Sign Language Interpreter, Wheelchair Accessibility, Large Print materials">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- County and Ethnicity Accessible Comboboxes -->
+                  <div class="form-row-paired">
+                    <div class="form-group">
+                      <label class="form-label">Home County <span class="required-star">*</span></label>
+                      <div id="combo-county-container"></div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Sub-County / Constituency <span class="required-star">*</span></label>
+                      <div id="combo-subcounty-container"></div>
+                    </div>
+                  </div>
+
+                  <div class="form-row-paired">
+                    <div class="form-group">
+                      <label class="form-label">Ethnicity <span class="required-star">*</span></label>
+                      <div id="combo-ethnicity-container"></div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label" for="field-ward">Home Ward</label>
+                      <input type="text" id="field-ward" name="ward" class="form-control" value="Kosirai">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="segment-actions-bar">
+                  <button type="button" class="btn btn-secondary prev-segment-btn" data-prev="1">
+                    &larr; Back to Identification
+                  </button>
+                  <div class="segment-progress-indicator">
+                    <span class="segment-dot-track">
+                      <span class="segment-dot completed"></span>
+                      <span class="segment-dot active"></span>
+                      <span class="segment-dot"></span>
+                      <span class="segment-dot"></span>
+                    </span>
+                    <span>Part 2 of 4 • Demographics</span>
+                  </div>
+                  <button type="button" class="btn btn-mustard next-segment-btn" data-next="3">
+                    Save & Continue to Contacts &rarr;
+                  </button>
+                </div>
+              </div>
+
+              <!-- SEGMENT 3: OFFICIAL CONTACT & POSTAL ADDRESS -->
+              <div id="segment-panel-3" class="form-segment" role="tabpanel" aria-labelledby="tab-seg-3">
+                <div class="segment-meta-header">
+                  <div class="segment-kicker">Part 3 of 4 • Official Channels</div>
+                  <h3 class="segment-title">Official Contact Particulars & Postal Address</h3>
+                  <p class="segment-description">All official interview invitations, shortlist announcements, and statutory notices will be transmitted to these verified coordinates.</p>
+                </div>
+
+                <div class="form-flow">
+                  <!-- Contact Particulars -->
+                  <div class="form-row-paired">
+                    <div class="form-group">
+                      <label class="form-label" for="field-mobileNumber">Primary Mobile Number <span class="required-star">*</span></label>
+                      <p class="form-hint">Used for official interview invitation SMS alerts.</p>
+                      <input type="tel" id="field-mobileNumber" name="mobileNumber" class="form-control input-phone" value="0721877088" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label" for="field-emailAddress">Email Address <span class="required-star">*</span></label>
+                      <p class="form-hint">Official email for formal recruitment correspondence.</p>
+                      <input type="email" id="field-emailAddress" name="emailAddress" class="form-control" value="shemdennis53@gmail.com" required>
+                    </div>
+                  </div>
+
+                  <!-- Postal Address -->
+                  <div class="form-row-triplet">
+                    <div class="form-group">
+                      <label class="form-label" for="field-postalAddress">Postal Address <span class="required-star">*</span></label>
+                      <input type="text" id="field-postalAddress" name="postalAddress" class="form-control" value="237 Kapsabet" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="field-postalCode">Postal Code <span class="required-star">*</span></label>
+                      <input type="text" id="field-postalCode" name="postalCode" class="form-control input-postal-code" value="30300" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="field-town">Town / City <span class="required-star">*</span></label>
+                      <input type="text" id="field-town" name="town" class="form-control" value="Kapsabet" required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="segment-actions-bar">
+                  <button type="button" class="btn btn-secondary prev-segment-btn" data-prev="2">
+                    &larr; Back to Demographics
+                  </button>
+                  <div class="segment-progress-indicator">
+                    <span class="segment-dot-track">
+                      <span class="segment-dot completed"></span>
+                      <span class="segment-dot completed"></span>
+                      <span class="segment-dot active"></span>
+                      <span class="segment-dot"></span>
+                    </span>
+                    <span>Part 3 of 4 • Contact Particulars</span>
+                  </div>
+                  <button type="button" class="btn btn-mustard next-segment-btn" data-next="4">
+                    Save & Continue to Ethics &rarr;
+                  </button>
+                </div>
+              </div>
+
+              <!-- SEGMENT 4: PUBLIC SERVICE STATUS & STATUTORY ETHICS -->
+              <div id="segment-panel-4" class="form-segment" role="tabpanel" aria-labelledby="tab-seg-4">
+                <div class="segment-meta-header">
+                  <div class="segment-kicker">Part 4 of 4 • Public Service & Ethics</div>
+                  <h3 class="segment-title">Public Service Status & Ethics Clearances</h3>
+                  <p class="segment-description">Statutory declarations pursuant to Chapter 6 of the Constitution and Section 100(4) of the Public Service Commission Act, 2017.</p>
+                </div>
+
+                <div class="form-flow">
+                  <!-- Public Service Employment Declaration -->
+                  <div class="form-group">
+                    <label class="form-label">Are you currently an Applicant serving in the Public Service? <span class="required-star">*</span></label>
+                    <p class="form-hint">Includes national government ministries, state departments, and semi-autonomous government agencies (SAGAs).</p>
+                    <div style="display: flex; gap: 2.25rem; margin-top: 0.45rem;">
+                      <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 700;">
+                        <input type="radio" name="inPublicService" value="Yes" checked id="ps-yes-radio"> Yes
+                      </label>
+                      <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 700;">
+                        <input type="radio" name="inPublicService" value="No" id="ps-no-radio"> No
+                      </label>
+                    </div>
+                  </div>
+
+                  <div id="ps-conditional-fields" style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: var(--border-radius-md); padding: 1.5rem; margin-top: 1rem;">
+                    <div class="form-row-paired">
+                      <div class="form-group">
+                        <label class="form-label" for="field-currentEmployer">Current Employer</label>
+                        <input type="text" id="field-currentEmployer" name="currentEmployer" class="form-control" value="Ministry of Information, Communications & The Digital Economy">
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label" for="field-positionHeld">Position Held</label>
+                        <input type="text" id="field-positionHeld" name="positionHeld" class="form-control" value="Assistant Systems Analyst">
+                      </div>
+                    </div>
+
+                    <div class="form-row-paired" style="margin-top: 1.25rem;">
+                      <div class="form-group">
+                        <label class="form-label" for="field-effectiveDate">Effective Appointment Date</label>
+                        <input type="date" id="field-effectiveDate" name="effectiveDate" class="form-control" value="2022-01-31">
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label" for="field-grossSalary">Gross Monthly Salary (Ksh.)</label>
+                        <input type="text" id="field-grossSalary" name="grossSalaryMonthly" class="form-control" value="94,500">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Statutory Disclosures from PSC Official Form -->
+                  <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--slate-300);">
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                      <label class="form-label">Have you ever been convicted of any criminal offence or been the subject of a probation order? <span class="required-star">*</span></label>
+                      <div style="display: flex; gap: 2.25rem; margin-top: 0.45rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 700;">
+                          <input type="radio" name="hasCriminalConviction" value="No" checked> No
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 700;">
+                          <input type="radio" name="hasCriminalConviction" value="Yes"> Yes
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Have you ever been dismissed or otherwise removed from public or private employment? <span class="required-star">*</span></label>
+                      <div style="display: flex; gap: 2.25rem; margin-top: 0.45rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 700;">
+                          <input type="radio" name="hasDismissal" value="No" checked> No
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 700;">
+                          <input type="radio" name="hasDismissal" value="Yes"> Yes
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="segment-actions-bar">
+                  <button type="button" class="btn btn-secondary prev-segment-btn" data-prev="3">
+                    &larr; Back to Contacts
+                  </button>
+                  <div class="segment-progress-indicator">
+                    <span class="segment-dot-track">
+                      <span class="segment-dot completed"></span>
+                      <span class="segment-dot completed"></span>
+                      <span class="segment-dot completed"></span>
+                      <span class="segment-dot active"></span>
+                    </span>
+                    <span>Part 4 of 4 • Ethics & Public Service</span>
+                  </div>
+                  <button type="button" class="btn btn-mustard next-segment-btn" data-next="finish">
+                    Complete Step 1 & Proceed to Step 2 &rarr;
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Step Panel 2: High School Qualifications -->
+        <div id="panel-step-highschool" class="profile-step-panel" style="display: none;">
+          <div class="page-header">
+            <h2 class="page-title">Step 2: Primary & High School Qualifications</h2>
+            <p class="page-description">
+              Verified secondary and primary school completion records. Information provided is subject to instant KNEC validation.
+            </p>
+          </div>
+
+          <div class="legal-warning-banner">
+            <svg class="legal-warning-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <div class="legal-warning-text">
+              <strong>KNEC Verification Disclaimer:</strong> Information provided here shall be validated directly with the Kenya National Examinations Council (KNEC). Falsification results in instant disqualification.
+            </div>
+          </div>
+
+          <div id="highschool-cards-container"></div>
+        </div>
+
+        <!-- Step Panel 3: Academic Qualifications -->
+        <div id="panel-step-academic" class="profile-step-panel" style="display: none;">
+          <div class="page-header">
+            <h2 class="page-title">Step 3: Academic Qualifications (Higher Education)</h2>
+            <p class="page-description">
+              Accredited university degrees, diplomas, and postgraduate qualifications from recognized Kenyan and international universities.
+            </p>
+          </div>
+          <div id="academic-cards-container"></div>
+        </div>
+
+        <!-- Step Panel 4: Professional Qualifications -->
+        <div id="panel-step-professional" class="profile-step-panel" style="display: none;">
+          <div class="page-header">
+            <h2 class="page-title">Step 4: Professional Qualifications & Certifications</h2>
+            <p class="page-description">
+              Technical, regulatory, and specialized certifications (e.g. CCNA, CPA-K, CS-K, Cloud Architect).
+            </p>
+          </div>
+          <div id="professional-cards-container"></div>
+        </div>
+
+        <!-- Step Panel 5: Other Courses / Seminars -->
+        <div id="panel-step-othercourses" class="profile-step-panel" style="display: none;">
+          <div class="page-header">
+            <h2 class="page-title">Step 5: Seminars, Workshops & Short Courses</h2>
+            <p class="page-description">
+              Professional training programs and governance workshops lasting not less than one (1) week.
+            </p>
+          </div>
+          <div id="othercourses-cards-container"></div>
+        </div>
+
+        <!-- Step Panel 6: Memberships to Professional Bodies -->
+        <div id="panel-step-memberships" class="profile-step-panel" style="display: none;">
+          <div class="page-header">
+            <h2 class="page-title">Step 6: Memberships to Professional Bodies</h2>
+            <p class="page-description">
+              Active professional society registrations, licenses to practice, and annual renewal certificates.
+            </p>
+          </div>
+          <div id="memberships-cards-container"></div>
+        </div>
+
+        <!-- Step Panel 7: Employment History -->
+        <div id="panel-step-experience" class="profile-step-panel" style="display: none;">
+          <div class="page-header">
+            <h2 class="page-title">Step 7: Employment & Management Experience</h2>
+            <p class="page-description">
+              Administrative, technical, and management work experience starting with your current or most recent engagement.
+            </p>
+          </div>
+          <div id="employment-cards-container"></div>
+        </div>
+
+        <!-- Step Panel 8: Referees -->
+        <div id="panel-step-referees" class="profile-step-panel" style="display: none;">
+          <div class="page-header">
+            <h2 class="page-title">Step 8: Professional Referees</h2>
+            <p class="page-description">
+              Provide three (3) professional referees who have known and interacted with you in an academic or working capacity.
+            </p>
+          </div>
+          <div id="referees-cards-container"></div>
+        </div>
+
+        <!-- Step Panel 9: GOV.UK Check Your Answers Review -->
+        <div id="panel-step-review" class="profile-step-panel" style="display: none;">
+          <!-- Rendered by summary.js -->
+        </div>
+
+        <!-- Stepper Navigation Buttons Action Bar -->
+        <div class="form-actions-bar">
+          <button type="button" id="step-prev-btn" class="btn btn-secondary" style="visibility: hidden;">
+            &larr; Back to Previous Step
+          </button>
+          <div style="display: flex; gap: 0.75rem;">
+            <button type="button" class="btn btn-secondary save-exit-btn">Save & Exit</button>
+            <button type="button" id="step-next-btn" class="btn btn-primary">
+              Continue to Step 2 &rarr;
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 5: STATUS OF MY APPLICATION(S) -->
+      <section id="view-applications" class="view-container" aria-labelledby="applications-heading">
+        <div class="page-header">
+          <h2 id="applications-heading" class="page-title">Status of My Application(s)</h2>
+          <p class="page-description">
+            Real-time status tracking for positions you have formally submitted to the Public Service Commission.
+          </p>
+        </div>
+
+        <div id="application-status-table-container">
+          <!-- Rendered by jobs.js -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Platform Architecture & Zero Trust Resilience Bar -->
+  <footer class="portal-architecture-bar" role="contentinfo">
+    <div class="arch-status-group">
+      <span class="arch-status-item">
+        <span class="arch-dot"></span>
+        <strong>NIST SP 800-207 Zero Trust:</strong> Active (mTLS 1.3 WireGuard Mesh)
+      </span>
+      <span class="arch-status-item">
+        <span class="arch-dot"></span>
+        <strong>Ingestion Buffer:</strong> 12ms P99 (Kafka Decoupled Queue)
+      </span>
+      <span class="arch-status-item">
+        <span class="arch-dot"></span>
+        <strong>Direct S3/GCS:</strong> Presigned Stream (Zero Server I/O)
+      </span>
+      <span class="arch-status-item">
+        <span class="arch-dot"></span>
+        <strong>Circuit Breakers:</strong> IPRS (Closed, 42ms) &bull; KNEC (Closed, 88ms)
+      </span>
+    </div>
+    <div class="arch-status-group">
+      <span class="arch-status-item" style="color: #FDE68A;">
+        <span class="arch-dot" style="background: #F59E0B; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.35);"></span>
+        <strong>WORM Audit Stream:</strong> Tamper-Proof Sync
+      </span>
+      <span style="opacity: 0.7;">PSCIMS v2.4-Enterprise (K8s Hardened Distroless)</span>
+    </div>
+  </footer>
+
+  <!-- Main Application ES Module -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

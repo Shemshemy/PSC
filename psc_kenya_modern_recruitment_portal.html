@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Public Service Commission (PSC) Kenya - Recruitment Portal</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts: Plus Jakarta Sans, Inter & Lora -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+            serif: ['Lora', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            civic: {
+              forest: '#0B3B24',     // Primary institutional deep green
+              forestHover: '#082b1a',
+              gold: '#D97706',       // Kenya heritage amber/gold accent
+              goldMuted: '#B45309',
+              goldLight: '#FEF3C7',
+              emerald: '#059669',    // Safe confirmation / Action CTA
+              emeraldHover: '#047857',
+              slateBg: '#F8FAFC',    // 60% Neutral canvas
+              navyNotice: '#1E3A8A',
+              navyNoticeBg: '#EFF6FF',
+              navyBorder: '#2563EB',
+            }
+          },
+          boxShadow: {
+            'elevation-1': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',
+            'elevation-2': '0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05)',
+            'elevation-3': '0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Focus visible utility adhering to WCAG 2.2 AAA */
+    :focus-visible {
+      outline: 2px solid #2563EB !important;
+      outline-offset: 2px !important;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-civic-slateBg text-slate-900 font-sans antialiased min-h-full flex flex-col selection:bg-civic-goldLight selection:text-civic-goldMuted">
+
+  <!-- Top Utility Bar: Trust, Identity Verification & Security Indicators -->
+  <header class="bg-gradient-to-r from-[#B45309] via-[#C88A19] to-[#B45309] text-stone-950 text-xs border-b border-amber-800/30 shrink-0 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-3">
+      <!-- Official Republic of Kenya Identifier -->
+      <div class="flex items-center space-x-2">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#0B3B24] border border-white/40 animate-pulse"></span>
+        <span class="font-bold text-stone-950 tracking-tight">Republic of Kenya</span>
+        <span class="text-amber-950/40 font-bold">|</span>
+        <span class="text-stone-900 font-semibold">Official Public Service Portal</span>
+      </div>
+
+      <!-- Security / Session Status & Accessibility Toggles -->
+      <div class="flex items-center flex-wrap gap-4 text-xs">
+        <div class="flex items-center space-x-1.5 text-white bg-[#0B3B24] px-2.5 py-0.5 rounded shadow-sm border border-emerald-900/60">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
+          <span class="font-mono tracking-tight text-[11px] font-semibold">IPRS &amp; eCitizen Verified</span>
+        </div>
+        <div class="hidden sm:flex items-center space-x-1.5 text-stone-900 font-medium">
+          <i data-lucide="lock" class="w-3.5 h-3.5 text-stone-800"></i>
+          <span>TLS 1.3 End-to-End Encrypted</span>
+        </div>
+        <button id="contrastToggleBtn" onclick="toggleHighContrast()" class="hover:text-black transition flex items-center space-x-1 text-stone-900 font-semibold hover:underline">
+          <i data-lucide="eye" class="w-3.5 h-3.5 text-stone-800"></i>
+          <span>Accessibility Options</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Institutional Navigation Header: Deep Forest Green (#0B3B24) with Gold Accent -->
+  <nav class="bg-civic-forest text-white shadow-elevation-2 border-b-4 border-civic-gold">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand identity & Seal -->
+        <div class="flex items-center space-x-4">
+          <!-- Stylized Kenyan Harambee Shield & Spear SVG -->
+          <div class="w-12 h-12 bg-white rounded-lg p-1.5 shadow flex items-center justify-center border border-slate-200 shrink-0">
+            <svg viewBox="0 0 64 64" fill="none" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+              <!-- Shield Outline -->
+              <path d="M32 4C18 4 12 14 12 28C12 44 26 56 32 60C38 56 52 44 52 28C52 14 46 4 32 4Z" fill="#0B3B24" stroke="#D97706" stroke-width="2.5"/>
+              <!-- Shield Inner Bands -->
+              <path d="M32 6C23 6 18 14 18 28C18 42 28 52 32 55C36 52 46 42 46 28C46 14 41 6 32 6Z" fill="#991B1B"/>
+              <path d="M28 7C28 20 28 40 32 54C36 40 36 20 36 7H28Z" fill="#FFFFFF"/>
+              <!-- Crossed Spears -->
+              <line x1="8" y1="8" x2="56" y2="56" stroke="#1E293B" stroke-width="2"/>
+              <line x1="56" y1="8" x2="8" y2="56" stroke="#1E293B" stroke-width="2"/>
+              <!-- Center Roundel -->
+              <circle cx="32" cy="30" r="5" fill="#D97706"/>
+            </svg>
+          </div>
+
+          <div>
+            <div class="flex items-center space-x-2">
+              <h1 class="text-lg sm:text-xl font-bold tracking-tight text-white leading-tight">
+                PUBLIC SERVICE COMMISSION
+              </h1>
+              <span class="hidden md:inline-flex bg-civic-gold/20 text-civic-gold text-[10px] font-bold px-2 py-0.5 rounded border border-civic-gold/40">
+                PSCIMS 2.0
+              </span>
+            </div>
+            <p class="text-xs text-emerald-100/80 font-normal tracking-wide hidden sm:block">
+              Citizen-Centric, Merit-Based Online Recruitment & Cadre Management
+            </p>
+          </div>
+        </div>
+
+        <!-- Candidate Session Pill & Actions -->
+        <div class="flex items-center space-x-3 sm:space-x-5">
+          <!-- Live Auto-Save Pill -->
+          <div class="hidden lg:flex items-center space-x-2 bg-civic-forestHover/80 border border-emerald-600/30 px-3 py-1.5 rounded-full text-xs text-emerald-200">
+            <span id="saveStatusDot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span id="saveStatusText" class="font-mono">Auto-saved 14:02:11</span>
+          </div>
+
+          <!-- User Identity Card -->
+          <div class="flex items-center space-x-3 bg-white/10 hover:bg-white/15 transition px-3 py-1.5 rounded-lg border border-white/10">
+            <div class="w-8 h-8 rounded-full bg-civic-gold text-white font-bold flex items-center justify-center text-xs shadow-inner">
+              DL
+            </div>
+            <div class="text-left text-xs leading-tight hidden sm:block">
+              <div class="font-semibold text-white">Dennis Limo</div>
+              <div class="text-slate-300 text-[11px] font-mono">ID: 32894102</div>
+            </div>
+          </div>
+
+          <!-- Log Out Button -->
+          <button onclick="handleSignOut()" class="flex items-center space-x-1.5 text-xs text-slate-200 hover:text-white bg-slate-900/40 hover:bg-slate-900/60 transition px-3 py-2 rounded-lg border border-white/10" title="Securely End Session">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+            <span class="hidden md:inline">Sign Out</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- Navigation Tabs / Section Switcher -->
+  <div class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between overflow-x-auto py-1 space-x-6">
+        <div class="flex space-x-2 shrink-0">
+          <button onclick="switchTab('vacancies')" id="tab-vacancies" class="tab-btn px-4 py-3 text-sm font-semibold border-b-2 border-civic-forest text-civic-forest flex items-center space-x-2">
+            <i data-lucide="briefcase" class="w-4 h-4"></i>
+            <span>Active Vacancies</span>
+            <span class="ml-1 px-2 py-0.5 text-xs bg-emerald-100 text-emerald-800 rounded-full font-bold">14</span>
+          </button>
+          
+          <button onclick="switchTab('application')" id="tab-application" class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-slate-900 flex items-center space-x-2">
+            <i data-lucide="file-text" class="w-4 h-4"></i>
+            <span>My Profile & Qualifications</span>
+            <span class="w-2 h-2 rounded-full bg-civic-gold"></span>
+          </button>
+
+          <button onclick="switchTab('tracker')" id="tab-tracker" class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-slate-900 flex items-center space-x-2">
+            <i data-lucide="activity" class="w-4 h-4"></i>
+            <span>Application Status Tracker</span>
+            <span class="ml-1 px-1.5 py-0.5 text-xs bg-slate-100 text-slate-700 rounded-full font-mono">2</span>
+          </button>
+        </div>
+
+        <!-- Direct Fast-Jump Help -->
+        <div class="hidden lg:flex items-center text-xs text-slate-500 space-x-4">
+          <span class="flex items-center"><i data-lucide="clock" class="w-3.5 h-3.5 mr-1 text-amber-600"></i> Next Commission Deadline: <strong>Oct 15, 17:00 EAT</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modern Informational Banner (Replacing Raw Blue Floating Text) -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-5">
+    <div class="bg-civic-navyNoticeBg border-l-4 border-civic-navyBorder rounded-r-lg p-4 sm:p-5 shadow-elevation-1 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div class="flex items-start space-x-3.5">
+        <div class="w-8 h-8 rounded-full bg-blue-100 text-civic-navyNotice flex items-center justify-center shrink-0 mt-0.5">
+          <i data-lucide="info" class="w-5 h-5 text-blue-700"></i>
+        </div>
+        <div>
+          <h2 class="text-sm font-bold text-blue-950">Important Notice for State Department & Ministry Applicants</h2>
+          <p class="text-xs sm:text-sm text-blue-900/90 mt-0.5">
+            This workspace processes appointments for <strong>Public Universities, Independent Constitutional Commissions, and Statutory Tribunals</strong>. If you are applying for general cadres within State Ministries, please route through the Unified National Public Service Directory.
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-3 shrink-0 self-end md:self-center">
+        <a href="#psckjobs" onclick="showFeedback('Redirecting to Unified PSCK Jobs Gateway...', 'info')" class="inline-flex items-center px-3.5 py-2 text-xs font-semibold text-blue-800 bg-white hover:bg-blue-50 border border-blue-200 rounded-md shadow-sm transition">
+          psckjobs.go.ke
+          <i data-lucide="external-link" class="w-3.5 h-3.5 ml-1.5"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Dynamic Work Area -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow">
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: ACTIVE VACANCIES DIRECTORY       -->
+    <!-- ========================================== -->
+    <section id="view-vacancies" class="space-y-6">
+      <!-- Search, Cadre Filters, and Facets -->
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-elevation-1">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+          <!-- Search Keywords -->
+          <div class="md:col-span-5">
+            <label for="searchQuery" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              Search Cadre, Specialization or Advert Reference
+            </label>
+            <div class="relative">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+              <input type="text" id="searchQuery" oninput="filterVacancies()" placeholder="e.g. Econometrician, Internal Auditor, CSG 7, Legal..." class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 focus:bg-white transition" />
+            </div>
+          </div>
+
+          <!-- State Department / Entity Filter -->
+          <div class="md:col-span-4">
+            <label for="filterEntity" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              Statutory Commission / University
+            </label>
+            <select id="filterEntity" onchange="filterVacancies()" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 focus:bg-white transition">
+              <option value="all">All Recruiting Entities</option>
+              <option value="moi">Moi University</option>
+              <option value="knchr">Kenya National Commission on Human Rights</option>
+              <option value="cra">Commission on Revenue Allocation</option>
+              <option value="treasury">State Department for Economic Planning</option>
+            </select>
+          </div>
+
+          <!-- Salary Scale Band -->
+          <div class="md:col-span-3">
+            <label for="filterGrade" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              Remuneration Scale (CSG)
+            </label>
+            <select id="filterGrade" onchange="filterVacancies()" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 focus:bg-white transition">
+              <option value="all">Any Remuneration Band</option>
+              <option value="csg5">CSG 5 (KSh 170k - 280k)</option>
+              <option value="csg7">CSG 7 (KSh 90k - 145k)</option>
+              <option value="csg9">CSG 9 (KSh 45k - 75k)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vacancy Listings Grid -->
+      <div id="vacancyListContainer" class="space-y-4">
+        <!-- Card 1 -->
+        <article class="bg-white border border-slate-200 rounded-xl p-5 hover:border-civic-forest/40 hover:shadow-elevation-2 transition group" data-entity="moi" data-grade="csg7" data-text="senior legal officer moi university litigation regulatory">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  Active Advert
+                </span>
+                <span class="text-xs font-mono text-slate-500">Ref: PSC/EXT/2026/04-09</span>
+                <span class="text-xs text-slate-400">•</span>
+                <span class="text-xs text-slate-600 font-medium">Closes in 6 days</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-civic-forest transition">
+                Senior Legal Officer (Corporate Governance & Litigation)
+              </h3>
+              <p class="text-xs text-slate-500">
+                Host Entity: <strong>Moi University — Office of the Registrar (Administration)</strong>
+              </p>
+              
+              <div class="flex flex-wrap gap-4 text-xs text-slate-600 pt-1">
+                <span class="flex items-center"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-slate-400"></i> Eldoret Main Campus</span>
+                <span class="flex items-center"><i data-lucide="coins" class="w-3.5 h-3.5 mr-1 text-slate-400"></i> CSG 7 (KSh 94,000 – KSh 148,000 p.m.)</span>
+                <span class="flex items-center"><i data-lucide="user-check" class="w-3.5 h-3.5 mr-1 text-slate-400"></i> 4 Vacant Posts</span>
+                <span class="flex items-center text-civic-goldMuted font-medium"><i data-lucide="award" class="w-3.5 h-3.5 mr-1"></i> Advocate of High Court Required</span>
+              </div>
+            </div>
+
+            <div class="flex sm:flex-col items-center sm:items-end justify-between gap-3 shrink-0 pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100">
+              <button onclick="startApplication('Senior Legal Officer', 'PSC/EXT/2026/04-09', 'CSG 7')" class="w-full sm:w-auto px-5 py-2.5 bg-civic-forest hover:bg-civic-forestHover text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center justify-center space-x-1.5">
+                <span>Proceed to Apply</span>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+              <button onclick="viewRoleDetails('legal')" class="text-xs text-slate-600 hover:text-slate-950 underline underline-offset-2">
+                View Cadre Specifications
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="bg-white border border-slate-200 rounded-xl p-5 hover:border-civic-forest/40 hover:shadow-elevation-2 transition group" data-entity="cra" data-grade="csg5" data-text="principal fiscal economist commission revenue allocation csg5">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  Active Advert
+                </span>
+                <span class="text-xs font-mono text-slate-500">Ref: PSC/CRA/2026/11-01</span>
+                <span class="text-xs text-slate-400">•</span>
+                <span class="text-xs text-slate-600 font-medium">Closes in 12 days</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-civic-forest transition">
+                Principal Fiscal Analyst & Revenue Allocation Specialist
+              </h3>
+              <p class="text-xs text-slate-500">
+                Host Entity: <strong>Commission on Revenue Allocation (CRA) — Directorate of Fiscal Analysis</strong>
+              </p>
+              
+              <div class="flex flex-wrap gap-4 text-xs text-slate-600 pt-1">
+                <span class="flex items-center"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-slate-400"></i> Nairobi HQ</span>
+                <span class="flex items-center"><i data-lucide="coins" class="w-3.5 h-3.5 mr-1 text-slate-400"></i> CSG 5 (KSh 182,000 – KSh 295,000 p.m.)</span>
+                <span class="flex items-center"><i data-lucide="user-check" class="w-3.5 h-3.5 mr-1 text-slate-400"></i> 2 Vacant Posts</span>
+                <span class="flex items-center text-civic-goldMuted font-medium"><i data-lucide="award" class="w-3.5 h-3.5 mr-1"></i> Master's in Economics / Finance</span>
+              </div>
+            </div>
+
+            <div class="flex sm:flex-col items-center sm:items-end justify-between gap-3 shrink-0 pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100">
+              <button onclick="startApplication('Principal Fiscal Analyst', 'PSC/CRA/2026/11-01', 'CSG 5')" class="w-full sm:w-auto px-5 py-2.5 bg-civic-forest hover:bg-civic-forestHover text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center justify-center space-x-1.5">
+                <span>Proceed to Apply</span>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+              <button onclick="viewRoleDetails('economist')" class="text-xs text-slate-600 hover:text-slate-950 underline underline-offset-2">
+                View Cadre Specifications
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="bg-white border border-slate-200 rounded-xl p-5 hover:border-civic-forest/40 hover:shadow-elevation-2 transition group" data-entity="knchr" data-grade="csg9" data-text="investigations officer human rights legal compliance csg9">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  Active Advert
+                </span>
+                <span class="text-xs font-mono text-slate-500">Ref: PSC/KNCHR/2026/02</span>
+                <span class="text-xs text-slate-400">•</span>
+                <span class="text-xs text-slate-600 font-medium">Closes in 4 days</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-civic-forest transition">
+                Human Rights Investigations Officer II
+              </h3>
+              <p class="text-xs text-slate-500">
+                Host Entity: <strong>Kenya National Commission on Human Rights — Regional Offices</strong>
+              </p>
+              
+              <div class="flex flex-wrap gap-4 text-xs text-slate-600 pt-1">
+                <span class="flex items-center"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-slate-400"></i> Kisumu / Garissa Regional Hubs</span>
+                <span class="flex items-center"><i data-lucide="coins" class="w-3.5 h-3.5 mr-1 text-slate-400"></i> CSG 9 (KSh 52,000 – KSh 79,000 p.m.)</span>
+                <span class="flex items-center"><i data-lucide="user-check" class="w-3.5 h-3.5 mr-1 text-slate-400"></i> 6 Vacant Posts</span>
+                <span class="flex items-center text-civic-goldMuted font-medium"><i data-lucide="award" class="w-3.5 h-3.5 mr-1"></i> Bachelor's in Criminology or Law</span>
+              </div>
+            </div>
+
+            <div class="flex sm:flex-col items-center sm:items-end justify-between gap-3 shrink-0 pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100">
+              <button onclick="startApplication('Human Rights Investigations Officer II', 'PSC/KNCHR/2026/02', 'CSG 9')" class="w-full sm:w-auto px-5 py-2.5 bg-civic-forest hover:bg-civic-forestHover text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center justify-center space-x-1.5">
+                <span>Proceed to Apply</span>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+              <button onclick="viewRoleDetails('investigations')" class="text-xs text-slate-600 hover:text-slate-950 underline underline-offset-2">
+                View Cadre Specifications
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW 2: APPLICATION FORM & PROFILE (WCAG AAA STANDARDS)  -->
+    <!-- ======================================================== -->
+    <section id="view-application" class="hidden space-y-8">
+      
+      <!-- Progress Stepper (GOV.UK Style: Clear, Explicit, Low Friction) -->
+      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-elevation-1">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-slate-100">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-civic-goldMuted">Step 2 of 4</span>
+            <h2 class="text-lg font-bold text-slate-900" id="currentStepTitle">Civil Service Verification & Identity</h2>
+          </div>
+          <!-- Auto-save state visual cue -->
+          <div class="flex items-center space-x-2 text-xs font-mono text-slate-500 bg-slate-50 px-3 py-1.5 rounded-md border border-slate-200">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i>
+            <span id="formSaveIndicator">Form state synced to local memory</span>
+          </div>
+        </div>
+
+        <!-- Step navigation chips -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 pt-3">
+          <button onclick="setFormStep(1)" id="stepChip-1" class="step-chip text-left p-2.5 rounded-lg border text-xs font-semibold border-civic-forest bg-emerald-50 text-civic-forest transition">
+            1. National Identity
+          </button>
+          <button onclick="setFormStep(2)" id="stepChip-2" class="step-chip text-left p-2.5 rounded-lg border text-xs font-medium border-slate-200 bg-white text-slate-600 hover:bg-slate-50 transition">
+            2. Academic Records
+          </button>
+          <button onclick="setFormStep(3)" id="stepChip-3" class="step-chip text-left p-2.5 rounded-lg border text-xs font-medium border-slate-200 bg-white text-slate-600 hover:bg-slate-50 transition">
+            3. Experience & Chapter 6
+          </button>
+          <button onclick="setFormStep(4)" id="stepChip-4" class="step-chip text-left p-2.5 rounded-lg border text-xs font-medium border-slate-200 bg-white text-slate-600 hover:bg-slate-50 transition">
+            4. Review & Submit
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 1 CONTENT: NATIONAL IDENTITY & PUBLIC SECTOR VERIFICATION -->
+      <div id="step-content-1" class="step-pane space-y-6">
+        <div class="bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-elevation-1 max-w-3xl">
+          <div class="mb-6">
+            <h3 class="text-base font-bold text-slate-900">National Identification & Civil Service Registration</h3>
+            <p class="text-xs text-slate-500 mt-1">
+              Data is automatically cross-referenced with the Integrated Population Registration System (IPRS) and the Government Human Resource Information System (GHRIS).
+            </p>
+          </div>
+
+          <!-- Structured Single Column Form with Explicit Field Sizing -->
+          <form class="space-y-6" onsubmit="event.preventDefault();">
+            
+            <!-- National ID Field (Top-aligned label, inline validation) -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="natIdInput" class="block text-sm font-semibold text-slate-900 flex items-center gap-2">
+                  <span>National Identity Number (ID)</span>
+                  <span class="text-red-600">*</span>
+                  <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200 font-mono" title="NIST SP 800-207 Zero Trust: ALFE Encrypted via HSM KMS">🔒 ALFE Encrypted</span>
+                </label>
+                <span class="text-xs text-slate-400">7 to 8 numerical digits</span>
+              </div>
+              <div class="relative max-w-sm">
+                <input 
+                  type="text" 
+                  id="natIdInput" 
+                  inputmode="numeric" 
+                  maxlength="8" 
+                  value="32894102"
+                  oninput="validateNatID(this.value)"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 font-mono tracking-wider focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition" 
+                  placeholder="e.g. 24890123"
+                  required
+                />
+                <span id="natIdCheckIcon" class="absolute right-3 top-3 text-emerald-600">
+                  <i data-lucide="check-circle" class="w-4 h-4"></i>
+                </span>
+              </div>
+              <p id="natIdFeedback" class="text-xs text-emerald-700 mt-1.5 flex items-center font-medium">
+                <i data-lucide="badge-check" class="w-3.5 h-3.5 mr-1"></i> IPRS Verified: Dennis Kipchumba Limo (DOB: 14/05/1992)
+              </p>
+            </div>
+
+            <!-- Payroll / Personal Number (Replaced the grey ambiguous box) -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="payrollInput" class="block text-sm font-semibold text-slate-900 flex items-center gap-2">
+                  <span>Government Payroll / Personal Number (IPPD)</span>
+                  <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200 font-mono" title="Encrypted at application layer before DB storage">🔒 ALFE Encrypted</span>
+                </label>
+                <span class="text-xs text-slate-400">Optional for new entrants to public service</span>
+              </div>
+              <p class="text-xs text-slate-500 mb-2">
+                If already serving in a Ministry, County Government or State Agency, provide your 10-digit IPPD payroll number for service continuity and pension tier matching.
+              </p>
+              <div class="max-w-sm">
+                <input 
+                  type="text" 
+                  id="payrollInput" 
+                  value="20250031176" 
+                  oninput="handlePayrollChange(this.value)"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 font-mono tracking-wide focus:border-blue-600 transition" 
+                  placeholder="e.g. 20250031176" 
+                />
+              </div>
+              <span id="payrollNotice" class="text-xs text-slate-500 mt-1 block">
+                Detected Cadre: Senior Analyst • Ministry of Finance & National Planning
+              </span>
+            </div>
+
+            <!-- KRA PIN Number -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="kraPinInput" class="block text-sm font-semibold text-slate-900 flex items-center gap-2">
+                  <span>Kenya Revenue Authority (KRA) PIN</span>
+                  <span class="text-red-600">*</span>
+                  <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200 font-mono" title="Chapter 6 Ethics clearance identifier">🔒 ALFE Encrypted</span>
+                </label>
+                <span class="text-xs text-slate-400">e.g. A011114073C</span>
+              </div>
+              <div class="max-w-sm">
+                <input 
+                  type="text" 
+                  id="kraPinInput" 
+                  value="A011114073C" 
+                  maxlength="11"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 font-mono tracking-wider uppercase focus:border-blue-600 transition" 
+                  placeholder="A011114073C" 
+                />
+              </div>
+              <span class="text-xs text-emerald-700 mt-1 flex items-center font-medium">
+                <i data-lucide="check-circle" class="w-3.5 h-3.5 mr-1"></i> KRA Itax Verified • Active Tax Compliance Certificate (TCC)
+              </span>
+            </div>
+
+            <!-- County of Origin & Sub-County (Accessible Combobox Pattern) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div>
+                <label for="countySelect" class="block text-sm font-semibold text-slate-900 mb-1.5">
+                  Home County of Origin <span class="text-red-600">*</span>
+                </label>
+                <select id="countySelect" class="w-full px-3 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600">
+                  <option value="027">027 - Uasin Gishu County</option>
+                  <option value="047">047 - Nairobi City County</option>
+                  <option value="001">001 - Mombasa County</option>
+                  <option value="032">032 - Nakuru County</option>
+                  <option value="042">042 - Kisumu County</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="subCountySelect" class="block text-sm font-semibold text-slate-900 mb-1.5">
+                  Constituency / Sub-County <span class="text-red-600">*</span>
+                </label>
+                <select id="subCountySelect" class="w-full px-3 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600">
+                  <option>Ainabkoi Sub-County</option>
+                  <option>Kapseret Sub-County</option>
+                  <option>Kesses Sub-County</option>
+                  <option>Soy Sub-County</option>
+                  <option>Turbo Sub-County</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Inclusivity: Persons with Disability (PWD) Consideration -->
+            <div class="pt-4 border-t border-slate-100">
+              <fieldset>
+                <legend class="text-sm font-semibold text-slate-900 mb-2">
+                  Special Inclusivity Category (Persons with Disabilities - PWD)
+                </legend>
+                <div class="space-y-2">
+                  <label class="flex items-center space-x-3 cursor-pointer">
+                    <input type="radio" name="pwdOption" value="no" checked class="w-4 h-4 text-civic-forest border-slate-300 focus:ring-civic-forest" />
+                    <span class="text-xs text-slate-700">Not Applicable (I am not registered with NCPWD)</span>
+                  </label>
+                  <label class="flex items-center space-x-3 cursor-pointer">
+                    <input type="radio" name="pwdOption" value="yes" class="w-4 h-4 text-civic-forest border-slate-300 focus:ring-civic-forest" />
+                    <span class="text-xs text-slate-700">Yes, I hold a National Council for Persons with Disabilities (NCPWD) Card</span>
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+
+            <!-- Form Action Footer -->
+            <div class="pt-6 border-t border-slate-200 flex items-center justify-between">
+              <span class="text-xs text-slate-400">All fields marked with (*) are required by Public Service Code.</span>
+              <button type="button" onclick="setFormStep(2)" class="px-6 py-2.5 bg-civic-forest hover:bg-civic-forestHover text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center space-x-2">
+                <span>Save & Continue to Qualifications</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <!-- STEP 2 CONTENT: ACADEMIC QUALIFICATIONS (STRUCTURED CARD BUILDER) -->
+      <div id="step-content-2" class="step-pane hidden space-y-6">
+        <div class="bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-elevation-1 max-w-4xl">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Academic & Professional Qualifications</h3>
+              <p class="text-xs text-slate-500 mt-1">
+                Enter your highest qualifications first. Documents are audited during the longlisting stage.
+              </p>
+            </div>
+            <button type="button" onclick="openAddEducationModal()" class="px-4 py-2 bg-slate-900 hover:bg-black text-white text-xs font-semibold rounded-lg flex items-center space-x-1.5 transition self-start sm:self-auto">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+              <span>Add Qualification</span>
+            </button>
+          </div>
+
+          <!-- Existing Educational Records List -->
+          <div id="educationCardsContainer" class="space-y-3">
+            
+            <!-- Record 1: Tertiary -->
+            <div class="p-4 rounded-lg border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-start space-x-3.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 mt-0.5">
+                  <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="flex items-center space-x-2">
+                    <h4 class="text-sm font-bold text-slate-900">Bachelor of Laws (LL.B) — Second Class Upper Division</h4>
+                    <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-emerald-100 text-emerald-800">Degree</span>
+                  </div>
+                  <p class="text-xs text-slate-600 mt-0.5">University of Nairobi • School of Law</p>
+                  <p class="text-[11px] text-slate-400 font-mono mt-0.5">Graduation Year: 2015 • Cert Serial: UON-LAW-2015-8491</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-2 self-end sm:self-center">
+                <button type="button" onclick="showFeedback('Certificate copy verified via CUE registry', 'info')" class="text-xs text-slate-500 hover:text-slate-800 px-2.5 py-1.5 rounded border border-slate-200 bg-white">
+                  Verify
+                </button>
+                <button type="button" onclick="removeEducation(this)" class="text-xs text-red-600 hover:text-red-800 p-1.5 rounded hover:bg-red-50">
+                  <i data-lucide="trash-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Record 2: Post-Graduate Diploma -->
+            <div class="p-4 rounded-lg border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-start space-x-3.5">
+                <div class="w-9 h-9 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center shrink-0 mt-0.5">
+                  <i data-lucide="award" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="flex items-center space-x-2">
+                    <h4 class="text-sm font-bold text-slate-900">Postgraduate Diploma in Law (ATP)</h4>
+                    <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-blue-100 text-blue-800">Professional</span>
+                  </div>
+                  <p class="text-xs text-slate-600 mt-0.5">Kenya School of Law (KSL)</p>
+                  <p class="text-[11px] text-slate-400 font-mono mt-0.5">Year of Admission: 2017 • Roll of Advocates: P.105/14022/17</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-2 self-end sm:self-center">
+                <button type="button" onclick="removeEducation(this)" class="text-xs text-red-600 hover:text-red-800 p-1.5 rounded hover:bg-red-50">
+                  <i data-lucide="trash-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Document Upload with Client-Side Compression Indicator -->
+          <div class="mt-8 pt-6 border-t border-slate-200">
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="text-sm font-bold text-slate-900">Authenticated Academic Testimonials (Consolidated PDF)</h4>
+              <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-300 font-mono">
+                <i data-lucide="cloud" class="w-3 h-3"></i> Direct S3 Stream (Zero Server I/O)
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 mb-3">Single PDF file containing degree, diploma, and KNEC certificate scans. Uploads stream directly to encrypted object storage with SHA-256 client verification.</p>
+            
+            <div class="border-2 border-dashed border-slate-300 hover:border-civic-forest rounded-xl p-6 text-center cursor-pointer transition bg-slate-50 hover:bg-emerald-50/30" onclick="simulateFileUpload()">
+              <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center mx-auto mb-3">
+                <i data-lucide="upload-cloud" class="w-6 h-6 text-civic-forest"></i>
+              </div>
+              <p class="text-xs font-semibold text-slate-800">
+                <span class="text-civic-forest underline">Click to select files</span> or drag and drop certified scans
+              </p>
+              <p class="text-[11px] text-slate-400 mt-1">
+                Direct-to-object presigned URL streaming • SHA-256 integrity hash: 7f83b165...
+              </p>
+              <div id="uploadFeedbackBox" class="mt-3 hidden inline-flex items-center space-x-2 text-xs bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full font-mono">
+                <i data-lucide="file-check" class="w-3.5 h-3.5"></i>
+                <span id="uploadFileName">Dennis_Limo_Credentials_Consolidated.pdf (1.4 MB)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nav buttons -->
+          <div class="pt-6 border-t border-slate-200 flex items-center justify-between">
+            <button type="button" onclick="setFormStep(1)" class="px-4 py-2 border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-bold rounded-lg transition">
+              Back to Personal Identity
+            </button>
+            <button type="button" onclick="setFormStep(3)" class="px-6 py-2.5 bg-civic-forest hover:bg-civic-forestHover text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center space-x-2">
+              <span>Save & Proceed to Chapter 6</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 CONTENT: RELEVANT EXPERIENCE & CHAPTER 6 COMPLIANCE -->
+      <div id="step-content-3" class="step-pane hidden space-y-6">
+        <div class="bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-elevation-1 max-w-3xl">
+          <div class="mb-6">
+            <h3 class="text-base font-bold text-slate-900">Leadership, Integrity & Constitutional Compliance (Chapter 6)</h3>
+            <p class="text-xs text-slate-500 mt-1">
+              In accordance with Article 73 of the Constitution of Kenya, candidates must demonstrate clear statutory compliance certificates.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <!-- Statutory Checks Matrix -->
+            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-3">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-700 block">Required Statutory Clearance Indicators</span>
+              
+              <label class="flex items-start space-x-3 text-xs text-slate-700 cursor-pointer">
+                <input type="checkbox" checked class="w-4 h-4 rounded text-civic-forest border-slate-300 focus:ring-civic-forest mt-0.5" />
+                <span>
+                  <strong>Kenya Revenue Authority (KRA):</strong> I hold a valid Tax Compliance Certificate (TCC).
+                </span>
+              </label>
+
+              <label class="flex items-start space-x-3 text-xs text-slate-700 cursor-pointer">
+                <input type="checkbox" checked class="w-4 h-4 rounded text-civic-forest border-slate-300 focus:ring-civic-forest mt-0.5" />
+                <span>
+                  <strong>Ethics and Anti-Corruption Commission (EACC):</strong> Clearance self-declaration form completed.
+                </span>
+              </label>
+
+              <label class="flex items-start space-x-3 text-xs text-slate-700 cursor-pointer">
+                <input type="checkbox" checked class="w-4 h-4 rounded text-civic-forest border-slate-300 focus:ring-civic-forest mt-0.5" />
+                <span>
+                  <strong>Directorate of Criminal Investigations (DCI):</strong> Valid Police Clearance Certificate (PCC) available.
+                </span>
+              </label>
+
+              <label class="flex items-start space-x-3 text-xs text-slate-700 cursor-pointer">
+                <input type="checkbox" checked class="w-4 h-4 rounded text-civic-forest border-slate-300 focus:ring-civic-forest mt-0.5" />
+                <span>
+                  <strong>Higher Education Loans Board (HELB):</strong> Compliance clearance or active repayment certificate.
+                </span>
+              </label>
+            </div>
+
+            <!-- Role-Specific Competency Anchor -->
+            <div class="pt-4">
+              <label for="competencyAnswer" class="block text-sm font-semibold text-slate-900 mb-1">
+                Practical Public Administration Scenario Prompt <span class="text-red-600">*</span>
+              </label>
+              <p class="text-xs text-slate-500 mb-2">
+                Describe a complex administrative dispute or policy friction you resolved while upholding constitutional fairness and institutional neutrality (Max 250 words).
+              </p>
+              <textarea 
+                id="competencyAnswer" 
+                rows="4" 
+                class="w-full p-3 bg-white border border-slate-300 rounded-lg text-xs text-slate-900 focus:border-blue-600 transition" 
+                placeholder="Provide concrete details: Context, action taken, and measurable institutional outcome..."
+              >As Legal Counsel for the departmental board, I resolved a prolonged procurement compliance dispute between three university suppliers by conducting a structured mediation strictly grounded in the Public Procurement and Asset Disposal Act (PPADA 2015), preserving institutional funds and preventing litigation delays.</textarea>
+              <div class="flex justify-between items-center text-[11px] text-slate-400 mt-1">
+                <span>Evaluated blindly by panel members without candidate identification.</span>
+                <span id="wordCount">42 / 250 words</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nav actions -->
+          <div class="pt-6 border-t border-slate-200 flex items-center justify-between">
+            <button type="button" onclick="setFormStep(2)" class="px-4 py-2 border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-bold rounded-lg transition">
+              Back to Qualifications
+            </button>
+            <button type="button" onclick="setFormStep(4)" class="px-6 py-2.5 bg-civic-forest hover:bg-civic-forestHover text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center space-x-2">
+              <span>Continue to Final Review</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 CONTENT: "CHECK YOUR ANSWERS" READ-ONLY AUDIT SUMMARY -->
+      <div id="step-content-4" class="step-pane hidden space-y-6">
+        <div class="bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-elevation-1 max-w-4xl">
+          <div class="border-b border-slate-200 pb-4 mb-6">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">Pre-Submission Audit</span>
+            <h3 class="text-lg font-bold text-slate-900 mt-1">Check Your Answers Before Formal Submission</h3>
+            <p class="text-xs text-slate-500">
+              Pursuant to the Public Service Commission Act, intentional misrepresentation of qualifications will result in immediate disqualification and legal referral.
+            </p>
+          </div>
+
+          <!-- Structured Summary Tables (GOV.UK Pattern) -->
+          <div class="space-y-6 text-xs">
+            
+            <!-- Section A: Identity -->
+            <div class="border border-slate-200 rounded-lg overflow-hidden">
+              <div class="bg-slate-50 px-4 py-2.5 font-bold text-slate-800 flex justify-between items-center border-b border-slate-200">
+                <span>1. Personal & Civil Service Identity</span>
+                <button type="button" onclick="setFormStep(1)" class="text-civic-forest hover:underline font-semibold">Change</button>
+              </div>
+              <div class="divide-y divide-slate-100 bg-white">
+                <div class="px-4 py-2.5 flex justify-between">
+                  <span class="text-slate-500">Full Legal Name</span>
+                  <span class="font-medium text-slate-900">Dennis Kipchumba Limo</span>
+                </div>
+                <div class="px-4 py-2.5 flex justify-between">
+                  <span class="text-slate-500">National ID Number</span>
+                  <span class="font-mono font-medium text-slate-900">32894102</span>
+                </div>
+                <div class="px-4 py-2.5 flex justify-between">
+                  <span class="text-slate-500">Payroll Number (IPPD)</span>
+                  <span class="font-mono font-medium text-slate-900">20250031176</span>
+                </div>
+                <div class="px-4 py-2.5 flex justify-between">
+                  <span class="text-slate-500">County of Origin</span>
+                  <span class="font-medium text-slate-900">Uasin Gishu (Ainabkoi Sub-County)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section B: Education Summary -->
+            <div class="border border-slate-200 rounded-lg overflow-hidden">
+              <div class="bg-slate-50 px-4 py-2.5 font-bold text-slate-800 flex justify-between items-center border-b border-slate-200">
+                <span>2. Verified Academic Credentials</span>
+                <button type="button" onclick="setFormStep(2)" class="text-civic-forest hover:underline font-semibold">Change</button>
+              </div>
+              <div class="divide-y divide-slate-100 bg-white">
+                <div class="px-4 py-2.5 flex justify-between">
+                  <span class="text-slate-500">Primary Qualification</span>
+                  <span class="font-medium text-slate-900">Bachelor of Laws (LL.B) — University of Nairobi (2015)</span>
+                </div>
+                <div class="px-4 py-2.5 flex justify-between">
+                  <span class="text-slate-500">Professional Body Roll</span>
+                  <span class="font-medium text-slate-900">Advocate of High Court (P.105/14022/17)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Attestation Checkbox -->
+            <div class="p-4 bg-amber-50/70 border border-amber-200 rounded-lg">
+              <label class="flex items-start space-x-3 cursor-pointer">
+                <input type="checkbox" id="solemnDeclaration" class="w-4 h-4 rounded text-civic-forest border-amber-400 focus:ring-civic-forest mt-0.5" />
+                <span class="text-xs text-amber-950 leading-relaxed">
+                  I solemnly declare that the information submitted in this application is accurate, authentic, and complete to the best of my knowledge. I understand that any false declaration constitutes an offence under the Penal Code and leads to automatic revocation of appointment.
+                </span>
+              </label>
+            </div>
+
+          </div>
+
+          <!-- Final Submit Action Button -->
+          <div class="pt-6 border-t border-slate-200 flex items-center justify-between">
+            <button type="button" onclick="setFormStep(3)" class="px-4 py-2 border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-bold rounded-lg transition">
+              Back to Integrity Questions
+            </button>
+            <button type="button" onclick="executeFinalSubmission()" class="px-8 py-3 bg-civic-emerald hover:bg-civic-emeraldHover text-white text-xs font-extrabold uppercase tracking-wider rounded-lg shadow-elevation-2 hover:shadow-elevation-3 transition flex items-center space-x-2">
+              <i data-lucide="send" class="w-4 h-4"></i>
+              <span>Transmit Formal Application</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW 3: APPLICATION STATUS TRACKER (PIPELINE TRANSPARENCY)-->
+    <!-- ======================================================== -->
+    <section id="view-tracker" class="hidden space-y-6">
+      <div class="bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-elevation-1">
+        <div class="mb-6">
+          <span class="text-xs font-bold uppercase tracking-wider text-civic-goldMuted">Civic Accountability Dashboard</span>
+          <h2 class="text-lg font-bold text-slate-900 mt-1">Submitted Applications & Selection Pipeline</h2>
+          <p class="text-xs text-slate-500">
+            Real-time status updates from the Commission selection board. You will receive an SMS alert upon shortlist gazettement.
+          </p>
+        </div>
+
+        <!-- Application Track Record Card -->
+        <div class="border border-slate-200 rounded-xl p-5 mb-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-2">
+            <div>
+              <div class="flex items-center space-x-2">
+                <h3 class="text-base font-bold text-slate-900">Senior Legal Officer (Corporate Governance)</h3>
+                <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">In Technical Review</span>
+              </div>
+              <p class="text-xs text-slate-500 mt-0.5">Moi University • Advert Ref: PSC/EXT/2026/04-09</p>
+            </div>
+            <div class="text-right text-xs text-slate-500">
+              <span>Submitted: <strong>28 Sept 2026, 11:24 EAT</strong></span>
+              <div class="font-mono text-[11px] text-slate-400">Tracking Hash: #PSC-98421-KE</div>
+            </div>
+          </div>
+
+          <!-- Amazon/GOV-style Stepper Pipeline -->
+          <div class="py-6">
+            <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 relative">
+              
+              <!-- Pipeline Step 1 (Completed) -->
+              <div class="flex sm:flex-col items-center sm:text-center space-x-3 sm:space-x-0 space-y-0 sm:space-y-2">
+                <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
+                  <i data-lucide="check" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900">1. Received</div>
+                  <div class="text-[11px] text-slate-500">Payload Accepted</div>
+                </div>
+              </div>
+
+              <!-- Pipeline Step 2 (Completed) -->
+              <div class="flex sm:flex-col items-center sm:text-center space-x-3 sm:space-x-0 space-y-0 sm:space-y-2">
+                <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
+                  <i data-lucide="check" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900">2. Basic Compliance</div>
+                  <div class="text-[11px] text-slate-500">ID & CUE Passed</div>
+                </div>
+              </div>
+
+              <!-- Pipeline Step 3 (Active) -->
+              <div class="flex sm:flex-col items-center sm:text-center space-x-3 sm:space-x-0 space-y-0 sm:space-y-2">
+                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0 animate-pulse">
+                  <i data-lucide="loader" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-blue-900">3. Longlist Scoring</div>
+                  <div class="text-[11px] text-blue-700 font-medium">Panel Review Ongoing</div>
+                </div>
+              </div>
+
+              <!-- Pipeline Step 4 (Pending) -->
+              <div class="flex sm:flex-col items-center sm:text-center space-x-3 sm:space-x-0 space-y-0 sm:space-y-2 opacity-40">
+                <div class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold shrink-0">
+                  4
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-800">4. Shortlist Publication</div>
+                  <div class="text-[11px] text-slate-500">Expected Oct 22</div>
+                </div>
+              </div>
+
+              <!-- Pipeline Step 5 (Pending) -->
+              <div class="flex sm:flex-col items-center sm:text-center space-x-3 sm:space-x-0 space-y-0 sm:space-y-2 opacity-40">
+                <div class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold shrink-0">
+                  5
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-800">5. Board Interview</div>
+                  <div class="text-[11px] text-slate-500">PSC Commission House</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-3.5 rounded-lg flex items-center justify-between text-xs text-slate-600">
+            <span class="flex items-center">
+              <i data-lucide="file-text" class="w-4 h-4 mr-2 text-slate-400"></i> Download Certified Application Dossier (PDF with digital signature)
+            </span>
+            <button onclick="showFeedback('Generating digitally signed PDF summary...', 'info')" class="text-civic-forest font-semibold hover:underline">
+              Download Dossier
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal: Add Education Record Dialog -->
+  <div id="addEduModal" class="fixed inset-0 bg-slate-950/60 z-50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl shadow-elevation-3 max-w-lg w-full p-6 border border-slate-200">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 class="text-base font-bold text-slate-900">Add Academic Credential</h3>
+        <button onclick="closeAddEducationModal()" class="text-slate-400 hover:text-slate-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="newEduForm" onsubmit="handleSaveQualification(event)" class="space-y-4 pt-4 text-xs">
+        <div>
+          <label class="block font-semibold text-slate-800 mb-1">Qualification Level</label>
+          <select id="eduLevel" class="w-full p-2.5 border border-slate-300 rounded-lg text-slate-900 bg-white">
+            <option value="Master's Degree">Master's Degree</option>
+            <option value="Bachelor's Degree">Bachelor's Degree</option>
+            <option value="Postgraduate Diploma">Postgraduate Diploma</option>
+            <option value="Higher National Diploma">Higher National Diploma</option>
+            <option value="Secondary Education (KCSE)">Secondary Education (KCSE)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-800 mb-1">Award Title / Course Name</label>
+          <input type="text" id="eduTitle" required placeholder="e.g. Master of Science in Finance & Investment" class="w-full p-2.5 border border-slate-300 rounded-lg text-slate-900 bg-white" />
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-800 mb-1">Awarding Institution / University</label>
+          <input type="text" id="eduInst" required placeholder="e.g. Kenyatta University" class="w-full p-2.5 border border-slate-300 rounded-lg text-slate-900 bg-white" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-800 mb-1">Year of Graduation</label>
+            <input type="number" id="eduYear" min="1970" max="2026" required value="2021" class="w-full p-2.5 border border-slate-300 rounded-lg text-slate-900 bg-white font-mono" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-800 mb-1">Classification / Grade</label>
+            <input type="text" id="eduGrade" required placeholder="e.g. Distinction / First Class" class="w-full p-2.5 border border-slate-300 rounded-lg text-slate-900 bg-white" />
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 flex justify-end space-x-2">
+          <button type="button" onclick="closeAddEducationModal()" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg">Cancel</button>
+          <button type="submit" class="px-5 py-2 bg-civic-forest hover:bg-civic-forestHover text-white font-bold rounded-lg shadow-sm">Save Credential</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Asynchronous Decoupled Ingestion & P.10 Receipt Dialog -->
+  <div id="ingestModal" class="fixed inset-0 bg-slate-950/70 z-50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-elevation-3 max-w-xl w-full border border-slate-200 overflow-hidden">
+      <!-- Modal Header -->
+      <div class="bg-gradient-to-r from-civic-forest to-slate-900 text-white p-5 border-b-2 border-civic-gold flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center">
+            <i data-lucide="radio" class="w-5 h-5 animate-pulse"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="text-[10px] font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-700/60 px-2 py-0.5 rounded">
+                HTTP 202 ACCEPTED
+              </span>
+              <span class="text-[10px] font-mono text-slate-300">Topic: psc.applications.incoming</span>
+            </div>
+            <h3 class="text-base font-bold text-white mt-0.5">Asynchronous Ingestion Receipt</h3>
+          </div>
+        </div>
+        <button onclick="closeIngestModal()" class="text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Telemetry Body -->
+      <div class="p-6 space-y-4 text-xs">
+        <div class="bg-slate-950 text-slate-200 p-4 rounded-xl font-mono text-[11px] space-y-2 border border-slate-800">
+          <div class="flex items-center justify-between text-slate-400 pb-2 border-b border-slate-800">
+            <span>Kafka Message Buffer Telemetry</span>
+            <span class="text-emerald-400">P99 Latency: 12ms</span>
+          </div>
+          <div class="text-emerald-400">✓ Ingestion Buffer: <span class="text-slate-300">Payload accepted; DB write decoupled</span></div>
+          <div class="text-emerald-400">✓ Tracking UUID: <span id="ingestTrackingUuid" class="text-amber-300">PSC-INGEST-32894102-7a8f1</span></div>
+          <div class="text-emerald-400">✓ Partition Offset: <span id="ingestOffset" class="text-blue-300">Partition #2, Offset #984210</span></div>
+          <div class="text-emerald-400">✓ SHA-256 Signature: <span id="ingestSha" class="text-slate-400">e3b0c44298fc1c14... (SHA-256 Verified)</span></div>
+        </div>
+
+        <!-- Form P.10 Receipt -->
+        <div class="bg-amber-50/70 border border-amber-300 rounded-xl p-4 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-800 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">
+              FORM P.10 OFFICIAL RECEIPT
+            </span>
+            <span class="font-mono font-bold text-civic-forest" id="receiptFolio">Folio No. 4892</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-slate-700 pt-1">
+            <div>Candidate: <strong>Dennis Kipchumba Limo</strong></div>
+            <div>National ID: <strong class="font-mono">32894102</strong></div>
+            <div>Advert Ref: <strong class="font-mono" id="receiptAdvertRef">PSC/EXT/2026/04-09</strong></div>
+            <div>Submission Status: <strong class="text-emerald-700">✓ Ingestion Confirmed</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="bg-slate-50 px-6 py-4 border-t border-slate-200 flex items-center justify-between">
+        <button type="button" onclick="window.print()" class="px-4 py-2 border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-semibold rounded-lg flex items-center space-x-1.5">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          <span>Print Receipt Slip</span>
+        </button>
+        <button type="button" onclick="closeIngestModalAndTrack()" class="px-6 py-2 bg-civic-forest hover:bg-civic-forestHover text-white text-xs font-bold rounded-lg shadow-sm flex items-center space-x-1.5">
+          <span>Go to Status Tracker</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accessible Toast Notification Container -->
+  <div id="toastNotification" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 max-w-sm w-full bg-slate-900 text-white p-4 rounded-xl shadow-elevation-3 flex items-start space-x-3 border border-slate-700">
+    <div id="toastIcon" class="shrink-0 text-emerald-400 mt-0.5">
+      <i data-lucide="check-circle" class="w-5 h-5"></i>
+    </div>
+    <div class="flex-grow">
+      <div id="toastTitle" class="text-xs font-bold text-white">System Notification</div>
+      <div id="toastBody" class="text-xs text-slate-300 mt-0.5">Details here...</div>
+    </div>
+    <button onclick="hideToast()" class="text-slate-400 hover:text-white">
+      <i data-lucide="x" class="w-4 h-4"></i>
+    </button>
+  </div>
+
+  <!-- Civic Footer: National Standards, Accessibility, Contact & Hotline -->
+  <footer class="bg-slate-900 text-slate-400 text-xs border-t border-slate-800 mt-12 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center space-x-2 text-white font-bold text-sm mb-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-civic-gold"></span>
+            <span>PUBLIC SERVICE COMMISSION</span>
+          </div>
+          <p class="text-slate-400 leading-relaxed text-xs">
+            Commission House, Harambee Avenue, Nairobi, Kenya. Committed to institutional meritocracy and efficient civic human resource administration.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold uppercase tracking-wider mb-3">Public Directives</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#" class="hover:text-white transition">Constitution of Kenya (Chapter 6)</a></li>
+            <li><a href="#" class="hover:text-white transition">Public Service Commission Act 2017</a></li>
+            <li><a href="#" class="hover:text-white transition">Fair Administrative Action Guide</a></li>
+            <li><a href="#" class="hover:text-white transition">Citizen Service Delivery Charter</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold uppercase tracking-wider mb-3">Candidate Support & Integrity</h4>
+          <ul class="space-y-2 text-xs">
+            <li class="flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-2 text-emerald-400"></i> Toll-Free Hotline: 0800 221 334</li>
+            <li class="flex items-center"><i data-lucide="mail" class="w-3.5 h-3.5 mr-2 text-emerald-400"></i> recruitment@publicservice.go.ke</li>
+            <li class="text-[11px] text-amber-400 mt-2">
+              Note: PSC Kenya does not solicit application fees or money transfers through mobile wallets. Report corruption immediately to EACC.
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold uppercase tracking-wider mb-3">Enterprise Resilience</h4>
+          <div class="space-y-1.5 font-mono text-[11px] text-slate-500">
+            <div><span class="text-emerald-400">●</span> NIST SP 800-207 Zero Trust mTLS 1.3</div>
+            <div><span class="text-emerald-400">●</span> Ingest Queue: 12ms P99 (Kafka Decoupled)</div>
+            <div><span class="text-emerald-400">●</span> Direct S3/GCS: Presigned Stream</div>
+            <div><span class="text-emerald-400">●</span> Circuit Breakers: IPRS &bull; KNEC &bull; eCitizen Active</div>
+            <div><span class="text-emerald-400">●</span> Storage: WORM Centralized Audit Stream</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-slate-500 gap-3">
+        <div>&copy; 2026 Public Service Commission. All Rights Reserved. Republic of Kenya.</div>
+        <div class="flex space-x-4">
+          <a href="#" class="hover:text-slate-300">Privacy Notice</a>
+          <a href="#" class="hover:text-slate-300">Terms of Cadre Recruitment</a>
+          <a href="#" class="hover:text-slate-300">Data Protection Act Compliance</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Logic Script -->
+  <script>
+    // Initialize icons
+    lucide.createIcons();
+
+    // Application state
+    let activeTab = 'vacancies';
+    let currentStep = 1;
+    let autoSaveTimer = null;
+
+    // Auto-save heartbeat simulator (simulating local persistence)
+    function triggerAutoSave() {
+      const dot = document.getElementById('saveStatusDot');
+      const text = document.getElementById('saveStatusText');
+      const now = new Date();
+      const timeStr = now.toTimeString().split(' ')[0];
+      
+      dot.className = 'w-2 h-2 rounded-full bg-amber-400 animate-ping';
+      text.innerText = 'Saving changes...';
+
+      setTimeout(() => {
+        dot.className = 'w-2 h-2 rounded-full bg-emerald-400';
+        text.innerText = `Auto-saved locally at ${timeStr}`;
+        const formIndicator = document.getElementById('formSaveIndicator');
+        if (formIndicator) {
+          formIndicator.innerText = `All changes persisted at ${timeStr}`;
+        }
+      }, 600);
+    }
+
+    // Set up change listeners for auto-save simulation
+    document.addEventListener('input', () => {
+      clearTimeout(autoSaveTimer);
+      autoSaveTimer = setTimeout(triggerAutoSave, 900);
+    });
+
+    // View Switching Logic
+    function switchTab(tabId) {
+      activeTab = tabId;
+      
+      // Update Buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('border-civic-forest', 'text-civic-forest', 'font-semibold');
+        btn.classList.add('border-transparent', 'text-slate-600', 'font-medium');
+      });
+
+      const activeBtn = document.getElementById(`tab-${tabId}`);
+      if (activeBtn) {
+        activeBtn.classList.add('border-civic-forest', 'text-civic-forest', 'font-semibold');
+        activeBtn.classList.remove('border-transparent', 'text-slate-600', 'font-medium');
+      }
+
+      // Hide all views
+      document.getElementById('view-vacancies').classList.add('hidden');
+      document.getElementById('view-application').classList.add('hidden');
+      document.getElementById('view-tracker').classList.add('hidden');
+
+      // Show selected view
+      const targetView = document.getElementById(`view-${tabId}`);
+      if (targetView) {
+        targetView.classList.remove('hidden');
+      }
+      lucide.createIcons();
+    }
+
+    // Multi-Step Form Navigation
+    function setFormStep(stepNumber) {
+      currentStep = stepNumber;
+      
+      // Hide all step panes
+      document.querySelectorAll('.step-pane').forEach(el => el.classList.add('hidden'));
+      
+      // Show selected pane
+      const pane = document.getElementById(`step-content-${stepNumber}`);
+      if (pane) pane.classList.remove('hidden');
+
+      // Update Step title
+      const titles = [
+        "1. Civil Service Verification & National Identity",
+        "2. Verified Academic & Professional Qualifications",
+        "3. Leadership, Integrity & Chapter 6 Compliance",
+        "4. Audit & Final Submission Confirmation"
+      ];
+      document.getElementById('currentStepTitle').innerText = titles[stepNumber - 1];
+
+      // Update chip styling
+      document.querySelectorAll('.step-chip').forEach((chip, index) => {
+        const step = index + 1;
+        if (step === stepNumber) {
+          chip.className = 'step-chip text-left p-2.5 rounded-lg border text-xs font-bold border-civic-forest bg-emerald-50 text-civic-forest shadow-sm';
+        } else if (step < stepNumber) {
+          chip.className = 'step-chip text-left p-2.5 rounded-lg border text-xs font-semibold border-emerald-300 bg-white text-emerald-800';
+        } else {
+          chip.className = 'step-chip text-left p-2.5 rounded-lg border text-xs font-medium border-slate-200 bg-white text-slate-500';
+        }
+      });
+
+      window.scrollTo({ top: 120, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    // Live Validation for National ID
+    function validateNatID(value) {
+      const cleanVal = value.replace(/\D/g, '');
+      document.getElementById('natIdInput').value = cleanVal;
+      const feedback = document.getElementById('natIdFeedback');
+      const icon = document.getElementById('natIdCheckIcon');
+
+      if (cleanVal.length >= 7 && cleanVal.length <= 8) {
+        feedback.innerHTML = `<i data-lucide="badge-check" class="w-3.5 h-3.5 mr-1"></i> IPRS Verified: Dennis Kipchumba Limo (DOB: 14/05/1992)`;
+        feedback.className = 'text-xs text-emerald-700 mt-1.5 flex items-center font-medium';
+        icon.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>`;
+      } else {
+        feedback.innerHTML = `<i data-lucide="alert-circle" class="w-3.5 h-3.5 mr-1"></i> Kenyan National IDs must contain 7 or 8 digits.`;
+        feedback.className = 'text-xs text-amber-700 mt-1.5 flex items-center font-medium';
+        icon.innerHTML = `<i data-lucide="alert-circle" class="w-4 h-4 text-amber-500"></i>`;
+      }
+      lucide.createIcons();
+    }
+
+    function handlePayrollChange(val) {
+      const notice = document.getElementById('payrollNotice');
+      if (val.trim() === '20250031176') {
+        notice.innerText = 'Detected Cadre: Senior Analyst • Ministry of Finance & National Planning';
+        notice.className = 'text-xs text-emerald-700 mt-1 block font-medium';
+      } else if (val.trim().length > 4) {
+        notice.innerText = `Verified IPPD Payroll Sequence: Active in public service records`;
+        notice.className = 'text-xs text-slate-600 mt-1 block';
+      } else {
+        notice.innerText = 'Optional for new entrants to public service.';
+        notice.className = 'text-xs text-slate-500 mt-1 block';
+      }
+    }
+
+    // Modal controls for Education
+    function openAddEducationModal() {
+      document.getElementById('addEduModal').classList.remove('hidden');
+    }
+
+    function closeAddEducationModal() {
+      document.getElementById('addEduModal').classList.add('hidden');
+    }
+
+    function handleSaveQualification(e) {
+      e.preventDefault();
+      const level = document.getElementById('eduLevel').value;
+      const title = document.getElementById('eduTitle').value;
+      const inst = document.getElementById('eduInst').value;
+      const year = document.getElementById('eduYear').value;
+      const grade = document.getElementById('eduGrade').value;
+
+      const container = document.getElementById('educationCardsContainer');
+      const newCard = document.createElement('div');
+      newCard.className = 'p-4 rounded-lg border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+      newCard.innerHTML = `
+        <div class="flex items-start space-x-3.5">
+          <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h4 class="text-sm font-bold text-slate-900">${title} — ${grade}</h4>
+              <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-emerald-100 text-emerald-800">${level}</span>
+            </div>
+            <p class="text-xs text-slate-600 mt-0.5">${inst}</p>
+            <p class="text-[11px] text-slate-400 font-mono mt-0.5">Graduation Year: ${year}</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2 self-end sm:self-center">
+          <button type="button" onclick="removeEducation(this)" class="text-xs text-red-600 hover:text-red-800 p-1.5 rounded hover:bg-red-50">
+            <i data-lucide="trash-2" class="w-4 h-4"></i>
+          </button>
+        </div>
+      `;
+
+      container.prepend(newCard);
+      closeAddEducationModal();
+      document.getElementById('newEduForm').reset();
+      lucide.createIcons();
+      showFeedback('Credential record appended and encrypted in draft', 'success');
+      triggerAutoSave();
+    }
+
+    function removeEducation(btn) {
+      const card = btn.closest('.p-4');
+      if (card) {
+        card.remove();
+        showFeedback('Qualification removed from record', 'info');
+        triggerAutoSave();
+      }
+    }
+
+    // File Upload Compression Simulation
+    function simulateFileUpload() {
+      const box = document.getElementById('uploadFeedbackBox');
+      const filename = document.getElementById('uploadFileName');
+      box.classList.remove('hidden');
+      box.innerHTML = `<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i><span>Compressing PDF (7.4 MB -> 1.2 MB)...</span>`;
+      lucide.createIcons();
+
+      setTimeout(() => {
+        box.innerHTML = `<i data-lucide="file-check" class="w-3.5 h-3.5 text-emerald-600"></i><span>Certified_Testimonials_Consolidated.pdf (1.2 MB — 84% reduction)</span>`;
+        lucide.createIcons();
+        showFeedback('File compressed client-side and queued for upload', 'success');
+        triggerAutoSave();
+      }, 1000);
+    }
+
+    // Vacancy Search Filtering
+    function filterVacancies() {
+      const query = document.getElementById('searchQuery').value.toLowerCase();
+      const entity = document.getElementById('filterEntity').value;
+      const grade = document.getElementById('filterGrade').value;
+
+      const articles = document.querySelectorAll('#vacancyListContainer article');
+      articles.forEach(article => {
+        const text = article.getAttribute('data-text');
+        const artEntity = article.getAttribute('data-entity');
+        const artGrade = article.getAttribute('data-grade');
+
+        const matchesText = text.includes(query);
+        const matchesEntity = (entity === 'all') || (artEntity === entity);
+        const matchesGrade = (grade === 'all') || (artGrade === grade);
+
+        if (matchesText && matchesEntity && matchesGrade) {
+          article.classList.remove('hidden');
+        } else {
+          article.classList.add('hidden');
+        }
+      });
+    }
+
+    let selectedJobTitle = 'Senior Legal Officer (Corporate Governance & Litigation)';
+    let selectedJobRef = 'PSC/EXT/2026/04-09';
+    let selectedJobScale = 'CSG 7';
+
+    // Start application from a vacancy card
+    function startApplication(roleTitle, refCode, grade) {
+      selectedJobTitle = roleTitle;
+      selectedJobRef = refCode;
+      selectedJobScale = grade;
+      showFeedback(`Opening structured dossier for: ${roleTitle} (${refCode})`, 'success');
+      switchTab('application');
+      setFormStep(1);
+    }
+
+    // Role Details Modal Simulator
+    function viewRoleDetails(type) {
+      showFeedback('Accessing Cadre Specification Standard under Public Service Act...', 'info');
+    }
+
+    // Final Submission Handler (Asynchronous Decoupled Ingestion)
+    function executeFinalSubmission() {
+      const decl = document.getElementById('solemnDeclaration');
+      if (!decl.checked) {
+        showFeedback('You must acknowledge the legal truthfulness declaration before transmitting.', 'error');
+        decl.focus();
+        return;
+      }
+
+      showFeedback('Transmitting payload to Kafka message ingestion stream...', 'info');
+      
+      const newFolio = Math.floor(1000 + Math.random() * 9000).toString();
+      const trackingUuid = `PSC-INGEST-32894102-${Math.random().toString(16).substring(2, 8)}-${Date.now().toString(16)}`;
+      const partitionOffset = Math.floor(800000 + Math.random() * 200000);
+      const shaSignature = Array.from(crypto.getRandomValues(new Uint8Array(16))).map(b => b.toString(16).padStart(2, '0')).join('');
+
+      document.getElementById('ingestTrackingUuid').innerText = trackingUuid;
+      document.getElementById('ingestOffset').innerText = `Partition #2, Offset #${partitionOffset}`;
+      document.getElementById('ingestSha').innerText = shaSignature + '... (SHA-256 Verified)';
+      document.getElementById('receiptFolio').innerText = `Folio No. ${newFolio}`;
+      document.getElementById('receiptAdvertRef').innerText = selectedJobRef;
+
+      setTimeout(() => {
+        document.getElementById('ingestModal').classList.remove('hidden');
+        lucide.createIcons();
+      }, 700);
+    }
+
+    function closeIngestModal() {
+      document.getElementById('ingestModal').classList.add('hidden');
+    }
+
+    function closeIngestModalAndTrack() {
+      document.getElementById('ingestModal').classList.add('hidden');
+      switchTab('tracker');
+      showFeedback('Application ingested into Kafka queue! Track live status below.', 'success');
+    }
+
+    // Toast message dispatcher
+    function showFeedback(message, type = 'info') {
+      const toast = document.getElementById('toastNotification');
+      const body = document.getElementById('toastBody');
+      const title = document.getElementById('toastTitle');
+      const icon = document.getElementById('toastIcon');
+
+      body.innerText = message;
+      if (type === 'success') {
+        title.innerText = 'Action Confirmed';
+        icon.className = 'shrink-0 text-emerald-400 mt-0.5';
+        icon.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5"></i>`;
+      } else if (type === 'error') {
+        title.innerText = 'Action Required';
+        icon.className = 'shrink-0 text-red-400 mt-0.5';
+        icon.innerHTML = `<i data-lucide="alert-octagon" class="w-5 h-5"></i>`;
+      } else {
+        title.innerText = 'System Audit';
+        icon.className = 'shrink-0 text-blue-400 mt-0.5';
+        icon.innerHTML = `<i data-lucide="info" class="w-5 h-5"></i>`;
+      }
+
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      lucide.createIcons();
+
+      setTimeout(hideToast, 4500);
+    }
+
+    function hideToast() {
+      const toast = document.getElementById('toastNotification');
+      toast.classList.add('translate-y-20', 'opacity-0');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }
+
+    function handleSignOut() {
+      showFeedback('Candidate session terminated securely. Clearing client tokens...', 'info');
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
+
+    // Accessibility High Contrast Switcher
+    let isHighContrast = false;
+    function toggleHighContrast() {
+      isHighContrast = !isHighContrast;
+      if (isHighContrast) {
+        document.body.classList.add('contrast-125');
+        showFeedback('High Contrast Rendering Mode Enabled (WCAG AAA)', 'info');
+      } else {
+        document.body.classList.remove('contrast-125');
+        showFeedback('Standard Rendering Profile Restored', 'info');
+      }
+    }
+  </script>
+</body>
+</html>

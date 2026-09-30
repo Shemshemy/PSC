@@ -1,0 +1,1009 @@
+/* ==========================================================================
+   Public Service Commission of Kenya
+   Modern Design System & Civic Architectural Foundation
+   Conforming to GOV.UK, NN/g, Baymard Institute & WCAG 2.2 AAA Guidelines
+   ========================================================================== */
+
+:root {
+  /* Brand Heritage Forest Green */
+  --psc-forest-dark: #072818;
+  --psc-forest-900: #0B3B24;
+  --psc-forest-800: #104C30;
+  --psc-forest-700: #166534;
+  --psc-forest-600: #059669;
+  --psc-forest-500: #10B981;
+  --psc-forest-100: #DCFCE7;
+  --psc-forest-50:  #F0FDF4;
+
+  /* Rich Kenya Heritage Mustard Gold (Official Seal & Brand Heritage) */
+  --psc-mustard-900: #5C3D04;
+  --psc-mustard-800: #7E5406;
+  --psc-mustard-700: #A8710B;
+  --psc-mustard-600: #C88A19; /* Official PSC Outer Ring Mustard */
+  --psc-mustard-500: #D9961A;
+  --psc-mustard-400: #E7A82D;
+  --psc-mustard-300: #F3C469;
+  --psc-mustard-200: #FCE3A7;
+  --psc-mustard-100: #FDF2D9;
+  --psc-mustard-50:  #FEF9EE;
+
+  /* Canvas & Neutral Hierarchy (Airy, Spacious, Zero Eyestrain) */
+  --slate-950: #070B13;
+  --slate-900: #0F172A;
+  --slate-800: #1E293B;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --slate-500: #64748B;
+  --slate-400: #94A3B8;
+  --slate-300: #CBD5E1;
+  --slate-200: #E2E8F0;
+  --slate-100: #F1F5F9;
+  --slate-50:  #F8FAFC;
+  --white:     #FFFFFF;
+
+  /* State Tokens */
+  --blue-700: #1D4ED8;
+  --blue-600: #2563EB;
+  --blue-500: #3B82F6;
+  --blue-100: #DBEAFE;
+  --blue-50:  #EFF6FF;
+
+  --red-700:  #B91C1C;
+  --red-600:  #DC2626;
+  --red-100:  #FEE2E2;
+  --red-50:   #FEF2F2;
+
+  /* Ergonomic Input & Layout Physics */
+  --min-touch-target: 46px;
+  --focus-ring-width: 2px;
+  --focus-ring-color: #059669;
+  --focus-ring-glow:  rgba(5, 150, 105, 0.25);
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 18px;
+  --border-radius-xl: 26px;
+  --border-radius-pill: 9999px;
+
+  /* Airy Depth & Shadows */
+  --shadow-xs: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 2px 4px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+  --shadow-md: 0 6px 12px -2px rgba(15, 23, 42, 0.06), 0 3px 6px -3px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 14px 24px -4px rgba(15, 23, 42, 0.06), 0 6px 10px -4px rgba(15, 23, 42, 0.03);
+  --shadow-card: 0 8px 24px -4px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+  --shadow-mustard: 0 6px 16px -2px rgba(200, 138, 25, 0.35);
+
+  /* Typography (Plus Jakarta Sans & Inter from KSU Portal) */
+  --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+  --transition-fast: 160ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 260ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--slate-800);
+  background-color: var(--slate-50);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  background-color: var(--slate-50);
+}
+
+/* App Shell Desktop Height Lock & Non-Nested Window Scrolling */
+@media (min-width: 861px) {
+  html, body {
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden !important;
+  }
+}
+
+#top-portal-header {
+  flex-shrink: 0;
+  width: 100%;
+  z-index: 40;
+}
+
+/* Accessibility */
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -50px;
+  left: 1.5rem;
+  background: var(--slate-900);
+  color: var(--white);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--border-radius-sm);
+  z-index: 1000;
+  text-decoration: none;
+  font-weight: 700;
+  transition: top var(--transition-fast);
+}
+.skip-link:focus {
+  top: 1.25rem;
+}
+
+/* ==========================================================================
+   Top Header & Civic Emblem Identity (Airy, Prestigious)
+   ========================================================================== */
+
+/* ==========================================================================
+   Top Header & Dignified Civic Identity (Institutional Deep Forest Green with Gold Accent)
+   ========================================================================== */
+
+.psc-header {
+  background: #0B3B24;
+  border-bottom: 4px solid #D97706;
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Dual Heritage Accent: Flag Colours */
+.psc-header-top-accent {
+  height: 3px;
+  background: linear-gradient(90deg, 
+    #000000 0%, 
+    #000000 30%, 
+    #FFFFFF 30%,
+    #FFFFFF 32%,
+    #B91C1C 32%, 
+    #B91C1C 68%, 
+    #FFFFFF 68%,
+    #FFFFFF 70%,
+    #059669 70%, 
+    #059669 100%
+  );
+}
+
+.psc-header-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0.75rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.psc-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Sidebar Toggle Hamburger Button */
+.sidebar-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--white);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.sidebar-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.32);
+  transform: scale(1.04);
+}
+
+.psc-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.psc-emblems {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+}
+
+.psc-emblem-img {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.25));
+  transition: transform var(--transition-fast);
+}
+
+.psc-emblem-img:hover {
+  transform: scale(1.04);
+}
+
+.psc-emblem-divider {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+}
+
+.psc-brand-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.psc-brand-flagship {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  color: var(--white);
+  text-transform: uppercase;
+  line-height: 1.15;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.psc-brand-sub {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #FEF9EE;
+  letter-spacing: 0.2px;
+  margin-top: 1px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+/* Header Right Utilities */
+.psc-header-utils {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Auto-Save Status Badge */
+.auto-save-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.38rem 0.85rem;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--psc-forest-900);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  transition: all var(--transition-base);
+}
+
+.auto-save-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--psc-forest-600);
+  box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.3);
+}
+
+.auto-save-pill.saving {
+  background-color: #FEF3C7;
+  color: #92400E;
+}
+
+.auto-save-pill.saving .auto-save-dot {
+  background-color: #D97706;
+  box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.4);
+  animation: pulseSaving 0.8s infinite alternate;
+}
+
+@keyframes pulseSaving {
+  from { opacity: 0.35; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1.2); }
+}
+
+/* Signed In User Authentication Metadata */
+.psc-user-auth-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
+.signed-in-tag {
+  font-size: 0.82rem;
+  color: var(--white);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.signed-label {
+  opacity: 0.85;
+}
+
+.signed-name {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #FFFBEB;
+  margin-left: 0.2rem;
+}
+
+.auth-action-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(0, 0, 0, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FEF9EE;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.auth-link-btn:hover {
+  background: rgba(0, 0, 0, 0.32);
+  color: var(--white);
+}
+
+.auth-link-btn.danger {
+  background: rgba(185, 28, 28, 0.35);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #FEE2E2;
+}
+
+.auth-link-btn.danger:hover {
+  background: rgba(185, 28, 28, 0.75);
+  color: var(--white);
+}
+
+.auth-link-divider {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.75rem;
+}
+
+/* ==========================================================================
+   Main Layout: Curved Organic Side Rail & Airy Content Canvas
+   ========================================================================== */
+
+.app-wrapper {
+  flex: 1 1 0%;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Modernized Left Sidebar (Borrowing Clean Civic-Forest & Slate Design Cues) */
+.curved-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  height: 100%;
+  min-height: 0;
+  background: #FFFFFF;
+  border-right: 1px solid #E2E8F0;
+  color: #1E293B;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem 1rem 1rem 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.35) transparent;
+  z-index: 20;
+  box-shadow: 1px 0 4px rgba(0, 0, 0, 0.03);
+  transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1), padding 0.28s ease, transform 0.28s ease;
+}
+
+/* Subtle, sleek custom scrollbar for Sidebar */
+.curved-sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+.curved-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.curved-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(203, 213, 225, 0.55);
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+.curved-sidebar:hover::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.85);
+}
+
+.sidebar-curve-svg {
+  display: none;
+}
+
+.curved-sidebar-content {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  width: 100%;
+}
+
+/* System Banner in Sidebar */
+.sidebar-system-banner {
+  background: #FEF3C7;
+  border: 1px solid #FDE68A;
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  margin-bottom: 1.15rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.sidebar-system-title {
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #B45309;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+.sidebar-system-sub {
+  font-size: 0.68rem;
+  color: #78350F;
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+/* Accordion Section: Applicant Section */
+.sidebar-accordion-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+}
+
+.sidebar-section-header {
+  background: #0B3B24;
+  color: #FFFFFF;
+  padding: 0.7rem 0.95rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(11, 59, 36, 0.15);
+  border-left: 4px solid #D97706;
+  margin-bottom: 0.85rem;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.sidebar-section-header:hover {
+  background: #082b1a;
+  transform: translateY(-1px);
+}
+
+.sidebar-section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.sidebar-section-icon {
+  flex-shrink: 0;
+  color: #FDE68A;
+}
+
+.sidebar-chevron-icon {
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+  color: #FDE68A;
+}
+
+.sidebar-chevron-icon.open {
+  transform: rotate(0deg);
+}
+
+.sidebar-chevron-icon:not(.open) {
+  transform: rotate(-90deg);
+}
+
+/* Tree Navigation List with Connected Bullet Line */
+.sidebar-nav-tree {
+  position: relative;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: all 0.25s ease;
+}
+
+.tree-line-connector {
+  position: absolute;
+  left: 7px;
+  top: 14px;
+  bottom: 16px;
+  width: 2px;
+  background: #E2E8F0;
+}
+
+.sidebar-tree-node {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  color: #334155;
+  font-weight: 600;
+  font-size: 0.86rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.tree-bullet {
+  position: absolute;
+  left: -1.25rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2.5px solid #CBD5E1;
+  z-index: 2;
+  transition: all 0.2s ease;
+}
+
+.sidebar-tree-node:hover {
+  background: #F1F5F9;
+  color: #0F172A;
+}
+
+.sidebar-tree-node:hover .tree-bullet {
+  border-color: #0B3B24;
+  background: #ECFDF5;
+}
+
+.sidebar-tree-node.active {
+  background: #ECFDF5;
+  color: #0B3B24;
+  font-weight: 700;
+  border-left: 3px solid #0B3B24;
+}
+
+.sidebar-tree-node.active .tree-bullet {
+  background: #059669;
+  border-color: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.25);
+}
+
+.tree-node-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Badges on Tree Nodes */
+.tree-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.55rem;
+  border-radius: 9999px;
+  margin-left: 0.5rem;
+  flex-shrink: 0;
+}
+
+.tree-badge.mustard {
+  background: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+}
+
+.tree-badge.gold {
+  background: #FEF3C7;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.tree-badge.forest {
+  background: #DCFCE7;
+  color: #166534;
+  border: 1px solid #BBF7D0;
+}
+
+/* Profile Steps Sub-Tree (9 Steps) */
+.sidebar-profile-node-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.node-arrow-icon {
+  margin-left: 0.4rem;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  color: #94A3B8;
+}
+
+.node-arrow-icon.open {
+  transform: rotate(0deg);
+}
+
+.node-arrow-icon:not(.open) {
+  transform: rotate(-90deg);
+}
+
+.sidebar-steps-sublist {
+  display: none;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-left: 0.85rem;
+  margin: 0.25rem 0 0.5rem 0.85rem;
+  border-left: 1.5px dashed #CBD5E1;
+}
+
+.sidebar-profile-node-group.open .sidebar-steps-sublist {
+  display: flex;
+}
+
+.sidebar-step-node {
+  background: transparent;
+  border: none;
+  color: #475569;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  transition: all 0.15s ease;
+}
+
+.sidebar-step-node:hover {
+  background: #F1F5F9;
+  color: #0F172A;
+}
+
+.sidebar-step-node.active {
+  background: #ECFDF5;
+  color: #0B3B24;
+  font-weight: 700;
+}
+
+.sidebar-step-node.completed {
+  color: #047857;
+}
+
+.step-node-check {
+  font-size: 0.72rem;
+  color: #059669;
+  font-weight: 800;
+  margin-left: 0.25rem;
+}
+
+/* Citizen Support Card */
+.sidebar-support {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 0.85rem;
+  margin: 1.25rem 0;
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.sidebar-support-text {
+  color: #64748B;
+  margin-bottom: 0.3rem;
+  line-height: 1.35;
+}
+
+.sidebar-support-link {
+  color: #0B3B24;
+  font-weight: 700;
+  text-decoration: underline;
+  display: inline-block;
+  margin-bottom: 0.25rem;
+}
+
+.sidebar-support-link:hover {
+  color: #059669;
+}
+
+.sidebar-support-sub {
+  color: #94A3B8;
+  font-size: 0.72rem;
+  margin: 0;
+}
+
+/* Sidebar Footer Toolbar */
+.sidebar-footer-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid #E2E8F0;
+  gap: 0.5rem;
+}
+
+.toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.toolbar-btn:hover {
+  background: #E2E8F0;
+  color: #0F172A;
+  transform: translateY(-1px);
+}
+
+.toolbar-btn.danger:hover {
+  background: #FEE2E2;
+  border-color: #FECACA;
+  color: #DC2626;
+}
+
+/* Collapsed Sidebar State */
+.curved-sidebar.collapsed {
+  width: 76px;
+  padding: 1.25rem 0.5rem;
+}
+
+.curved-sidebar.collapsed .sidebar-system-title,
+.curved-sidebar.collapsed .sidebar-system-sub,
+.curved-sidebar.collapsed .sidebar-section-title,
+.curved-sidebar.collapsed .sidebar-chevron-icon,
+.curved-sidebar.collapsed .tree-node-label,
+.curved-sidebar.collapsed .tree-badge,
+.curved-sidebar.collapsed .node-arrow-icon,
+.curved-sidebar.collapsed .sidebar-steps-sublist,
+.curved-sidebar.collapsed .sidebar-support {
+  display: none !important;
+}
+
+.curved-sidebar.collapsed .sidebar-section-header {
+  justify-content: center;
+  padding: 0.65rem 0;
+  border-left: none;
+}
+
+.curved-sidebar.collapsed .sidebar-nav-tree {
+  padding-left: 0;
+}
+
+.curved-sidebar.collapsed .tree-line-connector {
+  display: none;
+}
+
+.curved-sidebar.collapsed .sidebar-tree-node {
+  justify-content: center;
+  padding: 0.6rem 0;
+}
+
+.curved-sidebar.collapsed .tree-bullet {
+  display: none;
+}
+
+.curved-sidebar.collapsed .sidebar-footer-toolbar {
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* ==========================================================================
+   Central Content Canvas: Airy, Spacious & Well-Laid Out
+   ========================================================================== */
+
+.app-main {
+  flex: 1 1 0%;
+  min-height: 0;
+  height: 100%;
+  background-color: var(--slate-50);
+  padding: 2.25rem 3rem 5rem 3rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.45) #F1F5F9;
+  transition: padding 0.3s ease;
+  position: relative;
+}
+
+/* Bespoke refined custom scrollbar for Main Canvas */
+.app-main::-webkit-scrollbar {
+  width: 7px;
+}
+.app-main::-webkit-scrollbar-track {
+  background: #F1F5F9;
+  border-left: 1px solid #E2E8F0;
+}
+.app-main::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+.app-main::-webkit-scrollbar-thumb:hover {
+  background: #0B3B24; /* PSC Civic Forest Green */
+}
+
+.view-container {
+  display: none;
+  animation: fadeInView 220ms ease-out forwards;
+}
+
+.view-container.active {
+  display: block;
+}
+
+@keyframes fadeInView {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* High Contrast Mode for WCAG 2.2 AAA */
+body.high-contrast {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+body.high-contrast .app-main,
+body.high-contrast .form-card,
+body.high-contrast .psc-header {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+body.high-contrast .form-control {
+  background: #000 !important;
+  color: #FFEB3B !important;
+  border-color: #FFEB3B !important;
+}
+
+body.high-contrast .curved-sidebar::-webkit-scrollbar-thumb,
+body.high-contrast .app-main::-webkit-scrollbar-thumb {
+  background: #FFEB3B !important;
+}
+
+body.high-contrast .app-main::-webkit-scrollbar-track {
+  background: #000000 !important;
+  border-left: 1px solid #FFEB3B !important;
+}
+
+body.mobile-drawer-open {
+  overflow: hidden !important;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1200px) {
+  .curved-sidebar {
+    width: 290px;
+    padding: 1.25rem 1rem;
+  }
+  .app-main {
+    padding: 2rem 2rem 4rem 2rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .curved-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 100;
+    transform: translateX(-100%);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .curved-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  .app-main {
+    padding: 1.5rem 1.25rem 4rem 1.25rem;
+  }
+  .psc-header-inner {
+    padding: 0.75rem 1rem;
+  }
+  .psc-brand-sub {
+    display: none;
+  }
+  .signed-in-tag {
+    display: none;
+  }
+}
+
+/* ==============================================================
+   Accessibility Scaling & Cognitive Support (WCAG 2.2 AAA)
+   ============================================================== */
+html.font-scale-sm {
+  font-size: 14px !important;
+}
+html.font-scale-base {
+  font-size: 16px !important;
+}
+html.font-scale-lg {
+  font-size: 18.5px !important;
+}
+
+body.dyslexia-font {
+  font-family: 'OpenDyslexic', 'Trebuchet MS', 'Segoe UI', sans-serif !important;
+  letter-spacing: 0.04em !important;
+  word-spacing: 0.08em !important;
+  line-height: 1.8 !important;
+}
+
+body.reduce-motion,
+body.reduce-motion * {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+/* Dropdown Animation */
+@keyframes civicFadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.civic-dropdown-animate {
+  animation: civicFadeInDown 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

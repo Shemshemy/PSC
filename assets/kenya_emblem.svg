@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="100%" height="100%">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#991B1B" />
+      <stop offset="50%" stop-color="#B91C1C" />
+      <stop offset="100%" stop-color="#7F1D1D" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="50%" stop-color="#D97706" />
+      <stop offset="100%" stop-color="#B45309" />
+    </linearGradient>
+  </defs>
+
+  <!-- Crossed Traditional Maasai Spears -->
+  <g stroke="#94A3B8" stroke-width="4" stroke-linecap="round">
+    <line x1="45" y1="210" x2="195" y2="30" />
+    <line x1="195" y1="210" x2="45" y2="30" />
+    <!-- Spear tips -->
+    <polygon points="195,30 205,42 195,38 185,42" fill="#DC2626" stroke="#991B1B" stroke-width="1.5" />
+    <polygon points="45,30 55,42 45,38 35,42" fill="#DC2626" stroke="#991B1B" stroke-width="1.5" />
+    <!-- Spear bottom counterweights -->
+    <circle cx="45" cy="210" r="5" fill="#475569" stroke="none" />
+    <circle cx="195" cy="210" r="5" fill="#475569" stroke="none" />
+  </g>
+
+  <!-- Left Lion Supporter -->
+  <g id="lion-left" fill="url(#goldGrad)" stroke="#78350F" stroke-width="1.5">
+    <!-- Body & Mane -->
+    <path d="M 68,140 C 60,110 40,105 45,85 C 50,68 65,65 72,75 C 78,85 75,95 82,105 C 88,115 88,135 78,165 C 72,185 60,195 50,195 C 45,195 42,185 48,180 C 58,172 65,165 68,140 Z" />
+    <!-- Left Foreleg holding spear -->
+    <path d="M 72,98 C 65,92 50,85 58,72 C 62,65 75,70 78,82 Z" />
+    <path d="M 78,110 C 85,115 100,120 102,128 C 98,134 85,128 78,122 Z" />
+    <!-- Lion Head Details -->
+    <circle cx="55" cy="76" r="2.5" fill="#1E293B" stroke="none" />
+    <!-- Tail -->
+    <path d="M 46,185 C 30,175 25,145 28,125 C 29,122 34,124 33,128 C 30,145 35,170 48,182 Z" fill="#D97706" />
+    <ellipse cx="28" cy="122" rx="4" ry="7" fill="#B45309" />
+  </g>
+
+  <!-- Right Lion Supporter (Mirrored) -->
+  <g id="lion-right" transform="translate(240, 0) scale(-1, 1)" fill="url(#goldGrad)" stroke="#78350F" stroke-width="1.5">
+    <path d="M 68,140 C 60,110 40,105 45,85 C 50,68 65,65 72,75 C 78,85 75,95 82,105 C 88,115 88,135 78,165 C 72,185 60,195 50,195 C 45,195 42,185 48,180 C 58,172 65,165 68,140 Z" />
+    <path d="M 72,98 C 65,92 50,85 58,72 C 62,65 75,70 78,82 Z" />
+    <path d="M 78,110 C 85,115 100,120 102,128 C 98,134 85,128 78,122 Z" />
+    <circle cx="55" cy="76" r="2.5" fill="#1E293B" stroke="none" />
+    <path d="M 46,185 C 30,175 25,145 28,125 C 29,122 34,124 33,128 C 30,145 35,170 48,182 Z" fill="#D97706" />
+    <ellipse cx="28" cy="122" rx="4" ry="7" fill="#B45309" />
+  </g>
+
+  <!-- Center Maasai Traditional Shield -->
+  <g id="shield">
+    <!-- Base Shape -->
+    <path d="M 120,45 C 155,75 162,125 152,175 C 145,200 120,215 120,215 C 120,215 95,200 88,175 C 78,125 85,75 120,45 Z" fill="#1E293B" stroke="#0F172A" stroke-width="2" />
+    
+    <!-- Top Black Segment -->
+    <path d="M 120,46 C 145,67 154,95 154,102 L 86,102 C 86,95 95,67 120,46 Z" fill="#0F172A" />
+    
+    <!-- Middle White Stripe -->
+    <line x1="86" y1="102" x2="154" y2="102" stroke="#FFFFFF" stroke-width="4" />
+    
+    <!-- Red Body with Cockerel (Kenya National Emblem) -->
+    <path d="M 87,104 L 153,104 C 153,125 151,148 147,162 L 93,162 C 89,148 87,125 87,104 Z" fill="url(#shieldGrad)" />
+    
+    <!-- White Cockerel holding Axe (Harambee Rooster) -->
+    <g fill="#FFFFFF" stroke="#0F172A" stroke-width="0.8">
+      <!-- Rooster body & head -->
+      <path d="M 120,118 C 124,115 128,116 130,120 C 132,124 130,128 127,131 C 125,134 126,140 122,143 C 117,144 114,138 116,132 C 117,128 115,122 120,118 Z" />
+      <!-- Crest / Comb -->
+      <path d="M 128,114 C 131,112 133,115 132,118 Z" fill="#DC2626" />
+      <!-- Tail feathers -->
+      <path d="M 116,130 C 110,126 108,135 112,142 C 114,140 115,136 116,134 Z" fill="#FFFFFF" />
+      <!-- Miniature Axe -->
+      <line x1="126" y1="126" x2="135" y2="120" stroke="#CBD5E1" stroke-width="2" />
+      <polygon points="133,117 138,119 135,124" fill="#D97706" />
+    </g>
+
+    <!-- Bottom White Stripe -->
+    <line x1="93" y1="162" x2="147" y2="162" stroke="#FFFFFF" stroke-width="4" />
+    
+    <!-- Bottom Green Segment -->
+    <path d="M 93,164 L 147,164 C 142,185 120,213 120,213 C 120,213 98,185 93,164 Z" fill="#047857" />
+
+    <!-- Maasai shield traditional edge markings -->
+    <path d="M 120,46 L 120,213" stroke="#F8FAFC" stroke-width="1.5" stroke-dasharray="3,3" />
+  </g>
+
+  <!-- Mount Kenya Terrain Pedestal -->
+  <path d="M 50,210 Q 85,198 120,202 Q 155,198 190,210 L 195,218 L 45,218 Z" fill="#14532D" />
+
+  <!-- Harambee Motto Ribbon / Banner -->
+  <g id="motto-banner">
+    <path d="M 60,214 L 180,214 L 188,226 L 176,226 L 172,234 L 120,230 L 68,234 L 64,226 L 52,226 Z" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" />
+    <text x="120" y="226" font-family="'Cinzel', 'Times New Roman', serif" font-weight="900" font-size="9" fill="#78350F" text-anchor="middle" letter-spacing="2">HARAMBEE</text>
+    <text x="120" y="238" font-family="'Inter', sans-serif" font-weight="700" font-size="7" fill="#1E293B" text-anchor="middle" letter-spacing="1.5">REPUBLIC OF KENYA</text>
+  </g>
+</svg>
