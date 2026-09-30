@@ -979,78 +979,113 @@ body.mobile-drawer-open {
 }
 
 /* ================================================================
-   MOBILE BOTTOM NAVIGATION BAR
+   MOBILE BOTTOM NAVIGATION BAR - REFINED MODERN NATIVE DESIGN
    ================================================================ */
+#mobile-bottom-nav {
+  box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08);
+}
+
+.mobile-nav-bar {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 60px;
+  padding: 0 4px;
+}
+
 .mobile-nav-btn {
   flex: 1;
+  max-width: 72px;
+  height: 52px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
-  padding: 10px 4px 10px 4px;
+  gap: 2px;
+  padding: 4px 2px;
   background: transparent;
   border: none;
+  border-radius: 12px;
   cursor: pointer;
-  color: #94A3B8;
-  transition: color 0.15s ease, background 0.15s ease;
+  color: #64748B;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   min-width: 0;
   -webkit-tap-highlight-color: transparent;
 }
 
 .mobile-nav-btn:active {
-  background: rgba(11, 59, 36, 0.04);
-  transform: scale(0.96);
+  transform: scale(0.92);
+}
+
+.mobile-nav-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 26px;
+  border-radius: 13px;
+  transition: all 0.2s ease;
+}
+
+.mobile-nav-icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.85;
+  transition: transform 0.2s ease;
 }
 
 .mobile-nav-btn.active {
   color: #0B3B24;
 }
 
-.mobile-nav-btn.active::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 28px;
-  height: 3px;
-  background: #0B3B24;
-  border-radius: 0 0 4px 4px;
+.mobile-nav-btn.active .mobile-nav-icon-wrap {
+  background: #ECFDF5;
+  color: #0B3B24;
 }
 
-.mobile-nav-icon {
-  width: 22px;
-  height: 22px;
-  stroke-width: 1.75;
-  flex-shrink: 0;
+.mobile-nav-btn.active .mobile-nav-icon {
+  transform: translateY(-1px);
+  stroke-width: 2.25;
 }
 
 .mobile-nav-label {
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   line-height: 1;
   white-space: nowrap;
+  transition: font-weight 0.15s ease, color 0.15s ease;
+}
+
+.mobile-nav-btn.active .mobile-nav-label {
+  font-weight: 800;
+  color: #0B3B24;
 }
 
 .mobile-nav-badge {
   position: absolute;
-  top: 7px;
-  right: calc(50% - 18px);
+  top: -3px;
+  right: -6px;
   background: #DC2626;
   color: white;
   font-size: 9px;
   font-weight: 800;
-  width: 16px;
-  height: 16px;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
   border-radius: 9999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid white;
+  border: 1.5px solid white;
   line-height: 1;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
 /* Mobile More Menu Grid Items */

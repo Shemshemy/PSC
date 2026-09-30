@@ -188,12 +188,12 @@ export class JobsManager {
     const isSw = (typeof window !== 'undefined' && window.currentLanguage && window.currentLanguage() === 'sw');
 
     this.tableContainer.innerHTML = `
-      <div class="jobs-filter-bar">
-        <div style="flex: 1; min-width: 240px;">
+      <div class="jobs-filter-bar mb-4 flex flex-col sm:flex-row gap-2.5">
+        <div class="flex-1 min-w-0">
           <input type="text" id="jobs-search-input" class="form-control" placeholder="${isSw ? 'Tafuta kwa Cheo, Shirika au Nambari ya Tangazo...' : 'Search by Position, Organization or Advert No...'}">
         </div>
         <div>
-          <select id="jobs-category-filter" class="form-control" style="min-width: 180px;">
+          <select id="jobs-category-filter" class="form-control sm:w-auto w-full">
             <option value="">${isSw ? 'Vitengo Vyote' : 'All Categories'}</option>
             <option value="University Senior Management">${isSw ? 'Uongozi wa Chuo Kikuu' : 'University Senior Management'}</option>
             <option value="Public Service / ICT">${isSw ? 'Utumishi wa Umma / ICT' : 'Public Service / ICT'}</option>
@@ -203,7 +203,69 @@ export class JobsManager {
         </div>
       </div>
 
-      <div class="table-responsive">
+      <!-- ============================================================== -->
+      <!-- MOBILE JOB CARDS (Visible only on mobile/tablet < 768px)       -->
+      <!-- ============================================================== -->
+      <div class="jobs-mobile-feed md:hidden space-y-3.5">
+        ${filtered.length === 0 ? `
+          <div class="bg-white rounded-xl border border-slate-200 p-8 text-center text-slate-500 text-sm">
+            ${isSw ? 'Hakuna nafasi zilizolingana na vigezo vyako.' : 'No vacancies matched your filter criteria.'}
+          </div>
+        ` : filtered.map(job => `
+          <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:border-emerald-500/50 transition flex flex-col justify-between gap-3">
+            <!-- Top Header: Advert Ref & Deadline -->
+            <div class="flex items-center justify-between gap-2">
+              <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-amber-50 text-amber-900 border border-amber-200">
+                Ref: ${job.advertNumber}
+              </span>
+              <span class="inline-flex items-center gap-1 text-[11px] font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded border border-red-100">
+                ⏳ ${isSw ? 'Mwisho' : 'Closes'} ${job.closeDate}
+              </span>
+            </div>
+
+            <!-- Position Title & Org -->
+            <div>
+              <h3 class="text-base font-extrabold text-slate-900 leading-snug">${job.position}</h3>
+              <div class="text-xs font-semibold text-slate-600 mt-1 flex items-center gap-1.5">
+                <span class="text-slate-400">🏛️</span>
+                <span>${job.organization}</span>
+              </div>
+            </div>
+
+            <!-- Key Chips Row -->
+            <div class="flex flex-wrap items-center gap-1.5 pt-1 border-t border-slate-100 text-[11px]">
+              <span class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-bold border border-blue-100">
+                ${job.vacancies} ${isSw ? 'Nafasi' : (job.vacancies === 1 ? '1 Vacancy' : `${job.vacancies} Vacancies`)}
+              </span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">
+                ${job.jobScale}
+              </span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">
+                ${job.yearsExp} ${isSw ? 'Miaka Uzoefu' : 'Yrs Exp'}
+              </span>
+              <span class="px-2 py-0.5 rounded bg-slate-50 text-slate-600 font-medium border border-slate-100 truncate max-w-[180px]">
+                ${job.category}
+              </span>
+            </div>
+
+            <!-- Action Buttons: Clear Full-Width Grid on Mobile -->
+            <div class="grid grid-cols-2 gap-2 pt-1">
+              <button type="button" class="btn btn-secondary view-job-details-btn w-full py-2 text-xs font-semibold" data-advert="${job.advertNumber}">
+                ${isSw ? 'Maelezo' : 'Advert Details'}
+              </button>
+              <button type="button" class="btn btn-primary apply-job-btn w-full py-2 text-xs font-bold bg-[#0B3B24] hover:bg-[#072517] text-white flex items-center justify-center gap-1 shadow-sm" data-advert="${job.advertNumber}">
+                <span>${isSw ? 'Tuma Maombi' : 'Apply Now'}</span>
+                <span>→</span>
+              </button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- DESKTOP DATA TABLE (Visible on >= 768px)                       -->
+      <!-- ============================================================== -->
+      <div class="hidden md:block table-responsive">
         <table class="psc-table">
           <thead>
             <tr>
@@ -235,7 +297,7 @@ export class JobsManager {
                       <button type="button" class="btn btn-secondary view-job-details-btn" data-advert="${job.advertNumber}" style="min-height: 36px; padding: 0.35rem 0.85rem; font-size: 0.82rem;">
                         ${isSw ? 'Maelezo ya Kazi' : 'Advert Details'}
                       </button>
-                      <button type="button" class="btn btn-primary apply-job-btn" data-advert="${job.advertNumber}" style="min-height: 36px; padding: 0.35rem 0.95rem; font-size: 0.82rem;">
+                      <button type="button" class="btn btn-primary apply-job-btn" data-advert="${job.advertNumber}" style="min-height: 36px; padding: 0.35rem 0.95rem; font-size: 0.82rem; background: #0B3B24; color: white;">
                         ${isSw ? 'Tuma Maombi' : 'Apply Now'}
                       </button>
                     </div>
@@ -267,7 +329,7 @@ export class JobsManager {
     if (searchInput) searchInput.addEventListener('input', applyFilters);
     if (categorySelect) categorySelect.addEventListener('change', applyFilters);
 
-    // Job Details bindings
+    // Job Details bindings (handles both mobile card and desktop table buttons)
     this.tableContainer.querySelectorAll('.view-job-details-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const advert = btn.getAttribute('data-advert');
@@ -296,7 +358,7 @@ export class JobsManager {
     }
 
     modal.innerHTML = `
-      <div class="modal-card" style="max-width: 720px;">
+      <div class="modal-card" style="max-width: 680px;">
         <div class="modal-header">
           <div>
             <span class="record-tag highlight">Advert No. ${job.advertNumber}</span>
@@ -308,7 +370,7 @@ export class JobsManager {
           </button>
         </div>
         <div class="modal-body" style="display: flex; flex-direction: column; gap: 1.25rem;">
-          <div class="form-row-triplet">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
             <div style="background: var(--slate-100); padding: 0.75rem 1rem; border-radius: var(--border-radius-md);">
               <div style="font-size: 0.75rem; color: var(--slate-500); font-weight: 600;">Vacancies</div>
               <div style="font-size: 1.1rem; font-weight: 700; color: var(--slate-900);">${job.vacancies} Post(s)</div>
@@ -342,7 +404,7 @@ export class JobsManager {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary close-job-modal-btn">Close</button>
-          <button type="button" class="btn btn-primary modal-apply-btn">Proceed to Apply with Profile</button>
+          <button type="button" class="btn btn-primary modal-apply-btn bg-[#0B3B24] text-white">Proceed to Apply with Profile</button>
         </div>
       </div>
     `;
@@ -369,7 +431,7 @@ export class JobsManager {
     }
 
     modal.innerHTML = `
-      <div class="modal-card" style="max-width: 680px;">
+      <div class="modal-card" style="max-width: 640px;">
         <div class="modal-header">
           <div>
             <span class="record-tag highlight" style="font-weight: 800;">Advert Ref: ${job.advertNumber}</span>
@@ -381,34 +443,34 @@ export class JobsManager {
           </button>
         </div>
 
-        <form id="formal-job-application-form" class="modal-body" style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <form id="formal-job-application-form" class="modal-body" style="display: flex; flex-direction: column; gap: 1.25rem;">
           <!-- Eligibility & Bio-Data Match Card -->
-          <div style="background: var(--psc-mustard-50); border: 1px solid var(--psc-mustard-200); border-radius: var(--border-radius-md); padding: 1.25rem 1.5rem;">
-            <div style="font-size: 0.78rem; text-transform: uppercase; font-weight: 800; color: var(--psc-mustard-800); letter-spacing: 0.5px; margin-bottom: 0.4rem;">
-              Applicant Pre-Qualification Match
+          <div style="background: var(--psc-mustard-50); border: 1px solid var(--psc-mustard-200); border-radius: var(--border-radius-md); padding: 1rem 1.25rem;">
+            <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 800; color: var(--psc-mustard-800); letter-spacing: 0.5px; margin-bottom: 0.35rem;">
+              Applicant Bio-Data Summary
             </div>
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap;">
               <div>
-                <div style="font-size: 1.05rem; font-weight: 800; color: var(--slate-900);">Faith Mwangi (ID: 24681012)</div>
-                <div style="font-size: 0.85rem; color: var(--slate-700);">BSc Computer Science • 4 Yrs 6 Mos Experience • IPPD: 20260012345</div>
+                <div style="font-size: 1rem; font-weight: 800; color: var(--slate-900);">Faith Mwangi (ID: 24681012)</div>
+                <div style="font-size: 0.82rem; color: var(--slate-700);">BSc Computer Science • 4 Yrs 6 Mos Experience • IPPD: 20260012345</div>
               </div>
               <span class="status-pill shortlisted" style="font-weight: 800;">✓ Bio-Data Complete</span>
             </div>
           </div>
 
           <!-- Position Summary Triplet -->
-          <div class="form-row-triplet">
-            <div style="background: var(--slate-100); padding: 0.75rem 1rem; border-radius: var(--border-radius-md);">
-              <div style="font-size: 0.72rem; color: var(--slate-500); font-weight: 700; text-transform: uppercase;">Cadre Scale</div>
-              <div style="font-size: 1rem; font-weight: 800; color: var(--slate-900);">${job.jobScale}</div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
+            <div style="background: var(--slate-100); padding: 0.65rem 0.85rem; border-radius: var(--border-radius-md);">
+              <div style="font-size: 0.70rem; color: var(--slate-500); font-weight: 700; text-transform: uppercase;">Cadre Scale</div>
+              <div style="font-size: 0.95rem; font-weight: 800; color: var(--slate-900);">${job.jobScale}</div>
             </div>
-            <div style="background: var(--slate-100); padding: 0.75rem 1rem; border-radius: var(--border-radius-md);">
-              <div style="font-size: 0.72rem; color: var(--slate-500); font-weight: 700; text-transform: uppercase;">Required Exp</div>
-              <div style="font-size: 1rem; font-weight: 800; color: var(--slate-900);">${job.yearsExp} Years Min</div>
+            <div style="background: var(--slate-100); padding: 0.65rem 0.85rem; border-radius: var(--border-radius-md);">
+              <div style="font-size: 0.70rem; color: var(--slate-500); font-weight: 700; text-transform: uppercase;">Required Exp</div>
+              <div style="font-size: 0.95rem; font-weight: 800; color: var(--slate-900);">${job.yearsExp} Years Min</div>
             </div>
-            <div style="background: var(--slate-100); padding: 0.75rem 1rem; border-radius: var(--border-radius-md);">
-              <div style="font-size: 0.72rem; color: var(--slate-500); font-weight: 700; text-transform: uppercase;">Closing Date</div>
-              <div style="font-size: 1rem; font-weight: 800; color: var(--red-600);">${job.closeDate}</div>
+            <div style="background: var(--slate-100); padding: 0.65rem 0.85rem; border-radius: var(--border-radius-md);">
+              <div style="font-size: 0.70rem; color: var(--slate-500); font-weight: 700; text-transform: uppercase;">Closing Date</div>
+              <div style="font-size: 0.95rem; font-weight: 800; color: var(--red-600);">${job.closeDate}</div>
             </div>
           </div>
 
@@ -418,28 +480,27 @@ export class JobsManager {
               Brief Statement of Suitability (Max 300 words)
             </label>
             <p class="form-hint">Highlight key competencies and achievements directly relevant to this vacancy.</p>
-            <textarea id="apply-cover-note" class="form-control" rows="4" placeholder="Summarize your leadership, technical expertise, or academic qualifications for this role...">I am pleased to formally submit my candidature for the position of ${job.position} under Advert ${job.advertNumber}. With my academic background in Computer Science and software engineering experience in civic technology, I possess the required competency to deliver citizen-centric excellence.</textarea>
+            <textarea id="apply-cover-note" class="form-control" rows="3" placeholder="Summarize your leadership, technical expertise, or academic qualifications for this role...">I am pleased to formally submit my candidature for the position of ${job.position} under Advert ${job.advertNumber}. With my academic background and proven experience, I possess the required competencies to deliver citizen-centric excellence.</textarea>
           </div>
 
-          <!-- Direct-to-Object Presigned Attachment Ingest (Zero Server I/O) -->
-          <div class="form-group" style="background: #F8FAFC; border: 1px dashed #CBD5E1; border-radius: var(--border-radius-md); padding: 1.25rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+          <!-- Dossier Attachment Upload -->
+          <div class="form-group" style="background: #F8FAFC; border: 1px dashed #CBD5E1; border-radius: var(--border-radius-md); padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
               <label class="form-label" style="margin-bottom: 0; display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 700;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
-                Direct Presigned Dossier Upload (PDF, Max 10MB)
+                Supplemental Dossier / Testimonials (Optional PDF, Max 10MB)
               </label>
-              <span class="alfe-badge" title="Cryptographically signed S3 PUT URL; zero load on application servers">☁️ Direct S3 Stream</span>
             </div>
-            <p class="form-hint" style="margin-bottom: 0.75rem;">
-              PDF documents stream straight to encrypted object storage. Application servers never buffer attachments.
+            <p class="form-hint" style="margin-bottom: 0.65rem;">
+              Attach additional certified documents if required. (Your saved verified profile records are automatically attached).
             </p>
-            <div id="dossier-upload-zone" style="display: flex; align-items: center; gap: 0.75rem; background: white; border: 1px solid #E2E8F0; padding: 0.75rem 1rem; border-radius: 6px;">
+            <div id="dossier-upload-zone" style="display: flex; align-items: center; gap: 0.75rem; background: white; border: 1px solid #E2E8F0; padding: 0.65rem 0.85rem; border-radius: 6px;">
               <input type="file" id="dossier-file-input" accept="application/pdf" style="display: none;">
-              <button type="button" class="btn btn-secondary" id="dossier-browse-btn" style="min-height: 36px; font-size: 0.8rem; padding: 0.35rem 0.85rem;">
-                Choose PDF File
+              <button type="button" class="btn btn-secondary" id="dossier-browse-btn" style="min-height: 34px; font-size: 0.8rem; padding: 0.35rem 0.85rem; shrink-0;">
+                Choose PDF
               </button>
-              <div id="dossier-file-status" style="font-size: 0.82rem; color: #64748B; flex: 1;">
-                No supplemental dossier attached (Default verified profile records will be attached)
+              <div id="dossier-file-status" style="font-size: 0.80rem; color: #64748B; flex: 1;">
+                No supplemental file chosen
               </div>
             </div>
           </div>
@@ -450,8 +511,8 @@ export class JobsManager {
             <div class="legal-warning-text">
               <label style="display: flex; align-items: flex-start; gap: 0.65rem; cursor: pointer;">
                 <input type="checkbox" id="job-apply-declaration-check" required style="width: 18px; height: 18px; margin-top: 2px;">
-                <span>
-                  <strong>Statutory Integrity Oath:</strong> I declare that all entries in my Public Service profile and this application are complete and true. I understand providing false information is an offence under Section 100(4) of the PSC Act 2017.
+                <span style="font-size: 0.82rem; line-height: 1.4;">
+                  <strong>Statutory Integrity Oath:</strong> I declare that all entries in my Public Service profile and this application are complete and true under Section 100(4) of the PSC Act 2017.
                 </span>
               </label>
             </div>
@@ -460,7 +521,7 @@ export class JobsManager {
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary close-apply-modal-btn">Cancel</button>
-          <button type="submit" form="formal-job-application-form" class="btn btn-mustard submit-job-btn" disabled>
+          <button type="submit" form="formal-job-application-form" class="btn btn-primary submit-job-btn bg-[#0B3B24] text-white" disabled>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
             Confirm & Submit Official Application
           </button>
@@ -482,7 +543,7 @@ export class JobsManager {
       submitBtn.disabled = !check.checked;
     });
 
-    // Presigned upload simulation with backend KMS / S3 integration
+    // Upload attachment handling
     const fileInput = modal.querySelector('#dossier-file-input');
     const browseBtn = modal.querySelector('#dossier-browse-btn');
     const statusLabel = modal.querySelector('#dossier-file-status');
@@ -493,14 +554,7 @@ export class JobsManager {
         if (fileInput.files && fileInput.files[0]) {
           const file = fileInput.files[0];
           statusLabel.innerHTML = `
-            <span style="color: #B45309; font-weight: 600;">Requesting S3 Presigned URL & computing SHA-256...</span>
-          `;
-          const presigned = await apiClient.requestPresignedUpload(file.name);
-          const kmsKey = (presigned && presigned.kmsKeyId) || 'arn:aws:kms:af-south-1:psc-hsm-01';
-          const checksum = (presigned && presigned.sha256Checksum) || '7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1f';
-          statusLabel.innerHTML = `
-            <span style="color: #0B3B24; font-weight: 700;">✓ Streamed to Encrypted S3:</span> ${file.name} (${(file.size / (1024 * 1024)).toFixed(2)} MB)
-            <div style="font-size: 0.72rem; color: #1E40AF; font-family: monospace;">SHA-256: ${checksum.slice(0, 32)}... • KMS: ${kmsKey}</div>
+            <span style="color: #0B3B24; font-weight: 700;">✓ Attached:</span> ${file.name} (${(file.size / (1024 * 1024)).toFixed(2)} MB)
           `;
         }
       });
@@ -511,7 +565,7 @@ export class JobsManager {
       e.preventDefault();
       submitBtn.disabled = true;
       submitBtn.innerHTML = `
-        <span style="display:inline-block; animation: spin 1s linear infinite;">⟳</span> Transmitting to Kafka Buffer...
+        <span style="display:inline-block; animation: spin 1s linear infinite;">⟳</span> Submitting Application...
       `;
 
       let telemetry = null;
@@ -535,10 +589,6 @@ export class JobsManager {
         ? telemetry.receiptFolio.split('/').pop() 
         : Math.floor(1000 + Math.random() * 9000).toString();
       const today = new Date().toISOString().slice(0, 10);
-      const trackingUuid = (telemetry && telemetry.trackingUuid) || `PSC-INGEST-24681012-${Math.random().toString(16).substring(2, 10)}`;
-      const shaSignature = (telemetry && telemetry.sha256PayloadSignature) || 'e3b0c44298fc1c14...';
-      const partitionInfo = (telemetry && telemetry.partition !== undefined) ? telemetry.partition : '#2';
-      const offsetInfo = (telemetry && telemetry.offset !== undefined) ? telemetry.offset : '#984210';
 
       const newApp = {
         folioNo: newFolio,
@@ -549,7 +599,7 @@ export class JobsManager {
         jobScale: job.jobScale,
         vacancies: job.vacancies,
         totalApplicants: Math.floor(1200 + Math.random() * 5000),
-        status: 'ACCEPTED (HTTP 202) - INGESTED',
+        status: 'SUBMITTED • UNDER REVIEW',
         appliedDate: today,
         interviewDate: 'Preliminary Longlisting'
       };
@@ -558,15 +608,14 @@ export class JobsManager {
       this.applications.unshift(newApp);
       this.renderStatusTable();
 
-      // Render Asynchronous Ingestion & P.10 Receipt Dialog
+      // Render Official Citizen Application Receipt Dialog
       modal.querySelector('.modal-card').innerHTML = `
         <div class="modal-header" style="background: linear-gradient(135deg, #0B3B24 0%, #062617 100%); color: white; border-bottom: 2px solid #C88A19;">
           <div>
-            <span class="circuit-breaker-pill" style="margin-bottom: 0.35rem; background: #064E3B; color: #A7F3D0; border-color: #059669;">
-              <span class="pulse-dot"></span>
-              HTTP 202 ACCEPTED • ASYNC QUEUE BUFFER
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-800 text-emerald-100 border border-emerald-600 mb-1">
+              ✓ OFFICIAL RECEIPT
             </span>
-            <h3 class="section-title" style="color: white; margin: 0.25rem 0 0 0;">Application Ingested Successfully</h3>
+            <h3 class="section-title" style="color: white; margin: 0.25rem 0 0 0;">Application Submitted Successfully</h3>
             <div style="font-size: 0.84rem; color: #D1FAE5;">Candidate: Faith Mwangi (ID: 24681012) • Advert: ${job.advertNumber}</div>
           </div>
           <button type="button" class="btn-icon-action close-apply-modal-btn" style="color: white;">
@@ -575,58 +624,33 @@ export class JobsManager {
         </div>
 
         <div class="modal-body" style="display: flex; flex-direction: column; gap: 1.25rem;">
-          <!-- Telemetry Terminal -->
-          <div class="stream-ingest-terminal">
-            <div class="stream-ingest-header">
-              <span>Kafka Message Stream Telemetry</span>
-              <span class="stream-ingest-code">Topic: psc.applications.incoming</span>
-            </div>
-            <div class="stream-ingest-step completed">
-              <span>✓</span>
-              <span>[GATEWAY] JSON Schema Structural Payload Validation: PASSED</span>
-            </div>
-            <div class="stream-ingest-step completed">
-              <span>✓</span>
-              <span>[STREAM BUFFER] Appended to Partition ${partitionInfo} (Offset: ${offsetInfo})</span>
-            </div>
-            <div class="stream-ingest-step completed">
-              <span>✓</span>
-              <span>[SECURITY] ALFE AES-256-GCM Envelope Encryption (HSM Key ID: #82910)</span>
-            </div>
-            <div class="stream-ingest-step completed">
-              <span>✓</span>
-              <span>[WORKER] Pool Consumer: Committed to PostgreSQL Primary Cluster</span>
-            </div>
-            <div class="stream-token-box">
-              <div style="font-size: 0.68rem; color: #94A3B8; text-transform: uppercase;">Cryptographic Tracking UUID:</div>
-              <strong style="color: #FCD34D;">${trackingUuid}</strong>
-              <div style="font-size: 0.68rem; color: #94A3B8; margin-top: 4px;">SHA-256 Digital Audit Signature: <code style="word-break: break-all;">${shaSignature}</code></div>
-            </div>
-          </div>
-
           <!-- Official P.10 Folio Receipt Card -->
-          <div style="background: #FEF9EE; border: 1.5px solid #C88A19; border-radius: 8px; padding: 1.25rem 1.5rem;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+          <div style="background: #FEF9EE; border: 1.5px solid #C88A19; border-radius: 10px; padding: 1.25rem 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
               <div>
-                <span class="record-tag highlight" style="font-size: 0.76rem;">FORM P.10 OFFICIAL RECEIPT</span>
-                <div style="font-size: 1.25rem; font-weight: 800; color: #0B3B24; margin-top: 0.25rem;">Folio No. ${newFolio}</div>
+                <span class="record-tag highlight" style="font-size: 0.76rem;">FORM P.10 ACKNOWLEDGEMENT SLIP</span>
+                <div style="font-size: 1.35rem; font-weight: 800; color: #0B3B24; margin-top: 0.25rem;">Folio Ref: PSC/2026/${newFolio}</div>
               </div>
-              <span class="status-pill shortlisted" style="font-weight: 800;">✓ Ingestion Confirmed</span>
+              <span class="status-pill shortlisted" style="font-weight: 800;">✓ Received & Queued</span>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.85rem; color: #1E293B;">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-800">
               <div><strong>Position:</strong> ${job.position}</div>
               <div><strong>Cadre Scale:</strong> ${job.jobScale}</div>
               <div><strong>Organisation:</strong> ${job.organization}</div>
-              <div><strong>Submission Timestamp:</strong> ${new Date().toLocaleString('en-KE')}</div>
+              <div><strong>Submission Date:</strong> ${new Date().toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
             </div>
+          </div>
+
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-3.5 text-xs text-blue-900 leading-relaxed">
+            <strong>Next Steps:</strong> Your application dossier and verified credentials have been transmitted to the Commission Selection Board. You will receive an official SMS and Email notification when shortlisting is finalized.
           </div>
         </div>
 
         <div class="modal-footer" style="background: #F8FAFC;">
           <button type="button" class="btn btn-secondary close-apply-modal-btn">Close</button>
-          <button type="button" class="btn btn-mustard print-receipt-btn" style="min-height: 42px;" onclick="window.print()">
+          <button type="button" class="btn btn-primary print-receipt-btn bg-[#0B3B24] text-white" style="min-height: 42px;" onclick="window.print()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-            Print Official P.10 Receipt Slip
+            Print Acknowledgement Slip
           </button>
         </div>
       `;
@@ -644,7 +668,55 @@ export class JobsManager {
     const isSw = (typeof window !== 'undefined' && window.currentLanguage && window.currentLanguage() === 'sw');
 
     this.statusContainer.innerHTML = `
-      <div class="table-responsive">
+      <!-- ============================================================== -->
+      <!-- MOBILE APPLICATIONS FEED (Visible on mobile/tablet < 768px)    -->
+      <!-- ============================================================== -->
+      <div class="applications-mobile-feed md:hidden space-y-3.5">
+        ${this.applications.map(app => {
+          let displayStatus = app.status;
+          if (isSw) {
+            if (app.status.includes('SHORTLISTED')) displayStatus = 'UMEORODHESHWA KWA MAHOJIANO';
+            else if (app.status.includes('REVIEW')) displayStatus = 'INAKAGULIWA NA BODI';
+            else displayStatus = 'HAUKUTEULIWA';
+          }
+          return `
+            <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm flex flex-col justify-between gap-3">
+              <div class="flex items-center justify-between gap-2">
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-100 text-slate-800 border border-slate-200">
+                  Folio: ${app.folioNo || '-'}
+                </span>
+                <span class="status-pill ${app.status.includes('SHORTLISTED') ? 'shortlisted' : app.status.includes('REVIEW') ? 'review' : 'unsuccessful'} text-[10px]">
+                  ${displayStatus}
+                </span>
+              </div>
+
+              <div>
+                <span class="record-tag highlight text-[10px] mb-1 inline-block">${app.advertNumber}</span>
+                <h3 class="text-base font-extrabold text-slate-900 leading-snug">${app.designation}</h3>
+                <div class="text-xs text-slate-600 mt-1 flex flex-wrap items-center gap-2">
+                  <span class="font-semibold">${app.jobScale}</span>
+                  <span>•</span>
+                  <span>Applied: ${app.appliedDate}</span>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
+                <span class="text-xs text-slate-500 font-medium">
+                  👥 ${app.totalApplicants.toLocaleString()} applicants
+                </span>
+                <button type="button" class="btn btn-secondary text-xs py-1.5 px-3" onclick="alert('Downloading Official PSC P.10 Application Acknowledgement Slip for Advert ${app.advertNumber}...')">
+                  📄 ${isSw ? 'Risiti' : 'Receipt Slip'}
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- DESKTOP APPLICATIONS TABLE (Visible on >= 768px)               -->
+      <!-- ============================================================== -->
+      <div class="hidden md:block table-responsive">
         <table class="psc-table">
           <thead>
             <tr>

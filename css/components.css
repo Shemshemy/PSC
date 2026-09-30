@@ -1392,24 +1392,62 @@
 
 .segment-dot.completed {
   background: #059669;
-}
-
+/* Responsive Media Queries */
 @media (max-width: 860px) {
-  .segment-tabs-nav {
-    grid-template-columns: 1fr 1fr;
-  }
-  .segment-tab-btn {
-    border-right: none;
-    border-bottom: 1px solid var(--slate-200);
-  }
   .form-segment {
-    padding: 1.5rem;
+    padding: 1.25rem;
   }
 }
 
-@media (max-width: 540px) {
-  .segment-tabs-nav {
+@media (max-width: 640px) {
+  .form-row-paired,
+  .form-row-triplet {
     grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .modal-overlay {
+    padding: 0.5rem;
+    align-items: flex-end;
+  }
+
+  .modal-card {
+    max-height: 92vh;
+    border-radius: 1.25rem 1.25rem 0.5rem 0.5rem;
+    width: 100%;
+  }
+
+  .modal-header {
+    padding: 1.25rem 1rem;
+  }
+
+  .modal-body {
+    padding: 1.25rem 1rem;
+  }
+
+  .modal-footer {
+    padding: 1rem;
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+  }
+
+  .modal-footer button {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .jobs-filter-bar {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .jobs-filter-bar > div {
+    width: 100%;
+    min-width: 0 !important;
+  }
+
+  .jobs-filter-bar select {
+    width: 100%;
   }
 }
 

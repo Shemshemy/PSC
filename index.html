@@ -2333,13 +2333,15 @@
   <!-- MOBILE BOTTOM NAVIGATION BAR (visible only on mobile <640px)   -->
   <!-- ============================================================== -->
   <nav id="mobile-bottom-nav" class="fixed bottom-0 left-0 right-0 z-50 sm:hidden" aria-label="Mobile navigation" role="navigation">
-    <div class="bg-white border-t border-slate-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] flex items-stretch">
+    <div class="mobile-nav-bar">
 
       <!-- Dashboard -->
       <button type="button" class="mobile-nav-btn active" id="mob-nav-dashboard"
               onclick="if(window.pscApp) window.pscApp.switchView('dashboard'); setMobileNavActive('mob-nav-dashboard');"
               aria-label="Dashboard">
-        <i data-lucide="layout-dashboard" class="mobile-nav-icon"></i>
+        <div class="mobile-nav-icon-wrap">
+          <i data-lucide="layout-dashboard" class="mobile-nav-icon"></i>
+        </div>
         <span class="mobile-nav-label">Home</span>
       </button>
 
@@ -2347,16 +2349,18 @@
       <button type="button" class="mobile-nav-btn" id="mob-nav-jobs"
               onclick="if(window.pscApp) window.pscApp.switchView('jobs'); setMobileNavActive('mob-nav-jobs');"
               aria-label="Jobs">
-        <i data-lucide="briefcase" class="mobile-nav-icon"></i>
+        <div class="mobile-nav-icon-wrap">
+          <i data-lucide="briefcase" class="mobile-nav-icon"></i>
+          <span class="mobile-nav-badge">7</span>
+        </div>
         <span class="mobile-nav-label">Jobs</span>
-        <span class="mobile-nav-badge">7</span>
       </button>
 
       <!-- My Profile -->
       <button type="button" class="mobile-nav-btn" id="mob-nav-profile"
               onclick="if(window.pscApp) window.pscApp.switchView('profile'); setMobileNavActive('mob-nav-profile');"
               aria-label="My Profile">
-        <div class="relative">
+        <div class="mobile-nav-icon-wrap">
           <i data-lucide="user-circle" class="mobile-nav-icon"></i>
         </div>
         <span class="mobile-nav-label">Profile</span>
@@ -2366,23 +2370,27 @@
       <button type="button" class="mobile-nav-btn" id="mob-nav-apps"
               onclick="if(window.pscApp) window.pscApp.switchView('applications'); setMobileNavActive('mob-nav-apps');"
               aria-label="Applications">
-        <i data-lucide="file-text" class="mobile-nav-icon"></i>
+        <div class="mobile-nav-icon-wrap">
+          <i data-lucide="file-text" class="mobile-nav-icon"></i>
+          <span class="mobile-nav-badge">4</span>
+        </div>
         <span class="mobile-nav-label">Applied</span>
-        <span class="mobile-nav-badge">4</span>
       </button>
 
       <!-- More (triggers sidebar slide-in for full menu) -->
       <button type="button" class="mobile-nav-btn" id="mob-nav-more"
               onclick="toggleMobileMoreMenu();"
               aria-label="More options">
-        <i data-lucide="grid-3x3" class="mobile-nav-icon"></i>
+        <div class="mobile-nav-icon-wrap">
+          <i data-lucide="grid-3x3" class="mobile-nav-icon"></i>
+        </div>
         <span class="mobile-nav-label">More</span>
       </button>
 
     </div>
 
     <!-- Safe area spacer for iOS home indicator -->
-    <div class="bg-white" style="height: env(safe-area-inset-bottom, 0px);"></div>
+    <div class="bg-white/95" style="height: env(safe-area-inset-bottom, 0px);"></div>
   </nav>
 
   <!-- Mobile More Menu Drawer (slides up from bottom nav) -->
