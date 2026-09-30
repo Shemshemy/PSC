@@ -15,7 +15,7 @@ services:
       - RATE_LIMIT_MAX=100
       - DB_POOL_MAX=20
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/healthz/live"]
+      test: ["CMD", "node", "-e", "fetch('http://localhost:5000/healthz/live').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
       interval: 30s
       timeout: 5s
       retries: 3

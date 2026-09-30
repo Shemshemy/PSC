@@ -85,101 +85,102 @@
   <div id="top-portal-header" class="shrink-0 w-full z-40">
     <!-- Top Utility Trust & Security Bar (Authentic Kenya Mustard Ribbon) -->
     <header class="bg-gradient-to-r from-[#B45309] via-[#C88A19] to-[#B45309] text-stone-950 text-xs border-b border-amber-800/30 shrink-0 shadow-sm relative z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-3">
-      <!-- Official Republic of Kenya Identifier -->
-      <div class="flex items-center space-x-2">
-        <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#0B3B24] border border-white/40 animate-pulse"></span>
-        <span class="font-bold text-stone-950 tracking-tight" id="i18n-countryName">Republic of Kenya</span>
-        <span class="text-amber-950/40 font-bold">|</span>
-        <span class="text-stone-900 font-semibold hidden sm:inline" id="i18n-portalName">Official Public Service Portal</span>
+      <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-1 sm:py-2 flex items-center justify-between gap-2">
+        <!-- Official Republic of Kenya Identifier -->
+        <div class="flex items-center space-x-1.5 shrink-0">
+          <span class="inline-block w-2 h-2 rounded-full bg-[#0B3B24] border border-white/40 animate-pulse"></span>
+          <span class="font-bold text-stone-950 text-[11px] sm:text-xs tracking-tight" id="i18n-countryName">Republic of Kenya</span>
+          <span class="text-amber-950/40 font-bold hidden md:inline">|</span>
+          <span class="text-stone-900 font-semibold hidden md:inline" id="i18n-portalName">Official Public Service Portal</span>
+        </div>
+
+        <!-- Security / Session Status, Language & Accessibility Toggles -->
+        <div class="flex items-center gap-2 sm:gap-3 text-xs shrink-0">
+          <!-- Interactive IPRS Badge (Desktop & Tablet only) -->
+          <button type="button" onclick="openCivicModal('iprsModal')" class="hidden md:flex items-center space-x-1.5 text-white bg-[#0B3B24] hover:bg-[#072517] transition active:scale-95 px-2.5 py-0.5 rounded shadow-sm border border-emerald-900/60 cursor-pointer" title="Click to view National ID / IPRS & eCitizen verification status">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span class="font-mono tracking-tight text-[11px] font-semibold">IPRS &amp; eCitizen Verified</span>
+          </button>
+
+          <!-- Interactive TLS Badge (Large screens only) -->
+          <button type="button" onclick="openCivicModal('tlsModal')" class="hidden lg:flex items-center space-x-1.5 text-stone-900 hover:text-stone-950 font-medium hover:underline transition cursor-pointer" title="Click to view Government GCCN TLS 1.3 encryption status">
+            <i data-lucide="lock" class="w-3.5 h-3.5 text-stone-800"></i>
+            <span>TLS 1.3 End-to-End Encrypted</span>
+          </button>
+
+          <!-- Interactive Architecture & Observability Console Badge (Large screens only) -->
+          <button type="button" onclick="openArchitectureModal()" class="hidden xl:flex items-center space-x-1.5 text-stone-950 bg-amber-200/90 hover:bg-white transition active:scale-95 px-2.5 py-0.5 rounded shadow-sm border border-amber-900/40 cursor-pointer font-bold" title="Open Enterprise Architecture & Live Observability Console">
+            <i data-lucide="cpu" class="w-3.5 h-3.5 text-stone-900"></i>
+            <span class="tracking-tight text-[11px]">Architecture</span>
+          </button>
+
+          <!-- Accessibility Center Trigger -->
+          <button id="accessibilityModalBtn" onclick="openCivicModal('accessibilityModal')" class="hover:text-black transition flex items-center space-x-1 text-stone-900 font-semibold cursor-pointer text-[11px] sm:text-xs" title="Open Accessibility and Display Options">
+            <i data-lucide="eye" class="w-3.5 h-3.5 text-stone-900"></i>
+            <span class="hidden sm:inline" id="i18n-accessibility">Accessibility</span>
+          </button>
+
+          <!-- Bilingual Language Switcher (EN | SWA) -->
+          <div class="flex items-center bg-black/15 p-0.5 rounded border border-black/20 text-[10px] sm:text-[11px] font-bold">
+            <button type="button" id="lang-btn-en" onclick="setLanguage('en')" class="px-1.5 sm:px-2 py-0.5 rounded bg-white text-stone-950 shadow-sm transition">EN</button>
+            <button type="button" id="lang-btn-sw" onclick="setLanguage('sw')" class="px-1.5 sm:px-2 py-0.5 rounded text-stone-800 hover:text-black transition">SWA</button>
+          </div>
+        </div>
       </div>
+    </header>
 
-      <!-- Security / Session Status, Language & Accessibility Toggles -->
-      <div class="flex items-center flex-wrap gap-2.5 sm:gap-3.5 text-xs">
-        <!-- Interactive IPRS Badge -->
-        <button type="button" onclick="openCivicModal('iprsModal')" class="flex items-center space-x-1.5 text-white bg-[#0B3B24] hover:bg-[#072517] transition active:scale-95 px-2.5 py-0.5 rounded shadow-sm border border-emerald-900/60 cursor-pointer" title="Click to view National ID / IPRS & eCitizen verification status">
-          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
-          <span class="font-mono tracking-tight text-[11px] font-semibold">IPRS &amp; eCitizen Verified</span>
-        </button>
-
-        <!-- Interactive TLS Badge -->
-        <button type="button" onclick="openCivicModal('tlsModal')" class="hidden md:flex items-center space-x-1.5 text-stone-900 hover:text-stone-950 font-medium hover:underline transition cursor-pointer" title="Click to view Government GCCN TLS 1.3 encryption status">
-          <i data-lucide="lock" class="w-3.5 h-3.5 text-stone-800"></i>
-          <span>TLS 1.3 End-to-End Encrypted</span>
-        </button>
-
-        <!-- Interactive Architecture & Observability Console Badge -->
-        <button type="button" onclick="openArchitectureModal()" class="flex items-center space-x-1.5 text-stone-950 bg-amber-200/90 hover:bg-white transition active:scale-95 px-2.5 py-0.5 rounded shadow-sm border border-amber-900/40 cursor-pointer font-bold" title="Open Enterprise Architecture & Live Observability Console">
-          <i data-lucide="cpu" class="w-3.5 h-3.5 text-stone-900"></i>
-          <span class="tracking-tight text-[11px]">System Architecture</span>
-        </button>
-
-        <!-- Accessibility Center Trigger -->
-        <button id="accessibilityModalBtn" onclick="openCivicModal('accessibilityModal')" class="hover:text-black transition flex items-center space-x-1 text-stone-900 font-semibold hover:underline cursor-pointer" title="Open Accessibility and Display Options">
-          <i data-lucide="eye" class="w-3.5 h-3.5 text-stone-800"></i>
-          <span id="i18n-accessibility">Accessibility Options</span>
-        </button>
-
-        <!-- Bilingual Language Switcher (EN | SWA) -->
-        <div class="flex items-center bg-black/15 p-0.5 rounded border border-black/20 text-[11px] font-bold">
-          <button type="button" id="lang-btn-en" onclick="setLanguage('en')" class="px-2 py-0.5 rounded bg-white text-stone-950 shadow-sm transition">EN</button>
-          <button type="button" id="lang-btn-sw" onclick="setLanguage('sw')" class="px-2 py-0.5 rounded text-stone-800 hover:text-black transition">SWA</button>
+    <!-- Urgent Advert Deadline Ticker Strip -->
+    <div id="urgent-advert-ticker" class="bg-amber-950 text-amber-100 text-xs border-b border-amber-900/60 py-1 px-3 sm:px-4 sm:py-1.5 transition-all duration-300">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
+        <div class="flex items-center space-x-2 overflow-hidden min-w-0">
+          <span class="bg-red-600 text-white text-[9px] sm:text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded animate-pulse shrink-0">Urgent</span>
+          <p class="truncate text-amber-200 text-[11px] sm:text-xs">
+            <strong class="text-white font-semibold" id="i18n-advertNotice">ADVERT 04/2026:</strong> 
+            <span id="i18n-advertClosing">Closing in 3 days, 4 hrs across Ministries</span>
+          </p>
+        </div>
+        <div class="flex items-center space-x-2 shrink-0">
+          <a href="#vacancies" onclick="if(window.pscApp) window.pscApp.switchView('jobs')" class="hidden sm:inline-flex text-amber-300 hover:text-white underline font-semibold items-center gap-1 text-[11px]" id="i18n-viewOpenings">
+            View &rarr;
+          </a>
+          <button type="button" onclick="document.getElementById('urgent-advert-ticker').classList.add('hidden')" class="text-amber-400 hover:text-white p-0.5" title="Dismiss announcement">
+            <i data-lucide="x" class="w-3.5 h-3.5"></i>
+          </button>
         </div>
       </div>
     </div>
-  </header>
-
-  <!-- Urgent Advert Deadline Ticker Strip -->
-  <div id="urgent-advert-ticker" class="bg-amber-950 text-amber-100 text-xs border-b border-amber-900/60 py-1.5 px-4 transition-all duration-300">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
-      <div class="flex items-center space-x-2.5 overflow-hidden">
-        <span class="bg-red-600 text-white text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded animate-pulse shrink-0">Urgent</span>
-        <p class="truncate text-amber-200">
-          <strong class="text-white font-semibold" id="i18n-advertNotice">ADVERT NO. 04/2026:</strong> 
-          <span id="i18n-advertClosing">Closing in 3 days, 4 hrs (CSG 5 to CSG 8 vacancies across Ministries) — Submit before Friday 17:00 EAT</span>
-        </p>
-      </div>
-      <div class="flex items-center space-x-3 shrink-0">
-        <a href="#vacancies" onclick="if(window.pscApp) window.pscApp.switchView('jobs')" class="text-amber-300 hover:text-white underline font-semibold flex items-center gap-1 text-[11px]" id="i18n-viewOpenings">
-          View Openings &rarr;
-        </a>
-        <button type="button" onclick="document.getElementById('urgent-advert-ticker').classList.add('hidden')" class="text-amber-400 hover:text-white p-0.5" title="Dismiss announcement">
-          <i data-lucide="x" class="w-3.5 h-3.5"></i>
-        </button>
-      </div>
-    </div>
-  </div>
 
   <!-- Institutional Navigation Header: Deep Forest Green (#0B3B24) with Gold Accent -->
   <header class="psc-header sticky top-0 z-40" role="banner">
     <div class="psc-header-top-accent"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
       
       <!-- Left Header: Sidebar Hamburger Toggle & Institutional Seal -->
-      <div class="flex items-center space-x-3 sm:space-x-4">
+      <div class="flex items-center space-x-2 sm:space-x-4 min-w-0">
         <!-- Sidebar Toggle Hamburger Button -->
-        <button type="button" id="sidebar-toggle-btn" class="p-2 rounded-lg bg-black/20 hover:bg-black/35 text-white border border-white/20 transition flex items-center justify-center shrink-0" aria-label="Toggle navigation menu" title="Toggle Sidebar">
+        <button type="button" id="sidebar-toggle-btn" class="p-1.5 sm:p-2 rounded-lg bg-black/20 hover:bg-black/35 text-white border border-white/20 transition flex items-center justify-center shrink-0" aria-label="Toggle navigation menu" title="Toggle Sidebar">
           <i data-lucide="menu" class="w-5 h-5"></i>
         </button>
 
         <!-- Official Civic Emblems (Transparent PNGs directly on Forest Green Header) -->
-        <div class="flex items-center space-x-3">
+        <div class="flex items-center space-x-2 sm:space-x-3 min-w-0">
           <div class="flex items-center space-x-2 shrink-0">
-            <img src="assets/images/kenya_coat_of_arms_rgba.png" alt="Republic of Kenya Coat of Arms" class="h-9 sm:h-12 w-auto object-contain drop-shadow-md">
-            <div class="w-px h-7 sm:h-9 bg-white/25"></div>
-            <img src="assets/images/PSC_Logo.png" alt="Public Service Commission Seal" class="h-9 sm:h-12 w-auto object-contain drop-shadow-md">
+            <img src="assets/images/kenya_coat_of_arms_rgba.png" alt="Republic of Kenya Coat of Arms" class="hidden sm:block h-9 sm:h-12 w-auto object-contain drop-shadow-md">
+            <div class="hidden sm:block w-px h-7 sm:h-9 bg-white/25"></div>
+            <img src="assets/images/PSC_Logo.png" alt="Public Service Commission Seal" class="h-8 sm:h-12 w-auto object-contain drop-shadow-md">
           </div>
 
-          <div>
-            <div class="flex items-center space-x-2">
-              <h1 class="text-xs sm:text-base lg:text-lg font-bold tracking-tight text-white leading-tight" id="i18n-commissionName">
-                PUBLIC SERVICE COMMISSION
+          <div class="min-w-0">
+            <div class="flex items-center space-x-1.5 sm:space-x-2">
+              <h1 class="font-bold tracking-tight text-white leading-none sm:leading-tight truncate" id="i18n-commissionName">
+                <span class="sm:hidden text-xs font-black tracking-wide">PSC KENYA</span>
+                <span class="hidden sm:inline text-xs sm:text-base lg:text-lg">PUBLIC SERVICE COMMISSION</span>
               </h1>
               <span class="hidden md:inline-flex bg-civic-gold/25 text-amber-200 text-[10px] font-bold px-2 py-0.5 rounded border border-civic-gold/50">
                 PSCIMS
               </span>
             </div>
-            <p class="text-xs text-emerald-100/80 font-normal tracking-wide hidden sm:block" id="i18n-commissionMotto">
+            <p class="text-xs text-emerald-100/80 font-normal tracking-wide hidden sm:block truncate" id="i18n-commissionMotto">
               A Values-Driven Citizen-Centric Public Service
             </p>
           </div>
@@ -187,7 +188,7 @@
       </div>
 
       <!-- Right Header Section: Real-time Auto-save & User Authentication Meta -->
-      <div class="flex items-center space-x-2.5 sm:space-x-3.5">
+      <div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
         <!-- Live Auto-Save Pill -->
         <div id="auto-save-indicator" class="hidden sm:flex items-center space-x-2 bg-civic-forestHover/80 border border-emerald-600/30 px-3 py-1.5 rounded-full text-xs text-emerald-200" role="status" aria-live="polite">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -196,13 +197,13 @@
 
         <!-- Official Notifications Bell -->
         <div class="relative">
-          <button type="button" id="notif-toggle-btn" onclick="toggleNotificationDropdown()" class="relative p-2 rounded-lg bg-black/20 hover:bg-black/35 text-white border border-white/20 transition flex items-center justify-center cursor-pointer" aria-label="Notifications" title="Official PSC Notifications">
+          <button type="button" id="notif-toggle-btn" onclick="toggleNotificationDropdown()" class="relative p-1.5 sm:p-2 rounded-lg bg-black/20 hover:bg-black/35 text-white border border-white/20 transition flex items-center justify-center cursor-pointer" aria-label="Notifications" title="Official PSC Notifications">
             <i data-lucide="bell" class="w-4 h-4"></i>
             <span class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center ring-2 ring-[#0B3B24]">2</span>
           </button>
 
           <!-- Notifications Dropdown Menu -->
-          <div id="notif-dropdown" class="hidden absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-xl shadow-2xl border border-slate-200 text-slate-800 z-50 overflow-hidden civic-dropdown-animate">
+          <div id="notif-dropdown" class="hidden absolute right-0 -mr-12 sm:mr-0 mt-2 w-[calc(100vw-1.5rem)] max-w-sm sm:w-96 bg-white rounded-xl shadow-2xl border border-slate-200 text-slate-800 z-50 overflow-hidden civic-dropdown-animate">
             <div class="bg-slate-900 text-white px-4 py-3 flex items-center justify-between border-b border-slate-800">
               <div class="flex items-center space-x-2">
                 <i data-lucide="bell" class="w-4 h-4 text-civic-gold"></i>
@@ -252,8 +253,8 @@
 
         <!-- Candidate Session Card with Interactive Menu -->
         <div class="relative">
-          <button type="button" id="user-menu-btn" onclick="toggleUserMenuDropdown()" class="flex items-center space-x-2.5 bg-white/10 hover:bg-white/15 transition px-3 py-1.5 rounded-lg border border-white/10 cursor-pointer" aria-label="User account menu">
-            <div class="w-8 h-8 rounded-full bg-civic-gold text-white font-bold flex items-center justify-center text-xs shadow-inner">
+          <button type="button" id="user-menu-btn" onclick="toggleUserMenuDropdown()" class="flex items-center space-x-2 sm:space-x-2.5 bg-white/10 hover:bg-white/15 transition p-1 sm:px-3 sm:py-1.5 rounded-lg border border-white/10 cursor-pointer" aria-label="User account menu">
+            <div class="w-8 h-8 rounded-full bg-civic-gold text-white font-bold flex items-center justify-center text-xs shadow-inner shrink-0">
               DL
             </div>
             <div class="text-left text-xs leading-tight hidden md:block">
@@ -266,10 +267,10 @@
           </button>
 
           <!-- Candidate Profile Dropdown -->
-          <div id="user-menu-dropdown" class="hidden absolute right-0 mt-2 w-72 bg-white rounded-xl shadow-2xl border border-slate-200 text-slate-800 z-50 overflow-hidden civic-dropdown-animate">
+          <div id="user-menu-dropdown" class="hidden absolute right-0 mt-2 w-[calc(100vw-1.5rem)] max-w-xs sm:w-72 bg-white rounded-xl shadow-2xl border border-slate-200 text-slate-800 z-50 overflow-hidden civic-dropdown-animate">
             <div class="p-4 bg-gradient-to-br from-slate-900 to-[#0B3B24] text-white">
               <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-full bg-civic-gold text-white font-bold flex items-center justify-center text-sm shadow-md">
+                <div class="w-10 h-10 rounded-full bg-civic-gold text-white font-bold flex items-center justify-center text-sm shadow-md shrink-0">
                   DL
                 </div>
                 <div>
@@ -279,7 +280,7 @@
               </div>
               <div class="mt-2 text-[11px] text-slate-300 flex items-center gap-1.5">
                 <i data-lucide="mail" class="w-3 h-3 text-civic-gold"></i>
-                <span>d.limo@alumni.uonbi.ac.ke</span>
+                <span class="truncate">d.limo@alumni.uonbi.ac.ke</span>
               </div>
             </div>
 
@@ -312,13 +313,13 @@
           </div>
         </div>
 
-        <!-- Fast Action Buttons -->
+        <!-- Fast Action Buttons (Visible on Desktop / Tablets) -->
         <button type="button" class="hidden lg:flex items-center space-x-1 text-xs text-slate-200 hover:text-white bg-slate-900/40 hover:bg-slate-900/60 transition px-2.5 py-1.5 rounded-lg border border-white/10" id="btn-change-password" title="Change Account Password">
           <i data-lucide="key-round" class="w-3.5 h-3.5"></i>
           <span>Password</span>
         </button>
 
-        <button type="button" class="flex items-center space-x-1.5 text-xs text-red-200 hover:text-white bg-red-950/40 hover:bg-red-900/60 transition px-3 py-1.5 rounded-lg border border-red-800/40" id="btn-logout" title="Sign Out of PSC Portal">
+        <button type="button" class="hidden md:flex items-center space-x-1.5 text-xs text-red-200 hover:text-white bg-red-950/40 hover:bg-red-900/60 transition px-3 py-1.5 rounded-lg border border-red-800/40" id="btn-logout" title="Sign Out of PSC Portal">
           <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
           <span class="hidden sm:inline">Sign Out</span>
         </button>

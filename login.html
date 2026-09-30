@@ -84,18 +84,18 @@
 
   <!-- Top Utility Trust Ribbon (Authentic Kenya Mustard Ochre) -->
   <header class="bg-gradient-to-r from-[#B45309] via-[#C88A19] to-[#B45309] text-stone-950 text-xs border-b border-amber-800/40 shrink-0 shadow-sm relative z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-3">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-1.5 sm:py-2 flex items-center justify-between gap-2">
       <!-- Official Republic of Kenya Identifier -->
-      <div class="flex items-center space-x-2">
-        <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#0B3B24] border border-white/50 animate-pulse"></span>
-        <span class="font-bold text-stone-950 tracking-tight" id="i18n-countryName">Republic of Kenya</span>
-        <span class="text-amber-950/40 font-bold">|</span>
+      <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+        <span class="inline-block w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#0B3B24] border border-white/50 animate-pulse"></span>
+        <span class="font-bold text-stone-950 tracking-tight text-[11px] sm:text-xs" id="i18n-countryName">Republic of Kenya</span>
+        <span class="text-amber-950/40 font-bold hidden sm:inline">|</span>
         <span class="text-stone-900 font-semibold hidden sm:inline" id="i18n-portalName">Official Public Service Portal</span>
       </div>
 
       <!-- Trust Badges & Language Switcher -->
-      <div class="flex items-center flex-wrap gap-2.5 sm:gap-3.5 text-xs">
-        <button type="button" onclick="openCivicModal('iprsModal')" class="flex items-center space-x-1.5 text-white bg-[#0B3B24] hover:bg-[#072517] transition active:scale-95 px-2.5 py-0.5 rounded shadow-sm border border-emerald-900/60 cursor-pointer" title="National Identity Verification">
+      <div class="flex items-center gap-2 sm:gap-3.5 text-xs shrink-0">
+        <button type="button" onclick="openCivicModal('iprsModal')" class="hidden md:flex items-center space-x-1.5 text-white bg-[#0B3B24] hover:bg-[#072517] transition active:scale-95 px-2.5 py-0.5 rounded shadow-sm border border-emerald-900/60 cursor-pointer" title="National Identity Verification">
           <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
           <span class="font-mono tracking-tight text-[11px] font-semibold">IPRS &amp; eCitizen Verified</span>
         </button>
@@ -105,15 +105,15 @@
           <span>TLS 1.3 End-to-End Encrypted</span>
         </button>
 
-        <button type="button" onclick="openArchitectureModal()" class="flex items-center space-x-1.5 text-stone-950 bg-amber-200/90 hover:bg-white transition active:scale-95 px-2.5 py-0.5 rounded shadow-sm border border-amber-900/40 cursor-pointer font-bold" title="Open Enterprise Architecture & Observability Console">
+        <button type="button" onclick="openArchitectureModal()" class="hidden lg:flex items-center space-x-1.5 text-stone-950 bg-amber-200/90 hover:bg-white transition active:scale-95 px-2.5 py-0.5 rounded shadow-sm border border-amber-900/40 cursor-pointer font-bold" title="Open Enterprise Architecture & Observability Console">
           <i data-lucide="cpu" class="w-3.5 h-3.5 text-stone-900"></i>
           <span class="tracking-tight text-[11px]">System Architecture</span>
         </button>
 
         <!-- Bilingual Switcher -->
-        <div class="flex items-center bg-black/15 p-0.5 rounded border border-black/20 text-[11px] font-bold">
-          <button type="button" id="lang-btn-en" onclick="setLanguage('en')" class="px-2 py-0.5 rounded bg-white text-stone-950 shadow-sm transition">EN</button>
-          <button type="button" id="lang-btn-sw" onclick="setLanguage('sw')" class="px-2 py-0.5 rounded text-stone-800 hover:text-black transition">SWA</button>
+        <div class="flex items-center bg-black/15 p-0.5 rounded border border-black/20 text-[10px] sm:text-[11px] font-bold">
+          <button type="button" id="lang-btn-en" onclick="setLanguage('en')" class="px-1.5 sm:px-2 py-0.5 rounded bg-white text-stone-950 shadow-sm transition">EN</button>
+          <button type="button" id="lang-btn-sw" onclick="setLanguage('sw')" class="px-1.5 sm:px-2 py-0.5 rounded text-stone-800 hover:text-black transition">SWA</button>
         </div>
       </div>
     </div>
