@@ -102,8 +102,8 @@ export const activeJobsData = [
 export const candidateApplicationsData = [
   {
     folioNo: '752',
-    idNo: '35431943',
-    names: 'LIMO DENNIS',
+    idNo: '24681012',
+    names: 'MWANGI FAITH',
     advertNumber: '196/2025',
     designation: 'ICT OFFICER II',
     jobScale: 'CSG 10',
@@ -115,8 +115,8 @@ export const candidateApplicationsData = [
   },
   {
     folioNo: '1241',
-    idNo: '35431943',
-    names: 'LIMO DENNIS',
+    idNo: '24681012',
+    names: 'MWANGI FAITH',
     advertNumber: '1/2025',
     designation: 'INFORMATION, COMMUNICATION AND TECHNOLOGY ASSISTANT III',
     jobScale: 'CSG 12',
@@ -128,8 +128,8 @@ export const candidateApplicationsData = [
   },
   {
     folioNo: '752',
-    idNo: '35431943',
-    names: 'LIMO DENNIS',
+    idNo: '24681012',
+    names: 'MWANGI FAITH',
     advertNumber: '115/2026',
     designation: 'WEIGHTS AND MEASURES OFFICER II',
     jobScale: 'CSG 11',
@@ -141,8 +141,8 @@ export const candidateApplicationsData = [
   },
   {
     folioNo: '889',
-    idNo: '35431943',
-    names: 'LIMO DENNIS',
+    idNo: '24681012',
+    names: 'MWANGI FAITH',
     advertNumber: '204/2025',
     designation: 'LANDS INFORMATION MANAGEMENT OFFICER',
     jobScale: 'CSG 10',
@@ -389,8 +389,8 @@ export class JobsManager {
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
               <div>
-                <div style="font-size: 1.05rem; font-weight: 800; color: var(--slate-900);">Dennis Limo (ID: 35431943)</div>
-                <div style="font-size: 0.85rem; color: var(--slate-700);">BSc Computer Science • 4 Yrs 6 Mos Experience • IPPD: 20250031176</div>
+                <div style="font-size: 1.05rem; font-weight: 800; color: var(--slate-900);">Faith Mwangi (ID: 24681012)</div>
+                <div style="font-size: 0.85rem; color: var(--slate-700);">BSc Computer Science • 4 Yrs 6 Mos Experience • IPPD: 20260012345</div>
               </div>
               <span class="status-pill shortlisted" style="font-weight: 800;">✓ Bio-Data Complete</span>
             </div>
@@ -519,8 +519,8 @@ export class JobsManager {
         telemetry = await apiClient.ingestApplication({
           advertNumber: job.advertNumber,
           designation: job.position,
-          idNo: '35431943',
-          candidateName: 'LIMO DENNIS',
+          idNo: '24681012',
+          candidateName: 'MWANGI FAITH',
           payload: {
             organization: job.organization,
             jobScale: job.jobScale,
@@ -535,15 +535,15 @@ export class JobsManager {
         ? telemetry.receiptFolio.split('/').pop() 
         : Math.floor(1000 + Math.random() * 9000).toString();
       const today = new Date().toISOString().slice(0, 10);
-      const trackingUuid = (telemetry && telemetry.trackingUuid) || `PSC-INGEST-35431943-${Math.random().toString(16).substring(2, 10)}`;
+      const trackingUuid = (telemetry && telemetry.trackingUuid) || `PSC-INGEST-24681012-${Math.random().toString(16).substring(2, 10)}`;
       const shaSignature = (telemetry && telemetry.sha256PayloadSignature) || 'e3b0c44298fc1c14...';
       const partitionInfo = (telemetry && telemetry.partition !== undefined) ? telemetry.partition : '#2';
       const offsetInfo = (telemetry && telemetry.offset !== undefined) ? telemetry.offset : '#984210';
 
       const newApp = {
         folioNo: newFolio,
-        idNo: '35431943',
-        names: 'LIMO DENNIS',
+        idNo: '24681012',
+        names: 'MWANGI FAITH',
         advertNumber: job.advertNumber,
         designation: job.position,
         jobScale: job.jobScale,
@@ -567,7 +567,7 @@ export class JobsManager {
               HTTP 202 ACCEPTED • ASYNC QUEUE BUFFER
             </span>
             <h3 class="section-title" style="color: white; margin: 0.25rem 0 0 0;">Application Ingested Successfully</h3>
-            <div style="font-size: 0.84rem; color: #D1FAE5;">Candidate: Dennis Limo (ID: 35431943) • Advert: ${job.advertNumber}</div>
+            <div style="font-size: 0.84rem; color: #D1FAE5;">Candidate: Faith Mwangi (ID: 24681012) • Advert: ${job.advertNumber}</div>
           </div>
           <button type="button" class="btn-icon-action close-apply-modal-btn" style="color: white;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>

@@ -35,7 +35,7 @@ export class PSCAPIClient {
    */
   async ingestApplication(payload) {
     try {
-      const idempotencyKey = `IDEMP-${(payload.advertNumber || 'GEN').replace(/[^a-zA-Z0-9]/g, '')}-${payload.idNo || '35431943'}-${Math.floor(Date.now() / 60000)}`;
+      const idempotencyKey = `IDEMP-${(payload.advertNumber || 'GEN').replace(/[^a-zA-Z0-9]/g, '')}-${payload.idNo || payload.candidateId || '24681012'}-${Math.floor(Date.now() / 60000)}`;
       const res = await fetch(`${this.baseUrl}/applications/ingest`, {
         method: 'POST',
         headers: { 
@@ -52,7 +52,7 @@ export class PSCAPIClient {
     }
 
     // Graceful fallback
-    const id = payload.idNo || '35431943';
+    const id = payload.idNo || payload.candidateId || '24681012';
     return {
       status: 'ACCEPTED',
       code: 202,
@@ -96,10 +96,11 @@ export class PSCAPIClient {
 
   async requestPresignedUpload(fileName) {
     try {
+      const candidateId = (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('psc_candidate_id')) || '24681012';
       const res = await fetch(`${this.baseUrl}/storage/presigned-upload`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fileName, candidateId: '35431943' })
+        body: JSON.stringify({ fileName, candidateId })
       });
       if (res.ok) {
         return await res.json();

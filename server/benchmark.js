@@ -65,8 +65,8 @@ async function runBenchmark() {
       }, {
         advertNumber: '196/2025',
         designation: 'ICT Officer II',
-        idNo: `3543194${i % 10}`,
-        candidateName: 'Dennis Limo',
+        idNo: `2468101${i % 10}`,
+        candidateName: 'Faith Mwangi',
         payload: { benchmarkBatch: true, index: i }
       })
     );
@@ -88,12 +88,12 @@ async function runBenchmark() {
   const firstReq = await request('POST', '/api/v2/applications/ingest', {
     'Content-Type': 'application/json',
     'Idempotency-Key': key
-  }, { advertNumber: '188/2026', idNo: '35431943', designation: 'Vice Chancellor' });
+  }, { advertNumber: '188/2026', idNo: '24681012', designation: 'Vice Chancellor' });
 
   const secondReq = await request('POST', '/api/v2/applications/ingest', {
     'Content-Type': 'application/json',
     'Idempotency-Key': key
-  }, { advertNumber: '188/2026', idNo: '35431943', designation: 'Vice Chancellor' });
+  }, { advertNumber: '188/2026', idNo: '24681012', designation: 'Vice Chancellor' });
 
   const isDeduplicated = secondReq.headers['x-cache-lookup'] && secondReq.headers['x-cache-lookup'].includes('HIT');
   const identicalFolios = firstReq.body.receiptFolio === secondReq.body.receiptFolio;

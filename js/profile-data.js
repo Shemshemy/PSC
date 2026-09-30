@@ -3,37 +3,37 @@
  * Supports IndexedDB + LocalStorage sync with real-time auto-save physics
  */
 
-const STORAGE_KEY = 'psc_candidate_profile_v2';
+const STORAGE_KEY = 'psc_candidate_profile_v3';
 
 export const initialProfile = {
   // Personal Details
-  nationalId: '35431943',
+  nationalId: '24681012',
   hudumaNo: '',
-  payrollNumber: '20250031176',
-  salutation: 'Mr',
-  surname: 'Limo',
-  firstName: 'Dennis',
-  otherNames: 'Shem Ochieng',
-  dobDay: '16',
-  dobMonth: '09',
-  dobYear: '1998',
-  gender: 'Male',
-  kraPin: 'A011114073C',
+  payrollNumber: '20260012345',
+  salutation: 'Ms',
+  surname: 'Mwangi',
+  firstName: 'Faith',
+  otherNames: 'Wanjiku',
+  dobDay: '14',
+  dobMonth: '05',
+  dobYear: '1992',
+  gender: 'Female',
+  kraPin: 'A009876543Z',
   nationality: 'Kenya',
-  ethnicity: 'Kalenjin',
+  ethnicity: 'Kikuyu',
   isDisability: 'No',
   disabilityDetails: '',
-  homeCounty: 'Nandi',
-  constituency: 'Chesumei',
-  subCounty: 'Chesumei',
-  ward: 'Kosirai',
-  postalAddress: '237 Kapsabet',
-  postalCode: '30300',
-  town: 'Kapsabet',
-  mobileNumber: '0721877088',
-  emailAddress: 'shemdennis53@gmail.com',
-  altContactName: 'Cecilia',
-  altContactMobile: '0725597315',
+  homeCounty: 'Kiambu',
+  constituency: 'Gatundu South',
+  subCounty: 'Gatundu',
+  ward: 'Kiganjo',
+  postalAddress: 'P.O. Box 30095',
+  postalCode: '00100',
+  town: 'Nairobi',
+  mobileNumber: '0700000000',
+  emailAddress: 'candidate@publicservice.go.ke',
+  altContactName: 'Grace Mwangi',
+  altContactMobile: '0711000222',
 
   // Public Service Status
   inPublicService: 'Yes',
@@ -48,29 +48,29 @@ export const initialProfile = {
   highSchoolQualifications: [
     {
       id: 'hs-1',
-      schoolName: 'Meteitei Secondary School',
+      schoolName: 'Alliance Girls High School',
       schoolLevel: 'Secondary Education Level',
       examType: 'KCSE',
       course: 'Secondary/High School Education',
       award: 'Certificate (KCSE)',
-      grade: 'B+',
-      indexNumber: '27537101/014',
-      certificateNo: 'KCSE/2016/98210',
-      subjects: 'Maths A, English B+, Kiswahili A-, Physics A, Chemistry B+, Biology B, Geography A, Business Studies A',
-      completionYear: '2016'
+      grade: 'A',
+      indexNumber: '11200001/014',
+      certificateNo: 'KCSE/2010/98210',
+      subjects: 'Maths A, English A, Kiswahili A, Physics A, Chemistry A, Biology A, Geography A, Computer Studies A',
+      completionYear: '2010'
     },
     {
       id: 'hs-2',
-      schoolName: 'Fr Kuhn Academy',
+      schoolName: 'Kilimani Primary School',
       schoolLevel: 'Primary Education Level',
       examType: 'KCPE',
       course: 'Primary School Level',
       award: 'Certificate (KCPE)',
-      grade: '385 Marks',
-      indexNumber: '27537044/008',
-      certificateNo: 'KCPE/2012/11293',
-      subjects: 'Maths 84, English 81, Kiswahili 76, Science 74, Social Studies & CRE 70',
-      completionYear: '2012'
+      grade: '410 Marks',
+      indexNumber: '11200044/008',
+      certificateNo: 'KCPE/2006/11293',
+      subjects: 'Maths 88, English 86, Kiswahili 82, Science 80, Social Studies & CRE 74',
+      completionYear: '2006'
     }
   ],
 
@@ -239,9 +239,17 @@ class ProfileStore {
 
   loadProfile() {
     try {
+      // Automatically purge legacy profile versions and reset storage
+      localStorage.removeItem('psc_candidate_profile_v2');
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
-        return { ...initialProfile, ...JSON.parse(saved) };
+        const parsed = JSON.parse(saved);
+        // Purge any stale profiles from older app versions
+        if (parsed._version !== initialProfile._version) {
+          localStorage.removeItem(STORAGE_KEY);
+          return { ...initialProfile };
+        }
+        return { ...initialProfile, ...parsed };
       }
     } catch (e) {
       console.warn('Could not read from localStorage, using initial state', e);

@@ -124,8 +124,8 @@ const SEED_COURSES = [
 const SEED_APPLICATIONS = [
   {
     folioNo: 'PSC/APP/2026/08819',
-    idNo: '35431943',
-    names: 'Dennis Kipchumba Limo',
+    idNo: '24681012',
+    names: 'Faith Wanjiku Mwangi',
     advertNumber: '196/2025',
     designation: 'Econometrician / Chief Planning Officer',
     jobScale: 'CSG 7',
@@ -138,8 +138,8 @@ const SEED_APPLICATIONS = [
   },
   {
     folioNo: 'PSC/APP/2026/07412',
-    idNo: '35431943',
-    names: 'Dennis Kipchumba Limo',
+    idNo: '24681012',
+    names: 'Faith Wanjiku Mwangi',
     advertNumber: '197/2025',
     designation: 'Weights and Measures Officer II',
     jobScale: 'CSG 10',
@@ -152,8 +152,8 @@ const SEED_APPLICATIONS = [
   },
   {
     folioNo: 'PSC/APP/2026/04109',
-    idNo: '35431943',
-    names: 'Dennis Kipchumba Limo',
+    idNo: '24681012',
+    names: 'Faith Wanjiku Mwangi',
     advertNumber: '144/2026',
     designation: 'Deputy Vice-Chancellor (Administration & Finance)',
     jobScale: 'Executive / DVC Grade',
@@ -166,8 +166,8 @@ const SEED_APPLICATIONS = [
   },
   {
     folioNo: 'PSC/APP/2026/02105',
-    idNo: '35431943',
-    names: 'Dennis Kipchumba Limo',
+    idNo: '24681012',
+    names: 'Faith Wanjiku Mwangi',
     advertNumber: '146/2026',
     designation: 'PRINCIPAL',
     jobScale: 'Executive / Principal',
@@ -196,29 +196,29 @@ class PrimaryDatabaseCluster {
 
   initDefaultCandidate() {
     const rawCandidate = {
-      nationalId: "35431943",
+      nationalId: "24681012",
       hudumaNo: "",
-      salutation: "Mr",
-      firstName: "Dennis",
-      otherNames: "Kipchumba",
-      surname: "Limo",
-      dob: "1997-04-14",
-      gender: "Male",
-      kraPin: "A011114073C",
+      salutation: "Ms",
+      firstName: "Faith",
+      otherNames: "Wanjiku",
+      surname: "Mwangi",
+      dob: "1992-05-14",
+      gender: "Female",
+      kraPin: "A009876543Z",
       disability: "No",
       pwdAccommodation: "",
-      county: "Uasin Gishu",
-      subCounty: "Soy",
-      constituency: "Soy",
-      ethnicity: "Kalenjin",
+      county: "Kiambu",
+      subCounty: "Gatundu",
+      constituency: "Gatundu South",
+      ethnicity: "Kikuyu",
       religion: "Christian",
-      homeWard: "Soy Ward",
-      postalAddress: "P.O. Box 1120",
-      postalCode: "30100",
-      town: "Eldoret",
-      mobile: "+254 712 345 678",
-      email: "d.limo@alumni.uonbi.ac.ke",
-      altContactPerson: "Ezekiel Limo - Brother (+254 722 000 111)",
+      homeWard: "Kiganjo",
+      postalAddress: "P.O. Box 30095",
+      postalCode: "00100",
+      town: "Nairobi",
+      mobile: "+254 700 000 000",
+      email: "candidate@publicservice.go.ke",
+      altContactPerson: "Grace Mwangi - Mother (+254 711 000 222)",
       currentEmployer: "Private Sector / Tech Consulting",
       positionHeld: "Senior Systems Engineer",
       appointmentDate: "2022-01-15",
@@ -246,11 +246,11 @@ class PrimaryDatabaseCluster {
       highSchoolQualifications: [
         {
           id: "sec-1",
-          school: "Kapsabet High School",
-          year: "2015",
-          indexNo: "26500001/045",
+          school: "Alliance Girls High School",
+          year: "2010",
+          indexNo: "11200001/045",
           meanGrade: "A (Plain)",
-          certificateNo: "KNEC-KCSE-2015-99214"
+          certificateNo: "KNEC-KCSE-2010-99214"
         }
       ],
       professionalQualifications: [
@@ -311,7 +311,7 @@ class PrimaryDatabaseCluster {
     };
 
     // Store candidate with ALFE field protection
-    this.candidates["35431943"] = security.encryptProfileSensitiveFields(rawCandidate);
+    this.candidates["24681012"] = security.encryptProfileSensitiveFields(rawCandidate);
   }
 
   seedAuditTrail() {
@@ -322,7 +322,7 @@ class PrimaryDatabaseCluster {
     });
     this.appendWormEntry({
       event: 'ALFE_ENCRYPTION_COMMITTED',
-      candidateId: '35431943',
+      candidateId: '24681012',
       details: 'National ID, KRA PIN, Gross Salary encrypted under KMS HSM Key #82910'
     });
   }

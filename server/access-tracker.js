@@ -32,8 +32,8 @@ class AccessTracker {
   seedRealisticAccesses() {
     const baseTime = Date.now();
     const candidatePool = [
-      { name: 'Dennis Kipchumba Limo', idNo: '35431943', kyc: 'KYC-3 Biometric Verified', role: 'Applicant (CSG 7 Econometrician)' },
-      { name: 'Faith Wanjiku Mwangi', idNo: '32109845', kyc: 'KYC-3 Biometric Verified', role: 'Applicant (Senior State Counsel)' },
+      { name: 'Faith Wanjiku Mwangi', idNo: '24681012', kyc: 'KYC-3 Biometric Verified', role: 'Applicant (CSG 7 Econometrician)' },
+      { name: 'Sarah Nduta Karanja', idNo: '32109845', kyc: 'KYC-3 Biometric Verified', role: 'Applicant (Senior State Counsel)' },
       { name: 'Otieno Kevin Omondi', idNo: '28471920', kyc: 'KYC-3 Biometric Verified', role: 'Applicant (ICT Officer II)' },
       { name: 'Amina Hassan Abdi', idNo: '31094821', kyc: 'KYC-2 eCitizen 2FA', role: 'Applicant (Human Resource Officer)' },
       { name: 'Kiprotich Brian Sang', idNo: '36928174', kyc: 'KYC-3 Biometric Verified', role: 'Applicant (Accountant II)' },
@@ -156,8 +156,8 @@ class AccessTracker {
     const loc = this.resolveLocation(clientIp);
 
     // Identify Candidate / User Context
-    const candidateId = extraData.candidateId || req.headers['x-candidate-id'] || '35431943';
-    let candidateName = extraData.candidateName || 'Dennis Kipchumba Limo';
+    const candidateId = extraData.candidateId || req.headers['x-candidate-id'] || '24681012';
+    let candidateName = extraData.candidateName || 'Faith Wanjiku Mwangi';
     let authLevel = 'KYC-3 Biometric Verified';
 
     if (candidateId === 'anonymous' || candidateId === 'GUEST') {

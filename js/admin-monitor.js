@@ -46,8 +46,8 @@ class AdminAccessMonitor {
       const isMobile = window.innerWidth <= 768;
       const payload = {
         page: window.location.pathname + (window.location.hash || ''),
-        candidateId: '35431943',
-        candidateName: 'Dennis Kipchumba Limo',
+        candidateId: sessionStorage.getItem('psc_candidate_id') || '24681012',
+        candidateName: sessionStorage.getItem('psc_candidate_name') || 'Faith Wanjiku Mwangi',
         device: isMobile ? 'Mobile Phone' : 'Desktop Workstation',
         browser: navigator.userAgent.includes('Chrome') ? 'Brave / Chrome' : 'Safari / Browser',
         os: navigator.userAgent.includes('Linux') ? 'Linux x86_64' : (navigator.userAgent.includes('Android') ? 'Android' : 'Desktop OS'),

@@ -17,19 +17,19 @@ export class FormValidator {
       payrollNumber: (val) => {
         if (!val || !val.trim()) return null; // optional if not currently serving civil servant
         const clean = val.trim();
-        if (!/^\d{9,12}$/.test(clean)) return 'Civil Service Payroll Number must contain 9 to 12 digits (e.g. 20250031176).';
+        if (!/^\d{9,12}$/.test(clean)) return 'Civil Service Payroll Number must contain 9 to 12 digits (e.g. 20260012345).';
         return null;
       },
       kraPin: (val) => {
         if (!val || !val.trim()) return 'KRA PIN is required for statutory Chapter 6 ethics clearance.';
         const clean = val.trim().toUpperCase();
-        if (!/^[A-Z]\d{9}[A-Z]$/.test(clean)) return 'KRA PIN must match standard format: 1 letter, 9 digits, 1 letter (e.g. A011114073C).';
+        if (!/^[A-Z]\d{9}[A-Z]$/.test(clean)) return 'KRA PIN must match standard format: 1 letter, 9 digits, 1 letter (e.g. A009876543Z).';
         return null;
       },
       mobileNumber: (val) => {
         if (!val || !val.trim()) return 'Primary mobile number is required for SMS interview alerts.';
         const clean = val.trim().replace(/\s+/g, '');
-        if (!/^(07|01|\+2547|\+2541)\d{8}$/.test(clean)) return 'Enter a valid Kenyan mobile number starting with 07 or 01 (e.g. 0721877088).';
+        if (!/^(07|01|\+2547|\+2541)\d{8}$/.test(clean)) return 'Enter a valid Kenyan mobile number starting with 07 or 01 (e.g. 0712345678).';
         return null;
       },
       emailAddress: (val) => {

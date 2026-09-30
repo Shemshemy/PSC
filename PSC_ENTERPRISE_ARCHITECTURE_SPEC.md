@@ -76,12 +76,12 @@ Under our **Decoupled Asynchronous Ingestion Pattern**:
      "status": "ACCEPTED",
      "code": 202,
      "message": "Application ingested to PSC national buffer.",
-     "trackingUuid": "PSC-INGEST-35431943-7f9a2c1b-4d3e-4f81-a902-8c11e3b20726",
+     "trackingUuid": "PSC-INGEST-24681012-7f9a2c1b-4d3e-4f81-a902-8c11e3b20726",
      "advertNumber": "196/2025",
-     "candidateId": "35431943",
+     "candidateId": "24681012",
      "ingestionTimestamp": "2026-09-29T16:55:02.104Z",
      "sha256PayloadSignature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-     "receiptVerificationUrl": "/api/v2/receipts/verify/PSC-INGEST-35431943-7f9a2c1b"
+     "receiptVerificationUrl": "/api/v2/receipts/verify/PSC-INGEST-24681012-7f9a2c1b"
    }
    ```
 4. **Controlled Worker Consumption**: Autonomous, autoscaling consumer worker pools pull records from the stream at a managed, deterministic rate (e.g., 2,500 operations/sec) that the PostgreSQL primary cluster can comfortably absorb with zero lock contention.
@@ -92,7 +92,7 @@ Certificates, academic transcripts, and Chapter Six compliance documents **never
 2. The storage coordinator returns a signed AWS S3 / Google Cloud Storage PUT URL valid for exactly **120 seconds**.
 3. The applicant's browser streams the file binary directly to object storage via HTTP PUT:
    ```http
-   PUT /documents/candidate-35431943/academic-cert-20260929.pdf?X-Amz-Signature=... HTTP/1.1
+   PUT /documents/candidate-24681012/academic-cert-20260929.pdf?X-Amz-Signature=... HTTP/1.1
    Host: psc-citizen-documents-encrypted.s3.af-south-1.amazonaws.com
    Content-Type: application/pdf
    Content-Length: 1482910
@@ -254,8 +254,8 @@ stateDiagram-v2
   export default function () {
     const payload = JSON.stringify({
       advertNumber: "196/2025",
-      idNumber: "35431943",
-      payrollNumber: "20250031176",
+      idNumber: "24681012",
+      payrollNumber: "20260012345",
       statutoryDeclaration: true
     });
 

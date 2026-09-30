@@ -54,7 +54,7 @@ const server = http.createServer((req, res) => {
   }
 
   // Static File Serving with security traversal check
-  let filePath = path.join(ROOT_DIR, url.pathname === '/' ? 'index.html' : url.pathname);
+  let filePath = path.join(ROOT_DIR, url.pathname === '/' ? 'login.html' : url.pathname);
 
   if (!filePath.startsWith(ROOT_DIR)) {
     res.writeHead(403, { 'Content-Type': 'text/plain' });
@@ -65,7 +65,7 @@ const server = http.createServer((req, res) => {
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {
       if (req.headers.accept && req.headers.accept.includes('text/html')) {
-        filePath = path.join(ROOT_DIR, 'index.html');
+        filePath = path.join(ROOT_DIR, 'login.html');
       } else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('404 Not Found');

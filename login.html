@@ -217,7 +217,7 @@
           <div class="mb-5 bg-gradient-to-r from-amber-950/70 to-emerald-950/70 border border-amber-500/40 rounded-xl p-3 flex items-center justify-between gap-2 shadow-inner">
             <div class="flex items-center space-x-2">
               <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-              <span class="text-[11px] text-amber-200">Reviewer Quick-Fill: <strong>Dennis Limo</strong></span>
+              <span class="text-[11px] text-amber-200">Reviewer Quick-Fill: <strong>Faith Mwangi</strong></span>
             </div>
             <button type="button" onclick="quickFillCandidate()" class="px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-stone-950 text-[11px] font-black rounded-lg transition active:scale-95 shadow-sm flex items-center gap-1 cursor-pointer">
               <i data-lucide="zap" class="w-3 h-3"></i>
@@ -250,7 +250,7 @@
                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                   <i data-lucide="user-check" class="w-4 h-4"></i>
                 </div>
-                <input type="text" id="login-national-id" name="nationalId" required maxlength="10" placeholder="e.g. 35431943"
+                <input type="text" id="login-national-id" name="nationalId" required maxlength="10" placeholder="e.g. 24681012"
                        oninput="onNationalIdInput(this.value)"
                        class="w-full pl-10 pr-10 py-3 bg-slate-950 border border-slate-700 rounded-xl text-white font-mono text-sm placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition outline-none">
                 <div id="iprs-check-icon" class="absolute inset-y-0 right-0 pr-3 flex items-center hidden">
@@ -427,10 +427,10 @@
         <p class="text-slate-300">Enter your registered National ID Number. A one-time verification token will be dispatched to your phone number and email.</p>
         <div class="space-y-1.5">
           <label class="block text-xs font-bold text-slate-300">National ID Number</label>
-          <input type="text" id="reset-id-input" placeholder="e.g. 35431943" value="35431943" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white font-mono text-sm">
+          <input type="text" id="reset-id-input" placeholder="e.g. 24681012" value="24681012" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white font-mono text-sm">
         </div>
         <div id="reset-feedback" class="hidden p-3 rounded-lg bg-emerald-950/80 border border-emerald-700 text-emerald-300 text-xs">
-          ✓ Password reset OTP sent to registered mobile (+254 712 *** 678) and email. Valid for 10 minutes.
+          ✓ Password reset OTP sent to registered mobile (+254 700 *** 000) and email. Valid for 10 minutes.
         </div>
       </div>
       <div class="bg-slate-950 px-6 py-3 border-t border-slate-800 flex justify-between items-center">
@@ -511,9 +511,9 @@
     window.quickFillCandidate = function() {
       const idInput = document.getElementById('login-national-id');
       const passInput = document.getElementById('login-password');
-      if (idInput) idInput.value = '35431943';
+      if (idInput) idInput.value = '24681012';
       if (passInput) passInput.value = 'Kenya@2026#PSC';
-      onNationalIdInput('35431943');
+      onNationalIdInput('24681012');
     };
 
     window.onNationalIdInput = function(val) {
@@ -522,7 +522,7 @@
 
       if (val.length >= 8) {
         if (statusLabel) {
-          statusLabel.innerHTML = '<span class="text-emerald-400 font-bold">✓ IPRS Match: Dennis Kipchumba Limo</span>';
+          statusLabel.innerHTML = '<span class="text-emerald-400 font-bold">✓ IPRS Match: Faith Wanjiku Mwangi</span>';
         }
         if (checkIcon) checkIcon.classList.remove('hidden');
       } else {
@@ -537,11 +537,12 @@
     window.handleCitizenLogin = async function(e) {
       e.preventDefault();
       const submitBtn = document.getElementById('btn-login-submit');
-      const id = document.getElementById('login-national-id').value.trim();
+      const id = document.getElementById('login-national-id').value.trim() || '24681012';
       
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<span class="inline-block animate-spin mr-2">⟳</span> Authenticating with GovNet...';
 
+      let token = 'PSC-SECURE-SESSION-TOKEN-' + Math.random().toString(36).substring(2, 10);
       try {
         // Authenticate with live backend server
         const host = (window.location && window.location.hostname) ? window.location.hostname : 'localhost';
@@ -554,12 +555,16 @@
 
         if (res.ok) {
           const authData = await res.json();
-          sessionStorage.setItem('psc_auth_token', authData.accessToken);
-          sessionStorage.setItem('psc_candidate_id', id);
+          token = authData.accessToken || token;
         }
       } catch (err) {
         console.warn('Backend authentication fallback:', err);
       }
+
+      // Persist session tokens
+      sessionStorage.setItem('psc_auth_token', token);
+      sessionStorage.setItem('psc_candidate_id', id);
+      sessionStorage.setItem('psc_candidate_name', 'Faith Mwangi');
 
       // Success UX transition
       submitBtn.className = "w-full py-3.5 px-4 bg-emerald-600 text-white font-extrabold text-sm rounded-xl flex items-center justify-center space-x-2";
@@ -567,7 +572,7 @@
 
       setTimeout(() => {
         window.location.href = 'index.html';
-      }, 700);
+      }, 600);
     };
 
     window.handleEcitizenLogin = function() {
@@ -577,12 +582,13 @@
       
       setTimeout(() => {
         sessionStorage.setItem('psc_auth_token', 'ECITIZEN-GOVNET-OIDC-TOKEN-2026');
-        sessionStorage.setItem('psc_candidate_id', '35431943');
+        sessionStorage.setItem('psc_candidate_id', '24681012');
+        sessionStorage.setItem('psc_candidate_name', 'Faith Mwangi');
         btn.innerHTML = '<span>✓ eCitizen Single Sign-On Verified! Redirecting...</span>';
         setTimeout(() => {
           window.location.href = 'index.html';
-        }, 600);
-      }, 800);
+        }, 500);
+      }, 700);
     };
 
     window.dispatchResetOtp = function() {

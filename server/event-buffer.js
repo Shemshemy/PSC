@@ -33,7 +33,7 @@ export class IngestionEventBuffer {
    */
   ingest(applicationPayload, traceContext = {}) {
     const startTime = Date.now();
-    const candidateId = applicationPayload.idNo || applicationPayload.candidateId || "35431943";
+    const candidateId = applicationPayload.idNo || applicationPayload.candidateId || "24681012";
     const advertNumber = applicationPayload.advertNumber || "UNKNOWN";
 
     // 1. Check Backpressure Watermark
@@ -186,7 +186,7 @@ export class IngestionEventBuffer {
       const newRecord = {
         folioNo: item.folioNumber,
         idNo: item.candidateId,
-        names: 'Dennis Kipchumba Limo',
+        names: (item.payload && item.payload.candidateName) || 'Faith Wanjiku Mwangi',
         advertNumber: item.advertNumber,
         designation: job.position,
         jobScale: job.jobScale || 'CSG 7',

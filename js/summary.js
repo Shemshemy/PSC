@@ -229,8 +229,8 @@ export class SummaryReviewManager {
           const telemetry = await apiClient.ingestApplication({
             advertNumber: 'MASTER/PROFILE/2026',
             designation: 'PSC Master Candidate Profile Verification',
-            idNo: profile.idNo || '35431943',
-            candidateName: profile.firstName ? `${profile.firstName} ${profile.surname}` : 'DENNIS LIMO',
+            idNo: profile.idNo || profile.nationalId || '24681012',
+            candidateName: profile.firstName ? `${profile.firstName} ${profile.surname}` : 'FAITH MWANGI',
             payload: profile
           });
 

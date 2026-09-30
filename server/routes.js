@@ -253,7 +253,7 @@ export async function handleRequest(req, res, url) {
   if (pathname === '/api/v2/auth/token' && method === 'POST') {
     try {
       const body = await readBody();
-      const id = body.nationalId || '35431943';
+      const id = body.nationalId || '24681012';
       const token = security.issueToken(id);
 
       return send(200, {
@@ -397,7 +397,7 @@ export async function handleRequest(req, res, url) {
   if (pathname === '/api/v2/profile/save' && method === 'POST') {
     try {
       const body = await readBody();
-      const id = body.nationalId || body.idNo || '35431943';
+      const id = body.nationalId || body.idNo || '24681012';
 
       await primaryCluster.executeWrite('SAVE_CANDIDATE_PROFILE', ({ candidates, appendAudit }) => {
         // ALFE Field Protection on sensitive attributes
@@ -435,7 +435,7 @@ export async function handleRequest(req, res, url) {
   if (pathname === '/api/v2/storage/presigned-upload' && method === 'POST') {
     try {
       const body = await readBody();
-      const candidateId = body.candidateId || '35431943';
+      const candidateId = body.candidateId || '24681012';
       const fileName = (body.fileName || 'document.pdf').replace(/[^a-zA-Z0-9._-]/g, '_');
       const token = crypto.randomBytes(16).toString('hex');
       const s3Bucket = 'psc-citizen-documents-encrypted.s3.af-south-1.amazonaws.com';

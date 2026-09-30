@@ -3,6 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Immediate Authentication & Session Protection Guard -->
+  <script>
+    (function() {
+      try {
+        // Enforce strict session token requirement (no persistent auto-bypass)
+        localStorage.removeItem('psc_auth_token');
+        const token = sessionStorage.getItem('psc_auth_token');
+        if (!token) {
+          window.location.replace('login.html');
+        }
+      } catch (e) {
+        window.location.replace('login.html');
+      }
+    })();
+  </script>
+
   <title>Public Service Commission (PSC) Kenya - Recruitment Portal</title>
   <meta name="description" content="Official Public Service Commission of Kenya Online Recruitment and Selection System. Modern, accessible, WCAG 2.2 AAA compliant citizen career portal.">
 
@@ -242,7 +259,7 @@
                 </div>
                 <div>
                   <p class="font-semibold text-slate-900">eCitizen Single Sign-On Verified</p>
-                  <p class="text-slate-500 text-[11px] mt-0.5">National ID 35431943 logged in securely with 2FA session token.</p>
+                  <p class="text-slate-500 text-[11px] mt-0.5">National ID 24681012 logged in securely with 2FA session token.</p>
                   <span class="text-[10px] text-slate-400 font-mono mt-1 block">Yesterday 18:24</span>
                 </div>
               </div>
@@ -258,15 +275,15 @@
         <!-- Candidate Session Card with Interactive Menu -->
         <div class="relative">
           <button type="button" id="user-menu-btn" onclick="toggleUserMenuDropdown()" class="flex items-center space-x-2 sm:space-x-2.5 bg-white/10 hover:bg-white/15 transition p-1 sm:px-3 sm:py-1.5 rounded-lg border border-white/10 cursor-pointer" aria-label="User account menu">
-            <div class="w-8 h-8 rounded-full bg-civic-gold text-white font-bold flex items-center justify-center text-xs shadow-inner shrink-0">
-              DL
+            <div class="w-8 h-8 rounded-full bg-civic-gold text-white font-bold flex items-center justify-center text-xs shadow-inner shrink-0" id="user-avatar-initials">
+              FM
             </div>
             <div class="text-left text-xs leading-tight hidden md:block">
               <div class="font-semibold text-white flex items-center gap-1">
-                <span>Dennis Limo</span>
+                <span id="user-display-name">Faith Mwangi</span>
                 <i data-lucide="chevron-down" class="w-3 h-3 text-slate-300"></i>
               </div>
-              <div class="text-emerald-200 text-[11px] font-mono">ID: 35431943</div>
+              <div class="text-emerald-200 text-[11px] font-mono" id="user-display-id">ID: 24681012</div>
             </div>
           </button>
 
@@ -274,17 +291,17 @@
           <div id="user-menu-dropdown" class="hidden absolute right-0 mt-2 w-[calc(100vw-1.5rem)] max-w-xs sm:w-72 bg-white rounded-xl shadow-2xl border border-slate-200 text-slate-800 z-50 overflow-hidden civic-dropdown-animate">
             <div class="p-4 bg-gradient-to-br from-slate-900 to-[#0B3B24] text-white">
               <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-full bg-civic-gold text-white font-bold flex items-center justify-center text-sm shadow-md shrink-0">
-                  DL
+                <div class="w-10 h-10 rounded-full bg-civic-gold text-white font-bold flex items-center justify-center text-sm shadow-md shrink-0" id="user-dropdown-avatar">
+                  FM
                 </div>
                 <div>
-                  <div class="font-bold text-sm">Dennis Kipchumba Limo</div>
-                  <div class="text-emerald-300 text-xs font-mono">ID: 35431943 • Level 3 KYC</div>
+                  <div class="font-bold text-sm" id="user-dropdown-fullname">Faith Wanjiku Mwangi</div>
+                  <div class="text-emerald-300 text-xs font-mono" id="user-dropdown-id">ID: 24681012 • Level 3 KYC</div>
                 </div>
               </div>
               <div class="mt-2 text-[11px] text-slate-300 flex items-center gap-1.5">
                 <i data-lucide="mail" class="w-3 h-3 text-civic-gold"></i>
-                <span class="truncate">d.limo@alumni.uonbi.ac.ke</span>
+                <span class="truncate" id="user-dropdown-email">candidate@publicservice.go.ke</span>
               </div>
             </div>
 
@@ -514,8 +531,8 @@
                 id="dash-payroll-input"
                 name="dashPayrollNumber"
                 class="w-full max-w-xs px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 font-mono tracking-wider focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm"
-                value="20250031176"
-                placeholder="e.g. 20250031176"
+                value="20260012345"
+                placeholder="e.g. 20260012345"
                 aria-describedby="payroll-desc"
               >
               <button type="button" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs rounded-lg border border-slate-300 transition shrink-0" onclick="alert('Payroll number verified with Government Human Resource Information System (GHRIS).')">
@@ -720,7 +737,7 @@
                         </label>
                       </div>
                       <p class="text-xs text-slate-400 mb-1.5">7 to 8 digits from your National Identity Card.</p>
-                      <input type="text" id="field-nationalId" name="nationalId" class="w-full max-w-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 font-mono tracking-wider font-bold" value="35431943" readonly>
+                      <input type="text" id="field-nationalId" name="nationalId" class="w-full max-w-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 font-mono tracking-wider font-bold" value="24681012" readonly>
                     </div>
 
                     <div>
@@ -740,9 +757,9 @@
                     <div>
                       <label class="block text-sm font-semibold text-slate-900 mb-1.5" for="field-salutation">Salutation</label>
                       <select id="field-salutation" name="salutation" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm">
-                        <option value="Mr" selected>Mr</option>
+                        <option value="Ms" selected>Ms</option>
+                        <option value="Mr">Mr</option>
                         <option value="Mrs">Mrs</option>
-                        <option value="Ms">Ms</option>
                         <option value="Dr">Dr</option>
                         <option value="Prof">Prof</option>
                         <option value="Eng">Eng</option>
@@ -752,19 +769,19 @@
                       <label class="block text-sm font-semibold text-slate-900 mb-1.5" for="field-surname">
                         Surname <span class="text-red-600">*</span>
                       </label>
-                      <input type="text" id="field-surname" name="surname" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm font-medium" value="Limo" required>
+                      <input type="text" id="field-surname" name="surname" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm font-medium" value="Mwangi" required>
                     </div>
                     <div>
                       <label class="block text-sm font-semibold text-slate-900 mb-1.5" for="field-firstName">
                         First Name <span class="text-red-600">*</span>
                       </label>
-                      <input type="text" id="field-firstName" name="firstName" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm font-medium" value="Dennis" required>
+                      <input type="text" id="field-firstName" name="firstName" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm font-medium" value="Faith" required>
                     </div>
                   </div>
 
                   <div>
                     <label class="block text-sm font-semibold text-slate-900 mb-1.5" for="field-otherNames">Other Names</label>
-                    <input type="text" id="field-otherNames" name="otherNames" class="w-full max-w-lg px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm" value="Shem Ochieng">
+                    <input type="text" id="field-otherNames" name="otherNames" class="w-full max-w-lg px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm" value="Wanjiku">
                   </div>
 
                   <!-- 3-Part Numeric Date-of-Birth Pattern (GOV.UK Standard) -->
@@ -820,9 +837,9 @@
                           <span class="text-red-600">*</span>
                           <span class="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200" title="Protected & Encrypted under Data Protection Act (2019)">🔒 Encrypted</span>
                         </label>
-                        <span class="text-xs text-slate-400">e.g. A011114073C</span>
+                        <span class="text-xs text-slate-400">e.g. A009876543Z</span>
                       </div>
-                      <input type="text" id="field-kraPin" name="kraPin" class="w-full max-w-sm px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 font-mono uppercase tracking-wider font-bold focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm" value="A011114073C" required>
+                      <input type="text" id="field-kraPin" name="kraPin" class="w-full max-w-sm px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 font-mono uppercase tracking-wider font-bold focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm" value="A009876543Z" required>
                     </div>
                   </div>
                 </div>
@@ -921,7 +938,7 @@
 
                     <div>
                       <label class="block text-sm font-semibold text-slate-900 mb-1.5" for="field-ward">Home Ward</label>
-                      <input type="text" id="field-ward" name="ward" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm font-medium" value="Kosirai">
+                      <input type="text" id="field-ward" name="ward" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm font-medium" value="Kiganjo">
                     </div>
                   </div>
                 </div>
@@ -954,7 +971,7 @@
                         Primary Mobile Number <span class="text-red-600">*</span>
                       </label>
                       <p class="text-xs text-slate-400 mb-1.5">Used for official interview invitation SMS alerts.</p>
-                      <input type="tel" id="field-mobileNumber" name="mobileNumber" class="w-full max-w-sm px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 font-mono tracking-wider focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm font-medium" value="0721877088" required>
+                      <input type="tel" id="field-mobileNumber" name="mobileNumber" class="w-full max-w-sm px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 font-mono tracking-wider focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm font-medium" value="0700000000" required>
                     </div>
 
                     <div>
@@ -962,7 +979,7 @@
                         Email Address <span class="text-red-600">*</span>
                       </label>
                       <p class="text-xs text-slate-400 mb-1.5">Official email for formal recruitment correspondence.</p>
-                      <input type="email" id="field-emailAddress" name="emailAddress" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm font-medium" value="shemdennis53@gmail.com" required>
+                      <input type="email" id="field-emailAddress" name="emailAddress" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition shadow-sm font-medium" value="candidate@publicservice.go.ke" required>
                     </div>
                   </div>
 
@@ -971,19 +988,19 @@
                       <label class="block text-sm font-semibold text-slate-900 mb-1.5" for="field-postalAddress">
                         Postal Address <span class="text-red-600">*</span>
                       </label>
-                      <input type="text" id="field-postalAddress" name="postalAddress" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 transition shadow-sm" value="237 Kapsabet" required>
+                      <input type="text" id="field-postalAddress" name="postalAddress" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 transition shadow-sm" value="P.O. Box 30095" required>
                     </div>
                     <div>
                       <label class="block text-sm font-semibold text-slate-900 mb-1.5" for="field-postalCode">
                         Postal Code <span class="text-red-600">*</span>
                       </label>
-                      <input type="text" id="field-postalCode" name="postalCode" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 font-mono focus:border-blue-600 transition shadow-sm" value="30300" required>
+                      <input type="text" id="field-postalCode" name="postalCode" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 font-mono focus:border-blue-600 transition shadow-sm" value="00100" required>
                     </div>
                     <div>
                       <label class="block text-sm font-semibold text-slate-900 mb-1.5" for="field-town">
                         Town / City <span class="text-red-600">*</span>
                       </label>
-                      <input type="text" id="field-town" name="town" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 transition shadow-sm" value="Kapsabet" required>
+                      <input type="text" id="field-town" name="town" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:border-blue-600 transition shadow-sm" value="Nairobi" required>
                     </div>
                   </div>
                 </div>
@@ -1142,7 +1159,7 @@
               </p>
               <div id="uploadHighschoolFeedback" class="mt-3 hidden inline-flex items-center space-x-2 text-xs bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full font-mono">
                 <i data-lucide="file-check" class="w-3.5 h-3.5"></i>
-                <span>Dennis_Limo_KCSE_Certificate.pdf (1.1 MB)</span>
+                <span>Candidate_KCSE_Certificate.pdf (1.1 MB)</span>
               </div>
             </div>
           </div>
@@ -1180,7 +1197,7 @@
               </p>
               <div id="uploadDegreeFeedback" class="mt-3 hidden inline-flex items-center space-x-2 text-xs bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full font-mono">
                 <i data-lucide="file-check" class="w-3.5 h-3.5"></i>
-                <span>Dennis_Limo_Degree_Transcripts.pdf (2.4 MB)</span>
+                <span>Candidate_Degree_Transcripts.pdf (2.4 MB)</span>
               </div>
             </div>
           </div>
@@ -1524,7 +1541,7 @@
             <span class="text-emerald-400">P99 Latency: 12ms</span>
           </div>
           <div class="text-emerald-400">✓ Ingestion Buffer: <span class="text-slate-300">Payload accepted; DB write decoupled</span></div>
-          <div class="text-emerald-400">✓ Tracking UUID: <span id="ingestTrackingUuid" class="text-amber-300 font-bold">PSC-INGEST-35431943-88f21</span></div>
+          <div class="text-emerald-400">✓ Tracking UUID: <span id="ingestTrackingUuid" class="text-amber-300 font-bold">PSC-INGEST-24681012-88f21</span></div>
           <div class="text-emerald-400">✓ Partition Offset: <span id="ingestOffset" class="text-blue-300">Partition #3, Offset #984210</span></div>
           <div class="text-emerald-400">✓ SHA-256 Signature: <span id="ingestSha" class="text-slate-400">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</span></div>
         </div>
@@ -1542,8 +1559,8 @@
             <span class="font-mono font-bold text-civic-forest" id="receiptFolio">Folio No. 752/2026</span>
           </div>
           <div class="grid grid-cols-2 gap-2 text-slate-700 pt-1">
-            <div>Candidate: <strong>Dennis Kipchumba Limo</strong></div>
-            <div>National ID: <strong class="font-mono">35431943</strong></div>
+            <div>Candidate: <strong id="receiptCandidateName">Faith Wanjiku Mwangi</strong></div>
+            <div>National ID: <strong class="font-mono" id="receiptNationalId">24681012</strong></div>
             <div>Submission Type: <strong class="text-slate-900">Master Candidate Profile</strong></div>
             <div>Submission Status: <strong class="text-emerald-700">✓ Ingestion Confirmed</strong></div>
           </div>
@@ -1611,11 +1628,11 @@
         <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2.5">
           <div class="flex justify-between pb-2 border-b border-slate-200">
             <span class="text-slate-500">Citizen Full Name:</span>
-            <strong class="text-slate-900 font-semibold">Dennis Kipchumba Limo</strong>
+            <strong class="text-slate-900 font-semibold" id="iprsCandidateName">Faith Wanjiku Mwangi</strong>
           </div>
           <div class="flex justify-between pb-2 border-b border-slate-200">
             <span class="text-slate-500">National ID Serial:</span>
-            <strong class="font-mono text-slate-900 font-bold">35431943</strong>
+            <strong class="font-mono text-slate-900 font-bold" id="iprsNationalId">24681012</strong>
           </div>
           <div class="flex justify-between pb-2 border-b border-slate-200">
             <span class="text-slate-500">eCitizen SSO Token:</span>
@@ -2073,8 +2090,8 @@
             body: JSON.stringify({
               advertNumber: '196/2025',
               designation: 'ICT Officer II',
-              idNo: `3543194${i % 10}`,
-              candidateName: 'Dennis Limo'
+              idNo: `2468101${i % 10}`,
+              candidateName: 'Faith Mwangi'
             })
           })
         );
@@ -2098,7 +2115,7 @@
       const payload = JSON.stringify({
         advertNumber: '144/2026',
         designation: 'Deputy Vice-Chancellor',
-        idNo: '35431943'
+        idNo: '24681012'
       });
 
       try {
@@ -2318,7 +2335,7 @@
         let kmsId = 'arn:aws:kms:af-south-1:psc-hsm-01';
         if (window.pscApiClient) {
           try {
-            const presigned = await window.pscApiClient.requestPresignedUpload('Dennis_Limo_Credentials_Consolidated.pdf');
+            const presigned = await window.pscApiClient.requestPresignedUpload('Candidate_Credentials_Consolidated.pdf');
             if (presigned) {
               shaDigest = (presigned.sha256Checksum || shaDigest).slice(0, 32);
               kmsId = presigned.kmsKeyId || kmsId;
@@ -2329,7 +2346,7 @@
         }
 
         setTimeout(() => {
-          feedback.innerHTML = `<span class="text-emerald-700 font-mono font-bold flex items-center gap-1.5">✓ Uploaded & verified: Dennis_Limo_Credentials_Consolidated.pdf (1.4 MB) • SHA-256: ${shaDigest}... • KMS: ${kmsId}</span>`;
+          feedback.innerHTML = `<span class="text-emerald-700 font-mono font-bold flex items-center gap-1.5">✓ Uploaded & verified: Candidate_Credentials_Consolidated.pdf (1.4 MB) • SHA-256: ${shaDigest}... • KMS: ${kmsId}</span>`;
           if (window.lucide) window.lucide.createIcons();
         }, 600);
       }

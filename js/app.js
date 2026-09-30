@@ -189,9 +189,9 @@ class PSCApplication {
     const btnLogout = document.getElementById('btn-logout') || document.getElementById('btn-sidebar-power');
     const handleLogout = () => {
       if (confirm('Are you sure you wish to sign out of the Public Service Commission Portal?\nAll local edits have been safely cached.')) {
-        sessionStorage.removeItem('psc_auth_token');
-        sessionStorage.removeItem('psc_candidate_id');
-        window.location.href = 'login.html';
+        sessionStorage.clear();
+        localStorage.removeItem('psc_auth_token');
+        window.location.replace('login.html');
       }
     };
     if (document.getElementById('btn-logout')) document.getElementById('btn-logout').addEventListener('click', handleLogout);
@@ -200,7 +200,7 @@ class PSCApplication {
     const btnChangePassword = document.getElementById('btn-change-password');
     if (btnChangePassword) {
       btnChangePassword.addEventListener('click', () => {
-        alert('Change Password feature:\nA secure password reset token has been dispatched to candidate registered mobile (+254 721 *** 088) and email (shemdennis53@gmail.com).');
+        alert('Change Password feature:\nA secure password reset token has been dispatched to candidate registered mobile (+254 700 *** 000) and email (candidate@publicservice.go.ke).');
       });
     }
 
@@ -535,7 +535,7 @@ class PSCApplication {
         : `${stepMeta.desc}. Sequential, segmented bio-data capture.`;
     }
 
-    // Dynamic completion calculation (92% default for Dennis Limo's profile, advancing to 94%, 96%, 98%, 100%)
+    // Dynamic completion calculation (92% default for candidate profile, advancing to 94%, 96%, 98%, 100%)
     const basePct = 92;
     const stepIncrement = Math.round(((this.currentStep - 1) / (this.totalSteps - 1)) * 8);
     const overallPct = Math.min(100, basePct + stepIncrement);
@@ -582,7 +582,7 @@ class PSCApplication {
     this.countyCombobox = new Combobox('#combo-county-container', {
       items: counties,
       placeholder: 'Select Home County...',
-      initialValue: p.homeCounty || 'Nandi',
+      initialValue: p.homeCounty || 'Kiambu',
       maxWidth: '320px',
       onSelect: (selected) => {
         profileStore.set({ homeCounty: selected });
@@ -590,11 +590,11 @@ class PSCApplication {
       }
     });
 
-    const nandiSubcounties = ['Chesumei', 'Emgwen', 'Mosop', 'Nandi Hills', 'Aldai', 'Tinderet'];
+    const subcounties = ['Gatundu South', 'Gatundu North', 'Juja', 'Thika Town', 'Ruiru', 'Githunguri', 'Kiambu', 'Kiambaa', 'Kabete', 'Kikuyu', 'Limuru', 'Lari'];
     this.subcountyCombobox = new Combobox('#combo-subcounty-container', {
-      items: nandiSubcounties,
+      items: subcounties,
       placeholder: 'Select Sub-County...',
-      initialValue: p.subCounty || 'Chesumei',
+      initialValue: p.subCounty || 'Gatundu South',
       maxWidth: '320px',
       onSelect: (selected) => {
         profileStore.set({ subCounty: selected });
@@ -604,13 +604,13 @@ class PSCApplication {
 
     // Ethnicity Combobox
     const ethnicities = [
-      'Kalenjin', 'Kikuyu', 'Luhya', 'Luo', 'Kamba', 'Kisii', 'Meru', 'Mijikenda',
+      'Kikuyu', 'Kalenjin', 'Luhya', 'Luo', 'Kamba', 'Kisii', 'Meru', 'Mijikenda',
       'Maasai', 'Turkana', 'Somali', 'Taita', 'Embu', 'Borana', 'Kenyan Asian', 'Kenyan European', 'Other'
     ];
     this.ethnicityCombobox = new Combobox('#combo-ethnicity-container', {
       items: ethnicities,
       placeholder: 'Select Ethnicity...',
-      initialValue: p.ethnicity || 'Kalenjin',
+      initialValue: p.ethnicity || 'Kikuyu',
       maxWidth: '320px',
       onSelect: (selected) => {
         profileStore.set({ ethnicity: selected });
@@ -822,7 +822,7 @@ class PSCApplication {
       try {
         const payload = profileStore.getAll();
         const res = await apiClient.saveProfile({
-          idNo: payload.idNo || '35431943',
+          idNo: payload.idNo || payload.nationalId || '24681012',
           profile: payload
         });
         if (res && res.success && !res.localOnly) {

@@ -341,7 +341,7 @@ export class CardBuilder {
       return `
         <div class="form-group">
           <label class="form-label">School Name <span class="required-star">*</span></label>
-          <input type="text" name="schoolName" required class="form-control" value="${rec.schoolName || ''}" placeholder="e.g. Meteitei Secondary School">
+          <input type="text" name="schoolName" required class="form-control" value="${rec.schoolName || ''}" placeholder="e.g. Kenya High School">
         </div>
         <div class="form-row-paired">
           <div class="form-group">

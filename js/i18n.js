@@ -69,7 +69,7 @@ export const pscDictionary = {
   "Shortlist announced for CSG 7 Econometrician (Panel A, Commission Boardroom 4).": "Orodha ya waliochaguliwa kwa CSG 7 Mchumi imetangazwa (Jopo A, Chumba cha Bodi 4).",
   "2 hours ago": "Saa 2 zilizopita",
   "eCitizen Single Sign-On Verified": "Uthibitisho wa eCitizen Umekamilika",
-  "National ID 35431943 logged in securely with 2FA session token.": "Kitambulisho 35431943 kimeingia salama kwa nenosiri la hatua mbili (2FA).",
+  "National ID 24681012 logged in securely with 2FA session token.": "Kitambulisho 24681012 kimeingia salama kwa nenosiri la hatua mbili (2FA).",
   "Yesterday 18:24": "Jana saa 12:24 jioni",
   "View All Notification Logs →": "Tazama Kumbukumbu Zote za Taarifa →",
   "Candidate Profile & CV": "Wasifu wa Mwombaji & CV",
