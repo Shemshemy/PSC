@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign In | Public Service Commission (PSC) Kenya</title>
-  <meta name="description" content="Official Public Service Commission (PSC) Kenya Recruitment and Selection Portal Sign In.">
+  <title>Sign In | Candidate Recruitment Portal</title>
+  <meta name="description" content="Candidate Recruitment Portal Sign In.">
 
-  <!-- Favicon & Official PSC Emblem -->
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/images/psc_logo.png">
   <link rel="apple-touch-icon" href="assets/images/psc_logo.png">
 
@@ -43,7 +43,7 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-amber-100 selection:text-amber-900">
 
-  <!-- Top Kenyan National Stripe Accent -->
+  <!-- Top Accent Stripe -->
   <div class="h-1.5 w-full bg-gradient-to-r from-[#0B3B24] via-[#C88A19] to-[#0B3B24] shrink-0"></div>
 
   <!-- Main Container -->
@@ -53,16 +53,13 @@
       <!-- Login Card -->
       <div class="bg-white rounded-2xl border border-slate-200/90 shadow-xl p-6 sm:p-8 space-y-6">
 
-        <!-- Official Header: Crest, Seal & Titles -->
+        <!-- Portal Header -->
         <div class="text-center space-y-3">
           <div class="flex items-center justify-center gap-3">
-            <img src="assets/images/coatofarms.png" alt="Kenya Coat of Arms" class="w-11 h-11 object-contain">
-            <div class="w-px h-8 bg-slate-200"></div>
-            <img src="assets/images/psc_logo.png" alt="PSC Logo" class="h-11 w-auto max-w-[120px] object-contain">
+            <img src="assets/images/psc_logo.png" alt="Portal Logo" class="h-11 w-auto max-w-[120px] object-contain">
           </div>
           <div>
-            <span class="text-[11px] font-bold uppercase tracking-widest text-civic-gold block">Republic of Kenya</span>
-            <h1 class="text-xl sm:text-2xl font-extrabold text-[#0B3B24] tracking-tight mt-0.5">Public Service Commission</h1>
+            <h1 class="text-xl sm:text-2xl font-extrabold text-[#0B3B24] tracking-tight mt-0.5">Recruitment Portal</h1>
             <p class="text-xs text-slate-500 mt-1">Online Recruitment &amp; Selection Portal</p>
           </div>
         </div>
@@ -73,10 +70,10 @@
         <!-- Simple Sign In Form -->
         <form id="login-form" onsubmit="handleSignIn(event)" class="space-y-4">
           
-          <!-- National ID / Email -->
+          <!-- Username / Email -->
           <div class="space-y-1.5">
             <label for="login-id" class="block text-xs font-bold text-slate-700">
-              National ID Number
+              Username or Email
             </label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -87,8 +84,8 @@
                 id="login-id" 
                 name="nationalId" 
                 required 
-                placeholder="e.g. 24681012"
-                value="24681012"
+                placeholder="Enter username or email"
+                value="candidate@demo.local"
                 class="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 focus:bg-white border border-slate-300 focus:border-[#0B3B24] focus:ring-2 focus:ring-[#0B3B24]/10 rounded-xl text-slate-900 text-sm font-medium transition outline-none"
               >
             </div>
@@ -96,14 +93,9 @@
 
           <!-- Password -->
           <div class="space-y-1.5">
-            <div class="flex items-center justify-between">
-              <label for="login-password" class="block text-xs font-bold text-slate-700">
-                Password
-              </label>
-              <button type="button" onclick="showForgotPasswordModal()" class="text-[11px] font-semibold text-amber-700 hover:text-amber-900 hover:underline">
-                Forgot Password?
-              </button>
-            </div>
+            <label for="login-password" class="block text-xs font-bold text-slate-700">
+              Password
+            </label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                 <i data-lucide="lock" class="w-4 h-4"></i>
@@ -127,7 +119,7 @@
           <div class="flex items-center text-xs pt-0.5">
             <label class="flex items-center space-x-2 cursor-pointer text-slate-600">
               <input type="checkbox" id="remember-me" checked class="w-4 h-4 rounded border-slate-300 text-[#0B3B24] focus:ring-0">
-              <span>Remember my ID on this device</span>
+              <span>Remember me on this device</span>
             </label>
           </div>
 
@@ -142,51 +134,10 @@
           </button>
         </form>
 
-        <!-- Divider -->
-        <div class="relative my-4 text-center">
-          <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-200"></div></div>
-          <span class="relative bg-white px-3 text-[11px] text-slate-400 font-medium">or</span>
-        </div>
-
-        <!-- Register Link -->
-        <div class="text-center space-y-2">
-          <a href="index.html" class="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-[#0B3B24] hover:text-[#072517] hover:underline">
-            <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
-            <span>First time applicant? Register Account</span>
-          </a>
-        </div>
-
-      </div>
-
-      <!-- Simple Help & Support Footer -->
-      <div class="text-center mt-6 text-xs text-slate-500 space-y-1">
-        <div>Need assistance? Call PSC Helpdesk <a href="tel:0204919000" class="font-semibold text-slate-700 hover:underline">020-4919000</a></div>
-        <div class="text-[11px] text-slate-400">© 2026 Public Service Commission. Republic of Kenya.</div>
       </div>
 
     </div>
   </main>
-
-  <!-- Simple Forgot Password Modal -->
-  <div id="forgot-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-sm w-full p-6 space-y-4 shadow-2xl border border-slate-200">
-      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-        <h2 class="text-sm font-bold text-slate-900">Reset Password</h2>
-        <button onclick="closeForgotPasswordModal()" class="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-      <p class="text-xs text-slate-600">Enter your National ID Number to receive a reset code on your registered phone number.</p>
-      <input type="text" id="reset-id" value="24681012" placeholder="National ID" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono outline-none focus:border-[#0B3B24]">
-      <div id="reset-alert" class="hidden p-2.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-medium">
-        ✓ Reset code sent to your registered mobile number.
-      </div>
-      <div class="flex justify-end gap-2 pt-2">
-        <button type="button" onclick="closeForgotPasswordModal()" class="px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-lg">Cancel</button>
-        <button type="button" onclick="handleSendReset()" class="px-4 py-2 text-xs font-bold text-white bg-[#0B3B24] hover:bg-[#072517] rounded-lg">Send Code</button>
-      </div>
-    </div>
-  </div>
 
   <!-- Sign In Handler Script -->
   <script>
@@ -206,34 +157,16 @@
       if (window.lucide) window.lucide.createIcons();
     }
 
-    function showForgotPasswordModal() {
-      document.getElementById('forgot-modal').classList.remove('hidden');
-      if (window.lucide) window.lucide.createIcons();
-    }
-
-    function closeForgotPasswordModal() {
-      document.getElementById('forgot-modal').classList.add('hidden');
-      document.getElementById('reset-alert').classList.add('hidden');
-    }
-
-    function handleSendReset() {
-      const alertBox = document.getElementById('reset-alert');
-      alertBox.classList.remove('hidden');
-      setTimeout(() => {
-        closeForgotPasswordModal();
-      }, 1800);
-    }
-
     async function handleSignIn(e) {
       e.preventDefault();
       const btn = document.getElementById('btn-submit');
       const idInput = document.getElementById('login-id');
-      const id = idInput.value.trim() || '24681012';
+      const id = idInput.value.trim() || 'demo-candidate';
 
       btn.disabled = true;
       btn.innerHTML = '<span class="inline-block animate-spin mr-2">⟳</span> Signing In...';
 
-      let token = 'PSC-SECURE-SESSION-TOKEN-' + Math.random().toString(36).substring(2, 10);
+      let token = 'DEMO-SECURE-SESSION-TOKEN-' + Math.random().toString(36).substring(2, 10);
       try {
         const host = (window.location && window.location.hostname) ? window.location.hostname : 'localhost';
         const res = await fetch(`http://${host}:5000/api/v2/auth/token`, {
