@@ -449,11 +449,41 @@
 
 .card-builder-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
   padding-bottom: 1.25rem;
   border-bottom: 1px solid var(--slate-200);
+}
+
+.card-builder-header-info {
+  width: 100%;
+}
+
+.card-builder-header-info .section-title {
+  margin-bottom: 3px;
+}
+
+.card-builder-header .add-record-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  align-self: flex-start;
+  min-height: 38px;
+  padding: 0.45rem 1.15rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: var(--border-radius-md);
+  background-color: var(--psc-forest-900);
+  color: var(--white);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.card-builder-header .add-record-btn:hover {
+  background-color: var(--psc-forest-800);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .card-records-grid {
@@ -1528,6 +1558,24 @@
   .form-actions-bar > div > button {
     flex: 1;
     justify-content: center;
+  }
+
+  .card-builder-header {
+    gap: 0.75rem;
+    padding-bottom: 1rem;
+  }
+
+  .card-builder-header .add-record-btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+    font-size: 0.88rem;
+  }
+
+  .record-summary-card {
+    padding: 1rem 1.15rem;
+    gap: 1rem;
+    align-items: flex-start;
   }
 }
 
