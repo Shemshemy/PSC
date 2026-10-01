@@ -1098,11 +1098,23 @@
           </div>
 
           <!-- KNEC Verification Disclaimer -->
-          <div class="bg-amber-50 border-l-4 border-amber-500 rounded-r-xl p-4 shadow-sm flex items-start space-x-3 max-w-4xl">
-            <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
-            <div class="text-xs text-amber-900 leading-relaxed">
-              <strong>KNEC Verification Disclaimer:</strong> Information provided here shall be validated directly with the Kenya National Examinations Council (KNEC). Falsification results in instant disqualification.
+          <div id="knec-disclaimer-banner" class="bg-amber-50 border-l-4 border-amber-500 rounded-r-xl p-4 shadow-sm flex items-start justify-between gap-3 max-w-4xl transition-all duration-200" role="alert">
+            <div class="flex items-start space-x-3">
+              <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
+              <div class="text-xs text-amber-900 leading-relaxed">
+                <strong>KNEC Verification Disclaimer:</strong> Information provided here shall be validated directly with the Kenya National Examinations Council (KNEC). Falsification results in instant disqualification.
+              </div>
             </div>
+            <button type="button" 
+                    onclick="document.getElementById('knec-disclaimer-banner').classList.add('hidden')" 
+                    class="p-1 -mr-1 -mt-1 rounded-lg text-amber-700/60 hover:text-amber-900 hover:bg-amber-200/50 transition cursor-pointer shrink-0" 
+                    aria-label="Dismiss KNEC disclaimer" 
+                    title="Dismiss disclaimer">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
           </div>
 
           <div id="highschool-cards-container" class="max-w-4xl"></div>
