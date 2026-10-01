@@ -26,9 +26,9 @@ export class SummaryReviewManager {
     this.container.innerHTML = `
       <div class="page-header flex items-center space-x-4 mb-6">
         <div class="flex items-center space-x-2.5 shrink-0">
-          <img src="assets/images/kenya_coat_of_arms_rgba.png" alt="Republic of Kenya Coat of Arms" class="h-11 w-auto object-contain drop-shadow-sm">
+          <img src="assets/images/coatofarms.png" alt="Republic of Kenya Coat of Arms" class="h-11 w-auto object-contain drop-shadow-sm">
           <div class="w-px h-9 bg-slate-300"></div>
-          <img src="assets/images/PSC_Logo.png" alt="Public Service Commission Seal" class="h-11 w-auto object-contain drop-shadow-sm">
+          <img src="assets/images/psc_logo.png" alt="Public Service Commission Seal" class="h-11 w-auto object-contain drop-shadow-sm">
         </div>
         <div>
           <h2 class="page-title text-xl font-bold text-slate-900">Check Your Answers & Confirm Bio-Data</h2>
