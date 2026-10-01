@@ -183,16 +183,22 @@ export class JobsManager {
     }
   }
 
-  renderJobsTable(filtered = this.jobs) {
+  renderJobsTable() {
     if (!this.tableContainer) return;
     const isSw = (typeof window !== 'undefined' && window.currentLanguage && window.currentLanguage() === 'sw');
 
     this.tableContainer.innerHTML = `
-      <div class="jobs-filter-bar mb-4 flex flex-col sm:flex-row gap-2.5">
-        <div class="flex-1 min-w-0">
-          <input type="text" id="jobs-search-input" class="form-control" placeholder="${isSw ? 'Tafuta kwa Cheo, Shirika au Nambari ya Tangazo...' : 'Search by Position, Organization or Advert No...'}">
+      <div class="jobs-filter-bar mb-4 flex flex-col sm:flex-row gap-2.5 items-stretch sm:items-center">
+        <div class="flex-1 min-w-0 relative">
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          <input type="text" id="jobs-search-input" class="form-control pl-10 pr-9" placeholder="${isSw ? 'Tafuta kwa Cheo, Shirika au Nambari ya Tangazo...' : 'Search by Position, Organization, Keyword or Advert No...'}">
+          <button type="button" id="jobs-search-clear" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 transition" title="Clear search" aria-label="Clear search">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
         </div>
-        <div>
+        <div class="sm:w-auto w-full">
           <select id="jobs-category-filter" class="form-control sm:w-auto w-full">
             <option value="">${isSw ? 'Vitengo Vyote' : 'All Categories'}</option>
             <option value="University Senior Management">${isSw ? 'Uongozi wa Chuo Kikuu' : 'University Senior Management'}</option>
@@ -203,15 +209,117 @@ export class JobsManager {
         </div>
       </div>
 
-      <!-- ============================================================== -->
-      <!-- MOBILE JOB CARDS (Visible only on mobile/tablet < 768px)       -->
-      <!-- ============================================================== -->
-      <div class="jobs-mobile-feed md:hidden space-y-3.5">
-        ${filtered.length === 0 ? `
+      <!-- Live Search Results Meta Strip -->
+      <div id="jobs-count-badge" class="mb-3 text-xs font-semibold text-slate-500 flex items-center justify-between">
+        <span id="jobs-count-text"></span>
+      </div>
+
+      <!-- MOBILE JOB CARDS (Visible only on mobile/tablet < 768px) -->
+      <div id="jobs-mobile-feed" class="jobs-mobile-feed md:hidden space-y-3.5"></div>
+
+      <!-- DESKTOP DATA TABLE (Visible on >= 768px) -->
+      <div class="hidden md:block table-responsive">
+        <table class="psc-table">
+          <thead>
+            <tr>
+              <th style="width: 40px;">##</th>
+              <th>${isSw ? 'Nambari ya Tangazo' : 'Advert No.'}</th>
+              <th>${isSw ? 'Shirika' : 'Organisation'}</th>
+              <th>${isSw ? 'Cheo cha Kazi' : 'Position Title'}</th>
+              <th>${isSw ? 'Nafasi' : 'Vacancies'}</th>
+              <th>${isSw ? 'Uzoefu wa Chini' : 'Min Experience'}</th>
+              <th>${isSw ? 'Kitengo' : 'Category'}</th>
+              <th>${isSw ? 'Tarehe ya Mwisho' : 'Deadline'}</th>
+              <th style="text-align: right;">${isSw ? 'Hatua' : 'Action'}</th>
+            </tr>
+          </thead>
+          <tbody id="jobs-desktop-tbody"></tbody>
+        </table>
+      </div>
+    `;
+
+    const searchInput = this.tableContainer.querySelector('#jobs-search-input');
+    const clearBtn = this.tableContainer.querySelector('#jobs-search-clear');
+    const categorySelect = this.tableContainer.querySelector('#jobs-category-filter');
+
+    const applyFilters = () => {
+      const q = searchInput.value.trim().toLowerCase();
+      const cat = categorySelect.value;
+
+      if (q.length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+
+      const res = this.jobs.filter(j => {
+        const matchesQ = !q ||
+          (j.position && j.position.toLowerCase().includes(q)) ||
+          (j.organization && j.organization.toLowerCase().includes(q)) ||
+          (j.advertNumber && j.advertNumber.toLowerCase().includes(q)) ||
+          (j.category && j.category.toLowerCase().includes(q)) ||
+          (j.jobScale && j.jobScale.toLowerCase().includes(q)) ||
+          (j.requirements && j.requirements.toLowerCase().includes(q)) ||
+          (j.duties && j.duties.toLowerCase().includes(q));
+        const matchesCat = !cat || j.category === cat;
+        return matchesQ && matchesCat;
+      });
+
+      this.renderJobsList(res, q, cat);
+    };
+
+    if (searchInput) {
+      searchInput.addEventListener('input', applyFilters);
+    }
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchInput.focus();
+        applyFilters();
+      });
+    }
+    if (categorySelect) {
+      categorySelect.addEventListener('change', applyFilters);
+    }
+
+    this.renderJobsList(this.jobs, '', '');
+  }
+
+  renderJobsList(filtered = this.jobs, q = '', cat = '') {
+    if (!this.tableContainer) return;
+    const isSw = (typeof window !== 'undefined' && window.currentLanguage && window.currentLanguage() === 'sw');
+
+    const mobileFeed = this.tableContainer.querySelector('#jobs-mobile-feed');
+    const desktopTbody = this.tableContainer.querySelector('#jobs-desktop-tbody');
+    const countText = this.tableContainer.querySelector('#jobs-count-text');
+
+    if (countText) {
+      if (q || cat) {
+        countText.innerHTML = isSw ? 
+          `Imepatikana <strong>${filtered.length}</strong> ya <strong>${this.jobs.length}</strong> nafasi za kazi` :
+          `Found <strong>${filtered.length}</strong> of <strong>${this.jobs.length}</strong> advertised vacancies`;
+      } else {
+        countText.innerHTML = isSw ?
+          `Jumla ya nafasi <strong>${this.jobs.length}</strong> zinazopatikana` :
+          `Showing all <strong>${this.jobs.length}</strong> active public service vacancies`;
+      }
+    }
+
+    // Render mobile cards
+    if (mobileFeed) {
+      if (filtered.length === 0) {
+        mobileFeed.innerHTML = `
           <div class="bg-white rounded-xl border border-slate-200 p-8 text-center text-slate-500 text-sm">
-            ${isSw ? 'Hakuna nafasi zilizolingana na vigezo vyako.' : 'No vacancies matched your filter criteria.'}
+            <div class="text-3xl mb-2">🔍</div>
+            <p class="font-semibold text-slate-800">${isSw ? 'Hakuna nafasi zilizolingana na vigezo vyako.' : 'No vacancies matched your filter criteria.'}</p>
+            <p class="text-xs text-slate-500 mt-1">${isSw ? 'Jaribu maneno tofauti au weka upya vigezo.' : 'Try adjusting your search terms or clearing the category filter.'}</p>
+            <button type="button" class="mt-3 px-4 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-lg transition" onclick="const si=document.getElementById('jobs-search-input'); if(si){si.value=''; si.dispatchEvent(new Event('input'));}">
+              ${isSw ? 'Weka Upya' : 'Reset Search'}
+            </button>
           </div>
-        ` : filtered.map(job => `
+        `;
+      } else {
+        mobileFeed.innerHTML = filtered.map(job => `
           <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:border-emerald-500/50 transition flex flex-col justify-between gap-3">
             <!-- Top Header: Advert Ref & Deadline -->
             <div class="flex items-center justify-between gap-2">
@@ -259,77 +367,52 @@ export class JobsManager {
               </button>
             </div>
           </div>
-        `).join('')}
-      </div>
+        `).join('');
+      }
+    }
 
-      <!-- ============================================================== -->
-      <!-- DESKTOP DATA TABLE (Visible on >= 768px)                       -->
-      <!-- ============================================================== -->
-      <div class="hidden md:block table-responsive">
-        <table class="psc-table">
-          <thead>
-            <tr>
-              <th style="width: 40px;">##</th>
-              <th>${isSw ? 'Nambari ya Tangazo' : 'Advert No.'}</th>
-              <th>${isSw ? 'Shirika' : 'Organisation'}</th>
-              <th>${isSw ? 'Cheo cha Kazi' : 'Position Title'}</th>
-              <th>${isSw ? 'Nafasi' : 'Vacancies'}</th>
-              <th>${isSw ? 'Uzoefu wa Chini' : 'Min Experience'}</th>
-              <th>${isSw ? 'Kitengo' : 'Category'}</th>
-              <th>${isSw ? 'Tarehe ya Mwisho' : 'Deadline'}</th>
-              <th style="text-align: right;">${isSw ? 'Hatua' : 'Action'}</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${filtered.length === 0 ? `<tr><td colspan="9" style="text-align:center; padding: 2rem;">${isSw ? 'Hakuna nafasi zilizolingana na vigezo vyako.' : 'No vacancies matched your filter criteria.'}</td></tr>` : 
-              filtered.map((job, idx) => `
-                <tr>
-                  <td style="font-weight: 700; color: var(--slate-500);">${idx + 1}</td>
-                  <td><span class="record-tag highlight" style="font-family: monospace;">${job.advertNumber}</span></td>
-                  <td style="font-weight: 600; color: var(--slate-900);">${job.organization}</td>
-                  <td style="font-weight: 700; color: var(--psc-forest-900);">${job.position}</td>
-                  <td><span class="status-pill review">${job.vacancies} ${isSw ? 'Nafasi' : 'Post' + (job.vacancies > 1 ? 's' : '')}</span></td>
-                  <td>${job.yearsExp} ${isSw ? 'Miaka' : 'Years'}</td>
-                  <td><span class="record-tag">${job.category}</span></td>
-                  <td style="color: var(--red-700); font-weight: 600;">${job.closeDate}</td>
-                  <td style="text-align: right;">
-                    <div style="display: inline-flex; gap: 0.5rem;">
-                      <button type="button" class="btn btn-secondary view-job-details-btn" data-advert="${job.advertNumber}" style="min-height: 36px; padding: 0.35rem 0.85rem; font-size: 0.82rem;">
-                        ${isSw ? 'Maelezo ya Kazi' : 'Advert Details'}
-                      </button>
-                      <button type="button" class="btn btn-primary apply-job-btn" data-advert="${job.advertNumber}" style="min-height: 36px; padding: 0.35rem 0.95rem; font-size: 0.82rem; background: #0B3B24; color: white;">
-                        ${isSw ? 'Tuma Maombi' : 'Apply Now'}
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              `).join('')
-            }
-          </tbody>
-        </table>
-      </div>
-    `;
+    // Render desktop table body
+    if (desktopTbody) {
+      if (filtered.length === 0) {
+        desktopTbody.innerHTML = `
+          <tr>
+            <td colspan="9" style="text-align:center; padding: 3rem 1.5rem; color: var(--slate-500);">
+              <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🔍</div>
+              <div style="font-weight: 600; color: #1e293b;">${isSw ? 'Hakuna nafasi zilizolingana na vigezo vyako.' : 'No vacancies matched your filter criteria.'}</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">${isSw ? 'Jaribu maneno tofauti au weka upya vigezo.' : 'Try adjusting your search terms or clearing the category filter.'}</div>
+              <button type="button" class="btn btn-secondary" style="margin-top: 0.75rem; padding: 0.35rem 0.85rem; font-size: 0.8rem;" onclick="const si=document.getElementById('jobs-search-input'); if(si){si.value=''; si.dispatchEvent(new Event('input'));}">
+                ${isSw ? 'Weka Upya Vigezo' : 'Reset Search'}
+              </button>
+            </td>
+          </tr>
+        `;
+      } else {
+        desktopTbody.innerHTML = filtered.map((job, idx) => `
+          <tr>
+            <td style="font-weight: 700; color: var(--slate-500);">${idx + 1}</td>
+            <td><span class="record-tag highlight" style="font-family: monospace;">${job.advertNumber}</span></td>
+            <td style="font-weight: 600; color: var(--slate-900);">${job.organization}</td>
+            <td style="font-weight: 700; color: var(--psc-forest-900);">${job.position}</td>
+            <td><span class="status-pill review">${job.vacancies} ${isSw ? 'Nafasi' : 'Post' + (job.vacancies > 1 ? 's' : '')}</span></td>
+            <td>${job.yearsExp} ${isSw ? 'Miaka' : 'Years'}</td>
+            <td><span class="record-tag">${job.category}</span></td>
+            <td style="color: var(--red-700); font-weight: 600;">${job.closeDate}</td>
+            <td style="text-align: right;">
+              <div style="display: inline-flex; gap: 0.5rem;">
+                <button type="button" class="btn btn-secondary view-job-details-btn" data-advert="${job.advertNumber}" style="min-height: 36px; padding: 0.35rem 0.85rem; font-size: 0.82rem;">
+                  ${isSw ? 'Maelezo ya Kazi' : 'Advert Details'}
+                </button>
+                <button type="button" class="btn btn-primary apply-job-btn" data-advert="${job.advertNumber}" style="min-height: 36px; padding: 0.35rem 0.95rem; font-size: 0.82rem; background: #0B3B24; color: white;">
+                  ${isSw ? 'Tuma Maombi' : 'Apply Now'}
+                </button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
 
-    // Filter bindings
-    const searchInput = this.tableContainer.querySelector('#jobs-search-input');
-    const categorySelect = this.tableContainer.querySelector('#jobs-category-filter');
-
-    const applyFilters = () => {
-      const q = searchInput.value.trim().toLowerCase();
-      const cat = categorySelect.value;
-
-      const res = this.jobs.filter(j => {
-        const matchesQ = !q || j.position.toLowerCase().includes(q) || j.organization.toLowerCase().includes(q) || j.advertNumber.toLowerCase().includes(q);
-        const matchesCat = !cat || j.category === cat;
-        return matchesQ && matchesCat;
-      });
-      this.renderJobsTable(res);
-    };
-
-    if (searchInput) searchInput.addEventListener('input', applyFilters);
-    if (categorySelect) categorySelect.addEventListener('change', applyFilters);
-
-    // Job Details bindings (handles both mobile card and desktop table buttons)
+    // Re-bind click handlers for modal and apply buttons
     this.tableContainer.querySelectorAll('.view-job-details-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const advert = btn.getAttribute('data-advert');

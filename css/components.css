@@ -1458,13 +1458,13 @@
   }
 
   .modal-overlay {
-    padding: 0.5rem;
+    padding: 0.75rem 0.75rem calc(76px + env(safe-area-inset-bottom, 16px)) 0.75rem;
     align-items: flex-end;
   }
 
   .modal-card {
-    max-height: 92vh;
-    border-radius: 1.25rem 1.25rem 0.5rem 0.5rem;
+    max-height: calc(100dvh - 100px);
+    border-radius: 1.25rem 1.25rem 0.75rem 0.75rem;
     width: 100%;
   }
 
@@ -1505,6 +1505,29 @@
 
   .jobs-filter-bar select {
     width: 100%;
+  }
+
+  /* Accessible touch targets and stacked layout for form actions on mobile */
+  .form-actions-bar {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+    align-items: stretch;
+    margin-top: 1.75rem;
+  }
+
+  .form-actions-bar > button,
+  .form-actions-bar > div {
+    width: 100%;
+  }
+
+  .form-actions-bar > div {
+    display: flex;
+    gap: 0.65rem;
+  }
+
+  .form-actions-bar > div > button {
+    flex: 1;
+    justify-content: center;
   }
 }
 

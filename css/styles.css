@@ -972,9 +972,20 @@ body.mobile-drawer-open {
     display: none !important;
   }
 
-  /* Add safe bottom padding so content clears the bottom nav bar */
+  /* Add safe, generous bottom padding so all content and action buttons comfortably clear the bottom nav bar */
   .app-main {
-    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+    padding-bottom: calc(108px + env(safe-area-inset-bottom, 16px)) !important;
+  }
+
+  /* Ensure floating action buttons sit neatly above the mobile bottom nav */
+  #btn-scroll-to-top {
+    bottom: calc(76px + env(safe-area-inset-bottom, 16px)) !important;
+  }
+
+  /* Provide ample clearance for form stepper and action buttons at the bottom */
+  .form-actions-bar {
+    padding-bottom: 1.25rem !important;
+    margin-bottom: 0.75rem !important;
   }
 }
 

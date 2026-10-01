@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Citizen Sign In | Public Service Commission (PSC) Kenya</title>
-  <meta name="description" content="Official Public Service Commission (PSC) Kenya Recruitment & Selection Portal Sign In. Authenticate with National ID or eCitizen Government SSO.">
+  <title>Sign In | Public Service Commission (PSC) Kenya</title>
+  <meta name="description" content="Official Public Service Commission (PSC) Kenya Recruitment and Selection Portal Sign In.">
 
   <!-- Favicon & Official PSC Emblem -->
   <link rel="icon" type="image/png" href="assets/images/PSC_Logo.png">
   <link rel="apple-touch-icon" href="assets/images/PSC_Logo.png">
 
-  <!-- Google Fonts: Plus Jakarta Sans, Inter, and Lora -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=OpenDyslexic&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -22,25 +22,15 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
-            display: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
-            serif: ['Lora', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
           },
           colors: {
             civic: {
               forest: '#0B3B24',
-              forestHover: '#082b1a',
-              forestDark: '#051b10',
-              gold: '#D97706',
-              goldMuted: '#B45309',
+              forestHover: '#072517',
+              gold: '#C88A19',
               goldLight: '#FEF3C7',
-              emerald: '#059669',
-              emeraldHover: '#047857',
-              slateBg: '#F8FAFC',
-              navyNotice: '#1E3A8A',
-              navyNoticeBg: '#EFF6FF',
-              navyBorder: '#2563EB',
             }
           }
         }
@@ -50,558 +40,228 @@
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-
-  <!-- Core Stylesheets -->
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/components.css">
-
-  <style>
-    /* WCAG Focus */
-    :focus-visible {
-      outline: 2px solid #2563EB !important;
-      outline-offset: 2px !important;
-    }
-    .hero-mesh {
-      background: radial-gradient(circle at 10% 20%, rgba(217, 119, 6, 0.15) 0%, transparent 40%),
-                  radial-gradient(circle at 90% 80%, rgba(5, 150, 105, 0.2) 0%, transparent 45%);
-    }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: #0f172a;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #334155;
-      border-radius: 4px;
-    }
-  </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-civic-goldLight selection:text-civic-goldMuted">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-amber-100 selection:text-amber-900">
 
-  <!-- Accessible Skip Link -->
-  <a href="#login-card" class="skip-link">Skip to login form</a>
+  <!-- Top Kenyan National Stripe Accent -->
+  <div class="h-1.5 w-full bg-gradient-to-r from-[#0B3B24] via-[#C88A19] to-[#0B3B24] shrink-0"></div>
 
-  <!-- Top Utility Trust Ribbon (Authentic Kenya Mustard Ochre) -->
-  <header class="bg-gradient-to-r from-[#B45309] via-[#C88A19] to-[#B45309] text-stone-950 text-xs border-b border-amber-800/40 shrink-0 shadow-sm relative z-50">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-1.5 sm:py-2 flex items-center justify-between gap-2">
-      <!-- Official Republic of Kenya Identifier -->
-      <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
-        <span class="inline-block w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#0B3B24] border border-white/50 animate-pulse"></span>
-        <span class="font-bold text-stone-950 tracking-tight text-[11px] sm:text-xs" id="i18n-countryName">Republic of Kenya</span>
-        <span class="text-amber-950/40 font-bold hidden sm:inline">|</span>
-        <span class="text-stone-900 font-semibold hidden sm:inline" id="i18n-portalName">Official Public Service Portal</span>
-      </div>
+  <!-- Main Container -->
+  <main class="flex-1 flex items-center justify-center px-4 py-8 sm:py-12">
+    <div class="w-full max-w-md">
 
-      <!-- Trust Badges & Language Switcher -->
-      <div class="flex items-center gap-2 sm:gap-3.5 text-xs shrink-0">
-        <button type="button" onclick="openCivicModal('iprsModal')" class="hidden md:flex items-center space-x-1.5 text-white bg-[#0B3B24] hover:bg-[#072517] transition active:scale-95 px-2.5 py-0.5 rounded shadow-sm border border-emerald-900/60 cursor-pointer" title="National Identity Verification">
-          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
-          <span class="font-mono tracking-tight text-[11px] font-semibold">IPRS &amp; eCitizen Verified</span>
-        </button>
+      <!-- Login Card -->
+      <div class="bg-white rounded-2xl border border-slate-200/90 shadow-xl p-6 sm:p-8 space-y-6">
 
-        <button type="button" onclick="openCivicModal('tlsModal')" class="hidden md:flex items-center space-x-1.5 text-stone-900 hover:text-stone-950 font-medium hover:underline transition cursor-pointer">
-          <i data-lucide="lock" class="w-3.5 h-3.5 text-stone-800"></i>
-          <span>TLS 1.3 End-to-End Encrypted</span>
-        </button>
-
-        <button type="button" onclick="openArchitectureModal()" class="hidden lg:flex items-center space-x-1.5 text-stone-950 bg-amber-200/90 hover:bg-white transition active:scale-95 px-2.5 py-0.5 rounded shadow-sm border border-amber-900/40 cursor-pointer font-bold" title="Open Enterprise Architecture & Observability Console">
-          <i data-lucide="cpu" class="w-3.5 h-3.5 text-stone-900"></i>
-          <span class="tracking-tight text-[11px]">System Architecture</span>
-        </button>
-
-        <!-- Bilingual Switcher -->
-        <div class="flex items-center bg-black/15 p-0.5 rounded border border-black/20 text-[10px] sm:text-[11px] font-bold">
-          <button type="button" id="lang-btn-en" onclick="setLanguage('en')" class="px-1.5 sm:px-2 py-0.5 rounded bg-white text-stone-950 shadow-sm transition">EN</button>
-          <button type="button" id="lang-btn-sw" onclick="setLanguage('sw')" class="px-1.5 sm:px-2 py-0.5 rounded text-stone-800 hover:text-black transition">SWA</button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Main Hero & Split Authentication View -->
-  <main class="flex-1 flex flex-col lg:flex-row relative overflow-y-auto lg:overflow-hidden">
-    
-    <!-- LEFT PANE: Majestic Civic Showcase & Heritage Authority -->
-    <div class="lg:w-1/2 relative flex flex-col justify-between p-8 sm:p-12 lg:p-16 overflow-hidden">
-      <!-- Background Image with Gradient Overlay -->
-      <div class="absolute inset-0 z-0">
-        <img src="assets/images/psc_civic_hero.jpg" alt="Public Service Commission Kenya Headquarters" class="w-full h-full object-cover object-center filter brightness-75 scale-105 transform hover:scale-100 transition duration-1000">
-        <div class="absolute inset-0 bg-gradient-to-tr from-[#051b10]/95 via-[#0B3B24]/90 to-[#041D12]/92"></div>
-        <div class="absolute inset-0 hero-mesh"></div>
-      </div>
-
-      <!-- Left Header Content -->
-      <div class="relative z-10 space-y-6">
-        <!-- Official Government Insignia -->
-        <div class="flex items-center space-x-4">
-          <div class="bg-white/95 p-2 rounded-2xl shadow-xl border border-amber-400/40 backdrop-blur-sm">
-            <img src="assets/images/kenya-coat-of-arms-seeklogo.png" alt="Kenya Coat of Arms" class="w-14 h-14 object-contain">
-          </div>
-          <div class="bg-white/95 p-2 rounded-2xl shadow-xl border border-amber-400/40 backdrop-blur-sm">
-            <img src="assets/images/PSC_Logo.png" alt="PSC Seal" class="w-14 h-14 object-contain">
+        <!-- Official Header: Crest, Seal & Titles -->
+        <div class="text-center space-y-3">
+          <div class="flex items-center justify-center gap-3">
+            <img src="assets/images/kenya-coat-of-arms-seeklogo.png" alt="Kenya Coat of Arms" class="w-11 h-11 object-contain">
+            <div class="w-px h-8 bg-slate-200"></div>
+            <img src="assets/images/PSC_Logo.png" alt="PSC Logo" class="w-11 h-11 object-contain">
           </div>
           <div>
-            <span class="text-[11px] font-mono tracking-widest uppercase text-amber-300 font-extrabold block">Republic of Kenya</span>
-            <h1 class="text-xl sm:text-2xl font-black text-white tracking-tight uppercase">Public Service Commission</h1>
-            <p class="text-xs text-emerald-200/80 font-serif italic">Utumishi wa Umma Unaothamini Maadili na Unaomjali Mwananchi</p>
+            <span class="text-[11px] font-bold uppercase tracking-widest text-civic-gold block">Republic of Kenya</span>
+            <h1 class="text-xl sm:text-2xl font-extrabold text-[#0B3B24] tracking-tight mt-0.5">Public Service Commission</h1>
+            <p class="text-xs text-slate-500 mt-1">Online Recruitment &amp; Selection Portal</p>
           </div>
         </div>
 
-        <!-- Main Headline -->
-        <div class="pt-4 space-y-3">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-semibold">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            2026/2027 National Recruitment Cycle Active
-          </div>
-          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-            The National Gateway to <span class="text-amber-400">Merit-Based</span> Public Service.
-          </h2>
-          <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-lg">
-            Empowering citizens across all 47 counties through equal opportunity, transparent shortlisting, and institutional integrity under Articles 10 and 232 of the Constitution of Kenya.
-          </p>
-        </div>
+        <!-- Notification / Error Banner (Hidden by default) -->
+        <div id="login-alert" class="hidden p-3 rounded-lg text-xs font-semibold"></div>
 
-        <!-- Live Civic Telemetry Indicators -->
-        <div class="grid grid-cols-2 gap-3 pt-2 max-w-lg">
-          <div class="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/15">
-            <div class="text-2xl font-black text-amber-300 font-mono">1,280+</div>
-            <div class="text-xs text-slate-200 font-medium">Open Cadre Vacancies</div>
-            <div class="text-[10px] text-emerald-300 mt-0.5">Ministries &amp; State Departments</div>
-          </div>
-          <div class="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/15">
-            <div class="text-2xl font-black text-emerald-400 font-mono">100%</div>
-            <div class="text-xs text-slate-200 font-medium">IPRS &amp; eCitizen KYC</div>
-            <div class="text-[10px] text-emerald-300 mt-0.5">Automated Identity Match</div>
-          </div>
-          <div class="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/15">
-            <div class="text-2xl font-black text-amber-300 font-mono">47</div>
-            <div class="text-xs text-slate-200 font-medium">Counties Represented</div>
-            <div class="text-[10px] text-amber-300 mt-0.5">Equal Opportunity Mandate</div>
-          </div>
-          <div class="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/15">
-            <div class="text-2xl font-black text-emerald-300 font-mono">24/7</div>
-            <div class="text-xs text-slate-200 font-medium">Continuous Availability</div>
-            <div class="text-[10px] text-emerald-300 mt-0.5">Digital Public Service</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Left Bottom Legal Notice -->
-      <div class="relative z-10 pt-8 border-t border-white/15 text-[11px] text-slate-400 flex items-center justify-between">
-        <span>Public Service Commission Act No. 10 of 2017</span>
-        <span class="font-mono text-amber-300">GovNet Encrypted</span>
-      </div>
-    </div>
-
-    <!-- RIGHT PANE: Modern Glassmorphic Authentication Card -->
-    <div class="lg:w-1/2 flex items-center justify-center p-6 sm:p-10 lg:p-16 relative bg-slate-900/60 backdrop-blur-xl">
-      <div class="max-w-md w-full space-y-6" id="login-card">
-        
-        <!-- Login Card Container -->
-        <div class="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden backdrop-blur-2xl">
-          <!-- Top subtle glow accent -->
-          <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-amber-500 to-emerald-500"></div>
-
-          <!-- Card Header -->
-          <div class="text-center space-y-1 mb-6">
-            <div class="inline-flex p-3 rounded-2xl bg-civic-forest/40 border border-emerald-500/30 text-emerald-400 mb-2 shadow-inner">
-              <i data-lucide="shield-check" class="w-8 h-8"></i>
+        <!-- Simple Sign In Form -->
+        <form id="login-form" onsubmit="handleSignIn(event)" class="space-y-4">
+          
+          <!-- National ID / Email -->
+          <div class="space-y-1.5">
+            <label for="login-id" class="block text-xs font-bold text-slate-700">
+              National ID Number
+            </label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i data-lucide="user" class="w-4 h-4"></i>
+              </div>
+              <input 
+                type="text" 
+                id="login-id" 
+                name="nationalId" 
+                required 
+                placeholder="e.g. 24681012"
+                value="24681012"
+                class="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 focus:bg-white border border-slate-300 focus:border-[#0B3B24] focus:ring-2 focus:ring-[#0B3B24]/10 rounded-xl text-slate-900 text-sm font-medium transition outline-none"
+              >
             </div>
-            <h2 class="text-2xl font-extrabold text-white tracking-tight" id="i18n-loginTitle">Citizen Sign In</h2>
-            <p class="text-xs text-slate-400" id="i18n-loginSubtitle">Enter your National ID or authenticate through eCitizen GovNet SSO.</p>
           </div>
 
-          <!-- Quick-Fill Demo Candidate Banner -->
-          <div class="mb-5 bg-gradient-to-r from-amber-950/70 to-emerald-950/70 border border-amber-500/40 rounded-xl p-3 flex items-center justify-between gap-2 shadow-inner">
-            <div class="flex items-center space-x-2">
-              <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-              <span class="text-[11px] text-amber-200">Reviewer Quick-Fill: <strong>Faith Mwangi</strong></span>
-            </div>
-            <button type="button" onclick="quickFillCandidate()" class="px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-stone-950 text-[11px] font-black rounded-lg transition active:scale-95 shadow-sm flex items-center gap-1 cursor-pointer">
-              <i data-lucide="zap" class="w-3 h-3"></i>
-              <span>One-Click Fill</span>
-            </button>
-          </div>
-
-          <!-- Authentication Tabs -->
-          <div class="flex bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs font-bold mb-5">
-            <button type="button" id="tab-btn-id" onclick="switchLoginTab('id')" class="flex-1 py-2 rounded-lg bg-civic-forest text-white shadow-sm transition flex items-center justify-center gap-1.5">
-              <i data-lucide="credit-card" class="w-3.5 h-3.5 text-emerald-400"></i>
-              <span>National ID</span>
-            </button>
-            <button type="button" id="tab-btn-ecitizen" onclick="switchLoginTab('ecitizen')" class="flex-1 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center justify-center gap-1.5">
-              <i data-lucide="landmark" class="w-3.5 h-3.5 text-amber-400"></i>
-              <span>eCitizen SSO</span>
-            </button>
-          </div>
-
-          <!-- TAB 1: National ID + Password Form -->
-          <form id="citizen-login-form" onsubmit="handleCitizenLogin(event)" class="space-y-4">
-            
-            <!-- National ID Input -->
-            <div class="space-y-1.5">
-              <label for="login-national-id" class="block text-xs font-bold text-slate-300 flex items-center justify-between">
-                <span>National ID Number</span>
-                <span id="iprs-live-status" class="text-[10px] text-slate-500 font-mono">Enter 8-digit ID</span>
+          <!-- Password -->
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between">
+              <label for="login-password" class="block text-xs font-bold text-slate-700">
+                Password
               </label>
-              <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                  <i data-lucide="user-check" class="w-4 h-4"></i>
-                </div>
-                <input type="text" id="login-national-id" name="nationalId" required maxlength="10" placeholder="e.g. 24681012"
-                       oninput="onNationalIdInput(this.value)"
-                       class="w-full pl-10 pr-10 py-3 bg-slate-950 border border-slate-700 rounded-xl text-white font-mono text-sm placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition outline-none">
-                <div id="iprs-check-icon" class="absolute inset-y-0 right-0 pr-3 flex items-center hidden">
-                  <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
-                </div>
-              </div>
+              <button type="button" onclick="showForgotPasswordModal()" class="text-[11px] font-semibold text-amber-700 hover:text-amber-900 hover:underline">
+                Forgot Password?
+              </button>
             </div>
-
-            <!-- Password Input with Show/Hide -->
-            <div class="space-y-1.5">
-              <div class="flex items-center justify-between">
-                <label for="login-password" class="block text-xs font-bold text-slate-300">Portal Password</label>
-                <button type="button" onclick="openCivicModal('forgotPasswordModal')" class="text-[11px] text-amber-400 hover:text-amber-300 font-medium hover:underline transition">
-                  Forgot Password?
-                </button>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i data-lucide="lock" class="w-4 h-4"></i>
               </div>
-              <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                  <i data-lucide="lock" class="w-4 h-4"></i>
-                </div>
-                <input type="password" id="login-password" name="password" required placeholder="••••••••••••"
-                       class="w-full pl-10 pr-10 py-3 bg-slate-950 border border-slate-700 rounded-xl text-white font-mono text-sm placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition outline-none">
-                <button type="button" onclick="togglePasswordVisibility('login-password', 'eye-icon-pass')" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-200">
-                  <i data-lucide="eye" id="eye-icon-pass" class="w-4 h-4"></i>
-                </button>
-              </div>
-            </div>
-
-            <!-- Remember Me & Compliance -->
-            <div class="flex items-center justify-between text-xs pt-1">
-              <label class="flex items-center space-x-2 cursor-pointer text-slate-400 hover:text-slate-300">
-                <input type="checkbox" id="remember-me-check" checked class="w-4 h-4 rounded bg-slate-950 border-slate-700 text-civic-forest focus:ring-0">
-                <span>Remember my National ID</span>
-              </label>
-              <span class="text-emerald-400 font-mono text-[10px] flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                256-Bit SSL Active
-              </span>
-            </div>
-
-            <!-- Primary Sign In Button -->
-            <button type="submit" id="btn-login-submit" class="w-full py-3.5 px-4 bg-gradient-to-r from-civic-forest to-emerald-800 hover:from-emerald-800 hover:to-civic-forest text-white font-extrabold text-sm rounded-xl shadow-lg hover:shadow-emerald-900/30 transition transform active:scale-[0.99] flex items-center justify-center space-x-2 border border-emerald-500/40 cursor-pointer">
-              <i data-lucide="log-in" class="w-4 h-4"></i>
-              <span>Sign In to PSC Portal</span>
-            </button>
-          </form>
-
-          <!-- TAB 2: eCitizen Single Sign-On (Hidden by default) -->
-          <div id="ecitizen-login-section" class="hidden space-y-4">
-            <div class="bg-slate-950/80 p-4 rounded-xl border border-slate-800 text-center space-y-2">
-              <div class="w-12 h-12 mx-auto rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
-                <i data-lucide="landmark" class="w-6 h-6"></i>
-              </div>
-              <h4 class="font-bold text-white text-sm">eCitizen National Gateway SSO</h4>
-              <p class="text-xs text-slate-400 leading-relaxed">
-                Log in seamlessly using your unified Government of Kenya eCitizen credentials. No separate password required.
-              </p>
-            </div>
-
-            <button type="button" onclick="handleEcitizenLogin()" id="btn-ecitizen-submit" class="w-full py-3.5 px-4 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-stone-950 font-black text-sm rounded-xl shadow-lg transition transform active:scale-[0.99] flex items-center justify-center space-x-2 cursor-pointer">
-              <i data-lucide="fingerprint" class="w-4 h-4"></i>
-              <span>Authenticate with eCitizen SSO</span>
-            </button>
-          </div>
-
-          <!-- Divider -->
-          <div class="relative my-6 text-center">
-            <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-800"></div></div>
-            <span class="relative bg-slate-900 px-3 text-[11px] text-slate-500 uppercase tracking-wider font-bold">First Time Citizen?</span>
-          </div>
-
-          <!-- Register Account CTA -->
-          <div class="text-center space-y-2">
-            <a href="index.html" class="block w-full py-2.5 px-4 bg-slate-800/80 hover:bg-slate-800 text-slate-200 hover:text-white font-bold text-xs rounded-xl border border-slate-700/80 transition flex items-center justify-center gap-1.5">
-              <i data-lucide="user-plus" class="w-3.5 h-3.5 text-amber-400"></i>
-              <span>Register Citizen Master Account</span>
-            </a>
-            <div class="text-[11px] text-slate-400">
-              Need technical support? Call PSC Desk <a href="tel:0204919000" class="text-amber-400 font-bold hover:underline">020-4919000</a>
+              <input 
+                type="password" 
+                id="login-password" 
+                name="password" 
+                required 
+                placeholder="Enter your password"
+                value="••••••••••••"
+                class="w-full pl-10 pr-10 py-2.5 bg-slate-50 focus:bg-white border border-slate-300 focus:border-[#0B3B24] focus:ring-2 focus:ring-[#0B3B24]/10 rounded-xl text-slate-900 text-sm font-medium transition outline-none"
+              >
+              <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600" aria-label="Toggle password visibility">
+                <i data-lucide="eye" id="toggle-pwd-icon" class="w-4 h-4"></i>
+              </button>
             </div>
           </div>
 
-          <!-- Statutory Section 100(4) Warning -->
-          <div class="mt-6 pt-4 border-t border-slate-800/80 text-[10px] text-slate-500 leading-relaxed flex items-start gap-2">
-            <i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5"></i>
-            <div>
-              <strong>Section 100(4) Warning:</strong> Providing false identity or forged certificates is an offence punishable by a fine not exceeding Kshs. 200,000 or imprisonment up to 2 years.
-            </div>
+          <!-- Remember Me -->
+          <div class="flex items-center text-xs pt-0.5">
+            <label class="flex items-center space-x-2 cursor-pointer text-slate-600">
+              <input type="checkbox" id="remember-me" checked class="w-4 h-4 rounded border-slate-300 text-[#0B3B24] focus:ring-0">
+              <span>Remember my ID on this device</span>
+            </label>
           </div>
 
+          <!-- Sign In Button -->
+          <button 
+            type="submit" 
+            id="btn-submit"
+            class="w-full py-3 px-4 bg-[#0B3B24] hover:bg-[#072517] text-white font-bold text-sm rounded-xl shadow-sm transition transform active:scale-[0.99] flex items-center justify-center space-x-2 cursor-pointer"
+          >
+            <i data-lucide="log-in" class="w-4 h-4"></i>
+            <span>Sign In</span>
+          </button>
+        </form>
+
+        <!-- Divider -->
+        <div class="relative my-4 text-center">
+          <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-200"></div></div>
+          <span class="relative bg-white px-3 text-[11px] text-slate-400 font-medium">or</span>
         </div>
+
+        <!-- Register Link -->
+        <div class="text-center space-y-2">
+          <a href="index.html" class="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-[#0B3B24] hover:text-[#072517] hover:underline">
+            <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+            <span>First time applicant? Register Account</span>
+          </a>
+        </div>
+
       </div>
+
+      <!-- Simple Help & Support Footer -->
+      <div class="text-center mt-6 text-xs text-slate-500 space-y-1">
+        <div>Need assistance? Call PSC Helpdesk <a href="tel:0204919000" class="font-semibold text-slate-700 hover:underline">020-4919000</a></div>
+        <div class="text-[11px] text-slate-400">© 2026 Public Service Commission. Republic of Kenya.</div>
+      </div>
+
     </div>
   </main>
 
-  <!-- ============================================================== -->
-  <!-- MODALS: CIVIC TRUST, ARCHITECTURE, AND FORGOT PASSWORD          -->
-  <!-- ============================================================== -->
-
-  <!-- IPRS Modal -->
-  <div id="iprsModal" class="fixed inset-0 bg-slate-950/70 z-50 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white text-slate-900 rounded-2xl shadow-2xl max-w-lg w-full border border-slate-200 overflow-hidden">
-      <div class="bg-gradient-to-r from-civic-forest to-slate-900 text-white p-5 border-b-2 border-civic-gold flex items-center justify-between">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center">
-            <i data-lucide="shield-check" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <span class="text-[10px] font-mono uppercase tracking-widest text-emerald-300 font-bold">Government of Kenya</span>
-            <h3 class="text-base font-bold text-white">Integrated Population Registration (IPRS)</h3>
-          </div>
-        </div>
-        <button onclick="closeCivicModal('iprsModal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+  <!-- Simple Forgot Password Modal -->
+  <div id="forgot-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 space-y-4 shadow-2xl border border-slate-200">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <h2 class="text-sm font-bold text-slate-900">Reset Password</h2>
+        <button onclick="closeForgotPasswordModal()" class="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
       </div>
-      <div class="p-6 space-y-4 text-xs text-slate-600">
-        <p>The PSC Portal connects directly to the <strong>National Registration Bureau (NRB)</strong> and <strong>eCitizen Identity Gateway</strong> for real-time KYC validation.</p>
-        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-[11px] space-y-2">
-          <div class="text-emerald-700">✓ Real-time National ID Validation (NRB / IPRS Hub)</div>
-          <div class="text-emerald-700">✓ Biometric &amp; Civil Record Verification</div>
-          <div class="text-emerald-700">✓ Kenya Data Protection Act 2019 / ODPC Compliant</div>
-        </div>
+      <p class="text-xs text-slate-600">Enter your National ID Number to receive a reset code on your registered phone number.</p>
+      <input type="text" id="reset-id" value="24681012" placeholder="National ID" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono outline-none focus:border-[#0B3B24]">
+      <div id="reset-alert" class="hidden p-2.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-medium">
+        ✓ Reset code sent to your registered mobile number.
       </div>
-      <div class="bg-slate-50 px-6 py-3 border-t border-slate-200 flex justify-end">
-        <button onclick="closeCivicModal('iprsModal')" class="px-5 py-2 bg-civic-forest text-white text-xs font-bold rounded-lg">Close</button>
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" onclick="closeForgotPasswordModal()" class="px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-lg">Cancel</button>
+        <button type="button" onclick="handleSendReset()" class="px-4 py-2 text-xs font-bold text-white bg-[#0B3B24] hover:bg-[#072517] rounded-lg">Send Code</button>
       </div>
     </div>
   </div>
 
-  <!-- TLS Modal -->
-  <div id="tlsModal" class="fixed inset-0 bg-slate-950/70 z-50 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white text-slate-900 rounded-2xl shadow-2xl max-w-lg w-full border border-slate-200 overflow-hidden">
-      <div class="bg-gradient-to-r from-slate-900 to-civic-forest text-white p-5 border-b-2 border-civic-gold flex items-center justify-between">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center">
-            <i data-lucide="lock" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <span class="text-[10px] font-mono uppercase tracking-widest text-amber-300 font-bold">Government GCCN</span>
-            <h3 class="text-base font-bold text-white">TLS 1.3 Cryptographic Standards</h3>
-          </div>
-        </div>
-        <button onclick="closeCivicModal('tlsModal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-      <div class="p-6 space-y-4 text-xs text-slate-600">
-        <p>All communication between your browser and PSC servers is secured via <strong>TLS 1.3</strong> with forward secrecy and AES-256-GCM envelope encryption.</p>
-        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-[11px] space-y-2">
-          <div class="text-emerald-700">✓ Cipher Suite: TLS_AES_256_GCM_SHA384</div>
-          <div class="text-emerald-700">✓ Key Exchange: X25519 (ECDHE with Perfect Forward Secrecy)</div>
-          <div class="text-emerald-700">✓ Government Core Network (GCCN) Dedicated Backbone</div>
-        </div>
-      </div>
-      <div class="bg-slate-50 px-6 py-3 border-t border-slate-200 flex justify-end">
-        <button onclick="closeCivicModal('tlsModal')" class="px-5 py-2 bg-civic-forest text-white text-xs font-bold rounded-lg">Close</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Forgot Password Modal -->
-  <div id="forgotPasswordModal" class="fixed inset-0 bg-slate-950/70 z-50 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-slate-900 text-white rounded-2xl shadow-2xl max-w-md w-full border border-slate-700 overflow-hidden">
-      <div class="bg-gradient-to-r from-amber-950 to-slate-900 p-5 border-b border-amber-600/40 flex items-center justify-between">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center">
-            <i data-lucide="key" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h3 class="text-base font-bold text-white">Reset Candidate Password</h3>
-            <p class="text-xs text-slate-400">Receive OTP verification on registered mobile</p>
-          </div>
-        </div>
-        <button onclick="closeCivicModal('forgotPasswordModal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-      <div class="p-6 space-y-4 text-xs">
-        <p class="text-slate-300">Enter your registered National ID Number. A one-time verification token will be dispatched to your phone number and email.</p>
-        <div class="space-y-1.5">
-          <label class="block text-xs font-bold text-slate-300">National ID Number</label>
-          <input type="text" id="reset-id-input" placeholder="e.g. 24681012" value="24681012" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white font-mono text-sm">
-        </div>
-        <div id="reset-feedback" class="hidden p-3 rounded-lg bg-emerald-950/80 border border-emerald-700 text-emerald-300 text-xs">
-          ✓ Password reset OTP sent to registered mobile (+254 700 *** 000) and email. Valid for 10 minutes.
-        </div>
-      </div>
-      <div class="bg-slate-950 px-6 py-3 border-t border-slate-800 flex justify-between items-center">
-        <button onclick="closeCivicModal('forgotPasswordModal')" class="text-slate-400 hover:text-white text-xs">Cancel</button>
-        <button onclick="dispatchResetOtp()" class="px-5 py-2 bg-amber-600 hover:bg-amber-500 text-stone-950 font-extrabold text-xs rounded-lg">Send Reset Token</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Client-Side Auth & Helper Logic -->
-  <script type="module">
-    import { pscI18n } from './js/i18n.js';
-    import { apiClient } from './js/api-client.js';
-
-    // Initialize Lucide icons
+  <!-- Sign In Handler Script -->
+  <script>
+    // Initialize icons
     if (window.lucide) window.lucide.createIcons();
 
-    // Init i18n
-    if (pscI18n && pscI18n.init) pscI18n.init();
-
-    window.openCivicModal = function(id) {
-      const m = document.getElementById(id);
-      if (m) {
-        m.classList.remove('hidden');
-        if (window.lucide) window.lucide.createIcons();
-      }
-    };
-
-    window.closeCivicModal = function(id) {
-      const m = document.getElementById(id);
-      if (m) m.classList.add('hidden');
-    };
-
-    window.openArchitectureModal = function() {
-      // If user clicks Architecture from login, navigate to index.html with flag or alert
-      window.location.href = 'index.html#architecture';
-    };
-
-    window.setLanguage = function(lang) {
-      if (pscI18n) {
-        pscI18n.setLanguage(lang);
-      }
-    };
-
-    window.switchLoginTab = function(tab) {
-      const btnId = document.getElementById('tab-btn-id');
-      const btnEcitizen = document.getElementById('tab-btn-ecitizen');
-      const formId = document.getElementById('citizen-login-form');
-      const secEcitizen = document.getElementById('ecitizen-login-section');
-
-      if (tab === 'id') {
-        btnId.className = "flex-1 py-2 rounded-lg bg-civic-forest text-white shadow-sm transition flex items-center justify-center gap-1.5";
-        btnEcitizen.className = "flex-1 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center justify-center gap-1.5";
-        formId.classList.remove('hidden');
-        secEcitizen.classList.add('hidden');
-      } else {
-        btnEcitizen.className = "flex-1 py-2 rounded-lg bg-amber-600 text-stone-950 font-bold shadow-sm transition flex items-center justify-center gap-1.5";
-        btnId.className = "flex-1 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center justify-center gap-1.5";
-        secEcitizen.classList.remove('hidden');
-        formId.classList.add('hidden');
-      }
-      if (window.lucide) window.lucide.createIcons();
-    };
-
-    window.togglePasswordVisibility = function(inputId, iconId) {
-      const input = document.getElementById(inputId);
-      const icon = document.getElementById(iconId);
+    function togglePasswordVisibility() {
+      const input = document.getElementById('login-password');
+      const icon = document.getElementById('toggle-pwd-icon');
       if (input.type === 'password') {
         input.type = 'text';
-        if (icon) icon.setAttribute('data-lucide', 'eye-off');
+        icon.setAttribute('data-lucide', 'eye-off');
       } else {
         input.type = 'password';
-        if (icon) icon.setAttribute('data-lucide', 'eye');
+        icon.setAttribute('data-lucide', 'eye');
       }
       if (window.lucide) window.lucide.createIcons();
-    };
+    }
 
-    window.quickFillCandidate = function() {
-      const idInput = document.getElementById('login-national-id');
-      const passInput = document.getElementById('login-password');
-      if (idInput) idInput.value = '24681012';
-      if (passInput) passInput.value = 'Kenya@2026#PSC';
-      onNationalIdInput('24681012');
-    };
-
-    window.onNationalIdInput = function(val) {
-      const statusLabel = document.getElementById('iprs-live-status');
-      const checkIcon = document.getElementById('iprs-check-icon');
-
-      if (val.length >= 8) {
-        if (statusLabel) {
-          statusLabel.innerHTML = '<span class="text-emerald-400 font-bold">✓ IPRS Match: Faith Wanjiku Mwangi</span>';
-        }
-        if (checkIcon) checkIcon.classList.remove('hidden');
-      } else {
-        if (statusLabel) {
-          statusLabel.innerText = `${val.length}/8 Digits`;
-        }
-        if (checkIcon) checkIcon.classList.add('hidden');
-      }
+    function showForgotPasswordModal() {
+      document.getElementById('forgot-modal').classList.remove('hidden');
       if (window.lucide) window.lucide.createIcons();
-    };
+    }
 
-    window.handleCitizenLogin = async function(e) {
+    function closeForgotPasswordModal() {
+      document.getElementById('forgot-modal').classList.add('hidden');
+      document.getElementById('reset-alert').classList.add('hidden');
+    }
+
+    function handleSendReset() {
+      const alertBox = document.getElementById('reset-alert');
+      alertBox.classList.remove('hidden');
+      setTimeout(() => {
+        closeForgotPasswordModal();
+      }, 1800);
+    }
+
+    async function handleSignIn(e) {
       e.preventDefault();
-      const submitBtn = document.getElementById('btn-login-submit');
-      const id = document.getElementById('login-national-id').value.trim() || '24681012';
-      
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span class="inline-block animate-spin mr-2">⟳</span> Authenticating with GovNet...';
+      const btn = document.getElementById('btn-submit');
+      const idInput = document.getElementById('login-id');
+      const id = idInput.value.trim() || '24681012';
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="inline-block animate-spin mr-2">⟳</span> Signing In...';
 
       let token = 'PSC-SECURE-SESSION-TOKEN-' + Math.random().toString(36).substring(2, 10);
       try {
-        // Authenticate with live backend server
         const host = (window.location && window.location.hostname) ? window.location.hostname : 'localhost';
-        const backendUrl = `http://${host}:5000`;
-        const res = await fetch(`${backendUrl}/api/v2/auth/token`, {
+        const res = await fetch(`http://${host}:5000/api/v2/auth/token`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ nationalId: id })
         });
-
         if (res.ok) {
           const authData = await res.json();
           token = authData.accessToken || token;
         }
       } catch (err) {
-        console.warn('Backend authentication fallback:', err);
+        // Fallback for offline/live-server direct usage
       }
 
-      // Persist session tokens
+      // Store authenticated session
       sessionStorage.setItem('psc_auth_token', token);
       sessionStorage.setItem('psc_candidate_id', id);
       sessionStorage.setItem('psc_candidate_name', 'Faith Mwangi');
+      sessionStorage.setItem('psc_session_active', 'true');
 
-      // Success UX transition
-      submitBtn.className = "w-full py-3.5 px-4 bg-emerald-600 text-white font-extrabold text-sm rounded-xl flex items-center justify-center space-x-2";
-      submitBtn.innerHTML = '<span>✓ Verification Succeeded • Launching Portal...</span>';
+      btn.className = "w-full py-3 px-4 bg-emerald-700 text-white font-bold text-sm rounded-xl flex items-center justify-center space-x-2";
+      btn.innerHTML = '<span>✓ Authenticated! Opening Portal...</span>';
 
       setTimeout(() => {
         window.location.href = 'index.html';
-      }, 600);
-    };
-
-    window.handleEcitizenLogin = function() {
-      const btn = document.getElementById('btn-ecitizen-submit');
-      btn.disabled = true;
-      btn.innerHTML = '<span class="inline-block animate-spin mr-2">⟳</span> Handshaking with eCitizen OIDC Gateway...';
-      
-      setTimeout(() => {
-        sessionStorage.setItem('psc_auth_token', 'ECITIZEN-GOVNET-OIDC-TOKEN-2026');
-        sessionStorage.setItem('psc_candidate_id', '24681012');
-        sessionStorage.setItem('psc_candidate_name', 'Faith Mwangi');
-        btn.innerHTML = '<span>✓ eCitizen Single Sign-On Verified! Redirecting...</span>';
-        setTimeout(() => {
-          window.location.href = 'index.html';
-        }, 500);
-      }, 700);
-    };
-
-    window.dispatchResetOtp = function() {
-      const feedback = document.getElementById('reset-feedback');
-      if (feedback) {
-        feedback.classList.remove('hidden');
-        setTimeout(() => {
-          closeCivicModal('forgotPasswordModal');
-        }, 2200);
-      }
-    };
+      }, 400);
+    }
   </script>
-  <!-- Telemetry Beacon -->
-  <script src="js/admin-monitor.js"></script>
 </body>
 </html>
